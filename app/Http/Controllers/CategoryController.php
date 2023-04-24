@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 // namespace Intervention\Image\Facades;
 
@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $imageName = time() . '.' . $image->extension();
 
         $img = Image::make($image->path());
-        $img->fit(1680, 880); // resize the image to fit within 380x310 while preserving aspect ratio
+        $img->fit(300,240); // resize the image to fit within 380x310 while preserving aspect ratio
         $img->encode('jpg', 80); // convert image to JPEG format with 80% quality and reduce file size to 80kb
         $img->save(base_path('/uploads/categories/') . $imageName);
         $data['image'] = $imageName;
@@ -116,7 +116,7 @@ class CategoryController extends Controller
             $imageName = time() . '.' . $image->extension();
 
             $img = Image::make($image->path());
-            $img->fit(1680, 880); // resize the image to fit within 380x310 while preserving aspect ratio
+            $img->fit(300,240); // resize the image to fit within 380x310 while preserving aspect ratio
             $img->encode('jpg', 80); // convert image to JPEG format with 80% quality and reduce file size to 80kb
             $img->save(base_path('/uploads/categories/') . $imageName);
 

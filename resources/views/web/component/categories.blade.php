@@ -1,113 +1,46 @@
-
-<section class="layout-pt-md layout-pb-md">
-    <div data-anim-wrap class="container">
-        <div class="row justify-center text-center">
+<section class="layout-pt-md layout-pb-lg">
+    <div class="container">
+        <div class="row y-gap-20 justify-between items-end">
             <div class="col-auto">
 
                 <div class="sectionTitle ">
 
-                    <h2 class="sectionTitle__title ">Top Categories</h2>
+                    <h2 class="sectionTitle__title ">Top Subjects</h2>
 
-                    <p class="sectionTitle__text ">Lorem ipsum dolor sit amet, consectetur.</p>
-
+                    <p class="sectionTitle__text ">10,000+ unique online course list designs</p>
                 </div>
+
+            </div>
+
+            <div class="col-auto">
+
+                <a href="#" class="button -icon -purple-3 text-purple-1">
+                    All Subjects
+                    <i class="icon-arrow-top-right text-13 ml-10"></i>
+                </a>
 
             </div>
         </div>
 
-        <div class="overflow-hidden pt-50 js-section-slider" data-gap="30" data-loop data-pagination
-            data-slider-cols="xl-6 lg-4 md-2 sm-2">
-            <div class="swiper-wrapper">
+        <div data-anim-wrap="" class="row y-gap-30 pt-50 animated">
 
-                <div class="swiper-slide">
-                    <div data-anim-child="slide-left delay-2" class="featureCard -type-1 -featureCard-hover">
-                        <div class="featureCard__content">
-                            <div class="featureCard__icon">
-                                <img src="{{ asset('') }}assets/web/img/featureCards/1.svg" alt="icon">
-                            </div>
-                            <div class="featureCard__title">Design Creative</div>
-                            <div class="featureCard__text">573+ Courses</div>
+            @foreach ($categories as $category)
+                <div class="col-xl-3 col-md-6 is-in-view" data-anim-child="scale delay-1">
+                    <a href="#" class="categoryCard -type-4">
+                        <div class="categoryCard__icon bg-light-3">
+                            <img src="{{ asset('uploads/categories/' . $category->image) }}" alt="">
                         </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div data-anim-child="slide-left delay-3" class="featureCard -type-1 -featureCard-hover">
-                        <div class="featureCard__content">
-                            <div class="featureCard__icon">
-                                <img src="{{ asset('') }}assets/web/img/featureCards/2.svg" alt="icon">
+                        <div class="categoryCard__content mt-10">
+                            <h4 class="categoryCard__title text-17 fw-500">{{ $category->title }}</h4>
+                            <div class="categoryCard__text text-13 text-light-1 lh-1 mt-5">{{ $category->description }}
                             </div>
-                            <div class="featureCard__title">Sales Marketing</div>
-                            <div class="featureCard__text">565+ Courses</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
+            @endforeach
 
-                <div class="swiper-slide">
-                    <div data-anim-child="slide-left delay-4" class="featureCard -type-1 -featureCard-hover">
-                        <div class="featureCard__content">
-                            <div class="featureCard__icon">
-                                <img src="{{ asset('') }}assets/web/img/featureCards/3.svg" alt="icon">
-                            </div>
-                            <div class="featureCard__title">Development IT</div>
-                            <div class="featureCard__text">126+ Courses</div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="swiper-slide">
-                    <div data-anim-child="slide-left delay-5" class="featureCard -type-1 -featureCard-hover">
-                        <div class="featureCard__content">
-                            <div class="featureCard__icon">
-                                <img src="{{ asset('') }}assets/web/img/featureCards/4.svg" alt="icon">
-                            </div>
-                            <div class="featureCard__title">Engineering Architecture</div>
-                            <div class="featureCard__text">35+ Courses</div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="swiper-slide">
-                    <div data-anim-child="slide-left delay-6" class="featureCard -type-1 -featureCard-hover">
-                        <div class="featureCard__content">
-                            <div class="featureCard__icon">
-                                <img src="{{ asset('') }}assets/web/img/featureCards/5.svg" alt="icon">
-                            </div>
-                            <div class="featureCard__title">Personal Development</div>
-                            <div class="featureCard__text">908+ Courses</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div data-anim-child="slide-left delay-7" class="featureCard -type-1 -featureCard-hover">
-                        <div class="featureCard__content">
-                            <div class="featureCard__icon">
-                                <img src="{{ asset('') }}assets/web/img/featureCards/6.svg" alt="icon">
-                            </div>
-                            <div class="featureCard__title">Finance Accounting</div>
-                            <div class="featureCard__text">129+ Courses</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="d-flex justify-center x-gap-15 items-center pt-60 lg:pt-40">
-                <div class="col-auto">
-                    <button class="d-flex items-center text-24 arrow-left-hover js-prev">
-                        <i class="icon icon-arrow-left"></i>
-                    </button>
-                </div>
-                <div class="col-auto">
-                    <div class="pagination -arrows js-pagination"></div>
-                </div>
-                <div class="col-auto">
-                    <button class="d-flex items-center text-24 arrow-right-hover js-next">
-                        <i class="icon icon-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 </section>

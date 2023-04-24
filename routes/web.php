@@ -4,7 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\PublicController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,17 +43,17 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/inactive/{category}', [CategoryController::class, 'inactive'])->name('categories.inactive');
     });
 
-    Route::prefix('services')->group(function () {
+    Route::prefix('subjects')->group(function () {
         // Hero-Routes
-        Route::get('/', [ServiceController::class, 'index'])->name('services.index');
-        Route::get('/create', [ServiceController::class, 'create'])->name('services.create');
-        Route::post('/', [ServiceController::class, 'store'])->name('services.store');
-        Route::get('/{service}', [ServiceController::class, 'show'])->name('services.show');
-        Route::get('/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
-        Route::put('/{service}', [ServiceController::class, 'update'])->name('services.update');
-        Route::get('/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
-        Route::get('/active/{service}', [ServiceController::class, 'active'])->name('services.active');
-        Route::get('/inactive/{service}', [ServiceController::class, 'inactive'])->name('services.inactive');
+        Route::get('/', [SubjectController::class, 'index'])->name('subjects.index');
+        Route::get('/create', [SubjectController::class, 'create'])->name('subjects.create');
+        Route::post('/', [SubjectController::class, 'store'])->name('subjects.store');
+        Route::get('/{subject}', [SubjectController::class, 'show'])->name('subjects.show');
+        Route::get('/{subject}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');
+        Route::put('/{subject}', [SubjectController::class, 'update'])->name('subjects.update');
+        Route::get('/{subject}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
+        Route::get('/active/{subject}', [SubjectController::class, 'active'])->name('subjects.active');
+        Route::get('/inactive/{subject}', [SubjectController::class, 'inactive'])->name('subjects.inactive');
     });
 
     Route::prefix('blogs')->group(function () {

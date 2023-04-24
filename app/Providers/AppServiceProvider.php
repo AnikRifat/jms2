@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Content;
+use App\Models\Subject;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,8 +33,10 @@ class AppServiceProvider extends ServiceProvider
         // view()->share('blogs', $blogs);
 
 
-        // $services = Service::orderBy('order', 'ASC')->where('status', '1')->get();
-        // view()->share('services', $services);
+        $categories = Category::orderBy('order', 'ASC')->where('status', '1')->get();
+        view()->share('categories', $categories);
 
+        $subjects = Subject::orderBy('order', 'ASC')->where('status', '1')->get();
+        view()->share('subjects', $subjects);
     }
 }

@@ -1,7 +1,9 @@
 @extends('web.app.app')
 
+
 @section('main-body')
     <div class="main-body">
+
 
         <section class="form-page js-mouse-move-container">
             <div class="form-page__img bg-dark-1">
@@ -27,17 +29,14 @@
                                 <p class="mt-10">Don't have an account yet? <a href="signup.html"
                                         class="text-purple-1">Sign up for free</a></p>
 
-                                <form class="contact-form respondForm__form row y-gap-20 pt-30"
-                                    action="{{ route('login') }}" method="POST">
-                                    @csrf
+                                <form class="contact-form respondForm__form row y-gap-20 pt-30" action="#">
                                     <div class="col-12">
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10" for="email">Email</label>
-                                        <input type="email" id="email" name="email" placeholder="Email" required>
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Username Or Email</label>
+                                        <input type="text" name="title" placeholder="Name">
                                     </div>
                                     <div class="col-12">
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10" for="password">Password</label>
-                                        <input type="password" id="password" name="password" placeholder="Password"
-                                            required>
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Password</label>
+                                        <input type="password" name="title" placeholder="Password">
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" name="submit" id="submit"
@@ -53,5 +52,7 @@
             </div>
         </section>
 
+
+        <!-- blog breadcrumb version one strat here -->
     </div>
 @endsection

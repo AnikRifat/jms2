@@ -6,32 +6,32 @@
 
         <li class="menu-title" key="t-menu">Web Contents</li>
 
-        {{-- categorie --}}
+        {{-- Category --}}
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="bx bx-home-circle"></i>
-                <span key="t-categorie">categorie</span>
+                <span key="t-Category">Category</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{ route('categories.index') }}" key="t-list">All categorie</a></li>
-                <li><a href="{{ route('categories.create') }}" key="t-create">Create categorie</a></li>
+                <li><a href="{{ route('categories.index') }}" key="t-list">All Category</a></li>
+                <li><a href="{{ route('categories.create') }}" key="t-create">Create Category</a></li>
 
             </ul>
         </li>
-        {{-- End - service --}}
-        {{-- service --}}
+        {{-- End - Category --}}
+        {{-- subject --}}
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="bx bx-home-circle"></i>
-                <span key="t-service">Service</span>
+                <span key="t-subject">Subject</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{ route('services.index') }}" key="t-list">All Service</a></li>
-                <li><a href="{{ route('services.create') }}" key="t-create">Create Service</a></li>
+                <li><a href="{{ route('subjects.index') }}" key="t-list">All Subject</a></li>
+                <li><a href="{{ route('subjects.create') }}" key="t-create">Create Subject</a></li>
 
             </ul>
         </li>
-        {{-- End - service --}}
+        {{-- End - subject --}}
 
 
 

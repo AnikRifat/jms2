@@ -175,7 +175,7 @@
                             <div class="mobile-bg js-mobile-bg"></div>
 
                             <div class="d-none xl:d-flex items-center px-20 py-20 border-bottom-light">
-                                <a href="login.html" class="text-dark-1">Log in</a>
+                                <a href="{{ route('login') }}" class="text-dark-1">Log in</a>
                                 <a href="signup.html" class="text-dark-1 ml-30">Sign Up</a>
                             </div>
 
@@ -761,7 +761,7 @@
 
                                             <li class="menu-item-has-children">
                                                 <a href="#">Shop<div class="icon-chevron-right text-11"></div>
-                                                    </a>
+                                                </a>
                                                 <ul class="subnav">
                                                     <li class="menu__backButton js-nav-list-back">
                                                         <a href="#"><i
@@ -809,7 +809,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="login.html">Login</a>
+                                                <a href="{{ route('login') }}">Login</a>
                                             </li>
 
                                             <li>
@@ -987,7 +987,7 @@
                     </div>
 
                     <div class="header-right__buttons d-flex items-center ml-30 xl:ml-20 lg:d-none">
-                        <a href="login.html" class="button -underline text-purple-1">Log in</a>
+                        <a href="{{ route('login') }}" class="button -underline text-purple-1">Log in</a>
                         <a href="signup.html" class="button h-50 px-30 -purple-1 -rounded text-white ml-20">Sign
                             up</a>
                     </div>
