@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,10 +17,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-
-            ServiceSeeder::class,
             ContentSeeder::class,
             BlogSeeder::class,
+            CategorySeeder::class,
+            SubjectSeeder::class,
 
         ]);
     }

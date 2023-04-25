@@ -57,7 +57,7 @@ class SubjectController extends Controller
         $imageName = time() . '.' . $image->extension();
 
         $img = Image::make($image->path());
-        $img->fit(1680, 880); // resize the image to fit within 380x310 while preserving aspect ratio
+        $img->fit(340, 440); // resize the image to fit within 380x310 while preserving aspect ratio
         $img->encode('jpg', 80); // convert image to JPEG format with 80% quality and reduce file size to 80kb
         $img->save(base_path('/uploads/subjects/') . $imageName);
         $data['image'] = $imageName;
@@ -122,7 +122,7 @@ class SubjectController extends Controller
             $imageName = time() . '.' . $image->extension();
 
             $img = Image::make($image->path());
-            $img->fit(1680, 880); // resize the image to fit within 380x310 while preserving aspect ratio
+            $img->fit(340, 440); // resize the image to fit within 380x310 while preserving aspect ratio
             $img->encode('jpg', 80); // convert image to JPEG format with 80% quality and reduce file size to 80kb
             $img->save(base_path('/uploads/subjects/') . $imageName);
 

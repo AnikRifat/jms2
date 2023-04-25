@@ -8,7 +8,7 @@
                 <div class="header-left d-flex items-center">
 
                     <div class="header__logo pr-30 xl:pr-20 md:pr-0">
-                        <a data-barba href="index-2.html">
+                        <a data-barba href="{{ route('index') }}">
                             <img src="{{ asset('') }}/assets/web/img/general/logo-dark.svg" alt="logo">
                         </a>
                     </div>
@@ -176,7 +176,7 @@
 
                             <div class="d-none xl:d-flex items-center px-20 py-20 border-bottom-light">
                                 <a href="{{ route('login') }}" class="text-dark-1">Log in</a>
-                                <a href="signup.html" class="text-dark-1 ml-30">Sign Up</a>
+                                <a href="{{ route('register') }}" class="text-dark-1 ml-30">Sign Up</a>
                             </div>
 
                             <div class="menu js-navList">
@@ -192,7 +192,7 @@
                                                     Home</a>
                                             </li>
 
-                                            <li><a href="index-2.html">Home 1</a></li>
+                                            <li><a href="{{ route('index') }}">Home 1</a></li>
 
                                             <li><a href="home-2.html">Home 2</a></li>
 
@@ -813,7 +813,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="signup.html">Register</a>
+                                                <a href="{{ route('register') }}">Register</a>
                                             </li>
 
                                             <li>
@@ -988,7 +988,8 @@
 
                     <div class="header-right__buttons d-flex items-center ml-30 xl:ml-20 lg:d-none">
                         <a href="{{ route('login') }}" class="button -underline text-purple-1">Log in</a>
-                        <a href="signup.html" class="button h-50 px-30 -purple-1 -rounded text-white ml-20">Sign
+                        <a href="{{ route('register') }}"
+                            class="button h-50 px-30 -purple-1 -rounded text-white ml-20">Sign
                             up</a>
                     </div>
                 </div>

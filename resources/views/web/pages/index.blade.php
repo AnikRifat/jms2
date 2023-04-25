@@ -5,8 +5,8 @@
     <div class="main-body">
 
         @include('web.component.hero')
-
-        @include('web.component.categories')
+@include('web.component.subjects')
+        {{-- @include('web.component.categories') --}}
 
         @include('web.component.courses')
         @include('web.component.testimonial')

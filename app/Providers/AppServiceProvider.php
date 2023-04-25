@@ -29,8 +29,6 @@ class AppServiceProvider extends ServiceProvider
         $content =  Content::find(1)->first();
         view()->share('content', $content);
 
-        // $blogs = Blog::orderBy('id', 'DESC')->get();
-        // view()->share('blogs', $blogs);
 
 
         $categories = Category::orderBy('order', 'ASC')->where('status', '1')->get();
@@ -38,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
 
         $subjects = Subject::orderBy('order', 'ASC')->where('status', '1')->get();
         view()->share('subjects', $subjects);
+
+
+        // $blogs = Blog::orderBy('id', 'DESC')->get();
+        // view()->share('blogs', $blogs);
     }
 }
