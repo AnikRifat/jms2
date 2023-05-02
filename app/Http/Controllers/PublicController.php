@@ -4,13 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Content;
-use App\Models\Destination;
-use App\Models\Feature;
-use App\Models\Hero;
-use App\Models\Package;
-use App\Models\Photo;
-use App\Models\Service;
-use App\Models\Testimonial;
+use App\Models\User;
 
 class PublicController extends Controller
 {
@@ -42,4 +36,9 @@ class PublicController extends Controller
         return view('web.pages.authentication.student.complete-profile');
     }
 
+    public function userdashboard($id)
+    {
+        $user = User::find($id);
+        return view('web.pages.dashboard.index', compact('user'));
+    }
 }

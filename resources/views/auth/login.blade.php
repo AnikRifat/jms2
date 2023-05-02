@@ -4,28 +4,16 @@
     <div class="main-body">
 
         <section class="form-page js-mouse-move-container">
-            <div class="form-page__img bg-dark-1">
-                <div class="form-page-composition">
-                    <div class="-bg"><img data-move="30" class="js-mouse-move" src="img/login/bg.png" alt="bg"></div>
-                    <div class="-el-1"><img data-move="20" class="js-mouse-move"
-                            src="{{ asset('') }}/assets/web/img/home-9/hero/bg.png" alt="image"></div>
-                    <div class="-el-2"><img data-move="40" class="js-mouse-move"
-                            src="{{ asset('') }}/assets/web/img/home-9/hero/1.png" alt="icon"></div>
-                    <div class="-el-3"><img data-move="40" class="js-mouse-move"
-                            src="{{ asset('') }}/assets/web/img/home-9/hero/2.png" alt="icon"></div>
-                    <div class="-el-4"><img data-move="40" class="js-mouse-move"
-                            src="{{ asset('') }}/assets/web/img/home-9/hero/3.png" alt="icon"></div>
-                </div>
-            </div>
+
 
             <div class="form-page__content lg:py-50">
                 <div class="container">
                     <div class="row justify-center items-center">
-                        <div class="col-xl-6 col-lg-8">
+                        <div class="col-xl-6 col-lg-8 mx-auto">
                             <div class="px-50 py-50 md:px-25 md:py-25 bg-white shadow-1 rounded-16">
                                 <h3 class="text-30 lh-13">Login</h3>
-                                <p class="mt-10">Don't have an account yet? <a href="signup.html"
-                                        class="text-purple-1">Sign up for free</a></p>
+                                <p class="mt-10">Don't have an account yet? <a href="signup.html" class="text-purple-1">Sign
+                                        up for free</a></p>
 
                                 <form class="contact-form respondForm__form row y-gap-20 pt-30"
                                     action="{{ route('login') }}" method="POST">

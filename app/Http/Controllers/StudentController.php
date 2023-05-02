@@ -70,10 +70,10 @@ class StudentController extends Controller
         $student = Student::create($data);
 
         if ($student) {
-            dd('success');
-            // return redirect()->route('students.index')->with('success', 'Student created successfully.');
+            // dd('success');
+            return redirect()->route('user.dashboard', Auth::user()->id)->with('success', 'Student profile completed successfully.');
         } else {
-            dd('error');
+
             return back()->with('error', 'Student creating showing error.');
         }
     }

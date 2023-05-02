@@ -18,4 +18,8 @@ class Student extends Model
         'current_class',
         'current_school'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

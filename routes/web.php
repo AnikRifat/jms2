@@ -27,10 +27,14 @@ Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
 
 Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
 
-
-
-
+Route::prefix('/user/dashboard')->middleware('auth')->group(function () {
+    Route::get('/{user}', [PublicController::class, 'userdashboard'])->name('user.dashboard');
+});
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
+
+
+
+
     Route::get('/', [PublicController::class, 'dashboard'])->name('dashboard.index');
 
 

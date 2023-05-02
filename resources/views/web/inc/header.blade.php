@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="header__logo ml-30 md:ml-20">
-                        <a data-barba href="index-2.html">
+                        <a data-barba href="{{ route('index') }}">
                             <img class="-light-d-none" src="{{ asset('') }}assets/web/img/general/logo.svg"
                                 alt="logo">
                             <img class="-dark-d-none" src="{{ asset('') }}assets/web/img/general/logo-dark.svg"
@@ -241,7 +241,7 @@
                                         <div class="sidebar -dashboard">
 
                                             <div class="sidebar__item -is-active -dark-bg-dark-2">
-                                                <a href="dashboard.html"
+                                                <a href="{{ route('user.dashboard', Auth::user()->id) }}"
                                                     class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                                                     <i class="text-20 icon-discovery mr-15"></i>
                                                     Dashboard
