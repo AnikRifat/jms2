@@ -6,14 +6,14 @@
             <div class="form-page__img bg-dark-1">
                 <div class="form-page-composition">
                     <div class="-bg"><img data-move="30" class="js-mouse-move" src="img/login/bg.png" alt="bg"></div>
-                    <div class="-el-1"><img data-move="20" class="js-mouse-move" src="img/home-9/hero/bg.png"
-                            alt="image"></div>
-                    <div class="-el-2"><img data-move="40" class="js-mouse-move" src="img/home-9/hero/1.png"
-                            alt="icon"></div>
-                    <div class="-el-3"><img data-move="40" class="js-mouse-move" src="img/home-9/hero/2.png"
-                            alt="icon"></div>
-                    <div class="-el-4"><img data-move="40" class="js-mouse-move" src="img/home-9/hero/3.png"
-                            alt="icon"></div>
+                    <div class="-el-1"><img data-move="20" class="js-mouse-move"
+                            src="{{ asset('') }}/assets/web/img/home-9/hero/bg.png" alt="image"></div>
+                    <div class="-el-2"><img data-move="40" class="js-mouse-move"
+                            src="{{ asset('') }}/assets/web/img/home-9/hero/1.png" alt="icon"></div>
+                    <div class="-el-3"><img data-move="40" class="js-mouse-move"
+                            src="{{ asset('') }}/assets/web/img/home-9/hero/2.png" alt="icon"></div>
+                    <div class="-el-4"><img data-move="40" class="js-mouse-move"
+                            src="{{ asset('') }}/assets/web/img/home-9/hero/3.png" alt="icon"></div>
                 </div>
             </div>
 

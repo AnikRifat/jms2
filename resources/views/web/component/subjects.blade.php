@@ -5,9 +5,9 @@
 
                 <div class="sectionTitle ">
 
-                    <h2 class="sectionTitle__title ">Latest Books</h2>
+                    <h2 class="sectionTitle__title ">Latest Subjects</h2>
 
-                    <p class="sectionTitle__text ">10,000+ unique online course list designs</p>
+                    <p class="sectionTitle__text ">10,000+ </p>
 
                 </div>
 

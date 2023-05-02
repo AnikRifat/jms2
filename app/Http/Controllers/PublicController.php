@@ -30,12 +30,16 @@ class PublicController extends Controller
         $blogs = Blog::where('status', '1')->orderBy('id', 'DESC')->get();
         return view('web.pages.blog.index', compact('blogs'));
     }
-    
+
     public function blogDetails($title)
     {
         $blog = Blog::where('title', $title)->first();
         $content = Content::find(1);
         return view('web.pages.blog.details', compact('blog', 'content'));
+    }
+    public function completeprofile()
+    {
+        return view('web.pages.authentication.student.complete-profile');
     }
 
 }

@@ -16,7 +16,8 @@ class CreateStudentInformationTable extends Migration
         Schema::create('student_information', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('immage')->nullable();
+            $table->string('image')->nullable();
+            $table->string('file')->nullable();
             $table->string('address')->nullable();
             $table->string('current_depertment')->nullable();
             $table->string('current_class');

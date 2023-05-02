@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('index');
+Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
 Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
+
+Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
 
 
 

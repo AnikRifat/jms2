@@ -10,22 +10,39 @@
     </div>
     <!-- preloader end -->
 
-
-    <main class="main-content  ">
-
-        @include('web.inc.header')
+    <!-- barba container start -->
+    <div class="barba-container" data-barba="container">
 
 
-        <div class="content-wrapper  js-content-wrapper">
+        <main class="main-content">
 
-            @yield('main-body')
+            @include('web.inc.header')
 
-            @include('web.inc.footer')
+            <div class="content-wrapper js-content-wrapper">
+                <div class="dashboard -home-9 px-0 js-dashboard-home-9">
 
 
-        </div>
-    </main>
 
+                    @include('web.inc.sidebar')
+
+
+
+
+                    <div class="dashboard__main mt-0">
+                        <div class="dashboard__content pt-0 px-15 pb-0">
+                            @yield('main-body')
+
+                        </div>
+                        @include('web.inc.footer')
+                    </div>
+                </div>
+            </div>
+        </main>
+        @include('web.inc.aside')
+    </div>
+    <!-- barba container end -->
+
+    <!-- JavaScript -->
     @include('web.inc.script')
 </body>
 
