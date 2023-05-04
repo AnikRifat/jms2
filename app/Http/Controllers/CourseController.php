@@ -45,13 +45,14 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */ public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
             'creator_id' => 'required',
-            'duration' => 'required|integer|min:1',
+            'duration' => 'required',
             'image' => 'required|image|max:2048', // max file size of 2MB
         ]);
 
@@ -68,7 +69,7 @@ class CourseController extends Controller
         $course = Course::create($data);
 
         if ($course) {
-            return redirect()->route('user.course.index')->with('success', 'Course created successfully.');
+            return redirect()->route('user.courses.index')->with('success', 'Course created successfully.');
         } else {
             return back()->with('error', 'Course creation failed.');
         }
@@ -131,7 +132,7 @@ class CourseController extends Controller
         $course = $course->update($data);
 
         if ($course) {
-            return redirect()->route('user.course.index')->with('success', 'Course Updated successfully.');
+            return redirect()->route('user.courses.index')->with('success', 'Course Updated successfully.');
         } else {
             return back()->with('error', 'Course Update showing error.');
         }
@@ -155,7 +156,7 @@ class CourseController extends Controller
         // delete the course from the database
         $course->delete();
 
-        return redirect()->route('user.course.index')->with('success', 'Course deleted successfully.');
+        return redirect()->route('user.courses.index')->with('success', 'Course deleted successfully.');
     }
 
 
@@ -172,7 +173,7 @@ class CourseController extends Controller
 
         $course->status = '1';
         if ($course->save()) {
-            return redirect()->route('user.course.index')->with('success', 'course Activated successfully.');
+            return redirect()->route('user.courses.index')->with('success', 'course Activated successfully.');
         } else {
             return back()->with('error', 'course Activation Unsuccessfull');
         }
@@ -190,7 +191,7 @@ class CourseController extends Controller
         // dd($course->status);
         $course->status = '0';
         if ($course->save()) {
-            return redirect()->route('user.course.index')->with('success', 'course Deactivated successfully.');
+            return redirect()->route('user.courses.index')->with('success', 'course Deactivated successfully.');
         } else {
             return back()->with('error', 'course Dactivation Unsuccessfull.');
         }

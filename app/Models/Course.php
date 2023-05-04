@@ -22,4 +22,8 @@ class Course extends Model
         'image',
         'status'
     ];
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
 }
