@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Content;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PublicController extends Controller
 {
@@ -16,7 +17,11 @@ class PublicController extends Controller
 
     public function dashboard()
     {
-        return view('admin.pages.index');
+        if (Auth::user()->role  == 0) {
+            return view('admin.pages.index');
+        } else {
+            return redirect()->route('user.dashboard');
+        }
     }
 
     public function blogs()
@@ -33,12 +38,28 @@ class PublicController extends Controller
     }
     public function completeprofile()
     {
-        return view('web.pages.authentication.student.complete-profile');
+
+        if (Auth::user()->complete == 1) {
+            return redirect()->route('user.dashboard');
+        } else {
+
+            return view('web.pages.authentication.student.complete-profile');
+        }
     }
 
-    public function userdashboard($id)
+    public function userdashboard()
     {
-        $user = User::find($id);
-        return view('web.pages.dashboard.index', compact('user'));
+        $user = User::find(Auth::user()->id);
+        if (Auth::user()->complete == 1) {
+            return view('web.pages.dashboard.index', compact('user'));
+        } else {
+            return view('web.pages.authentication.student.complete-profile');
+        }
+    }
+    public function createcourse()
+    {
+        $user = User::find(Auth::user()->id);
+
+        return view('web.pages.courses.create', compact('user'));
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-        return view('students.index', compact('students'));
+        $teachers = Teacher::all();
+        return view('teachers.index', compact('teachers'));
     }
 
     /**
@@ -28,7 +28,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        return view('teachers.create');
     }
 
     /**
@@ -45,9 +45,8 @@ class StudentController extends Controller
             'file' => 'required',
             'address' => 'required',
             'birthday' => 'required',
-            'current_depertment' => 'required',
-            'current_class' => 'required',
-            'current_school' => 'required',
+            'profession' => 'required',
+            'subject' => 'required',
         ]);
         // dd($data);
         if ($request->hasFile('image')) {
@@ -57,14 +56,14 @@ class StudentController extends Controller
             $img = Image::make($image->path());
             $img->fit(200, 200);
             $img->encode('jpg', 80);
-            $img->save(base_path('/uploads/students/') . $imageName);
+            $img->save(base_path('/uploads/teachers/') . $imageName);
             $data['image'] = $imageName;
         }
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = time() . '_file.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/students/'), $fileName);
+            $file->move(public_path('uploads/teachers/'), $fileName);
             $data['file'] = $fileName;
         }
         $data['user_id'] = Auth::user()->id;
@@ -72,55 +71,54 @@ class StudentController extends Controller
         $userData['complete'] = 1;
         $user = User::find(Auth::user()->id);
         $updateUser = $user->update($userData);
-        $student = Student::create($data);
+        $teacher = Teacher::create($data);
 
-        if ($student && $updateUser) {
+        if ($teacher && $updateUser) {
             // dd('success');
-            return redirect()->route('user.dashboard')->with('success', 'Student profile completed successfully.');
+            return redirect()->route('user.dashboard')->with('success', 'Teacher profile completed successfully.');
         } else {
 
-            return back()->with('error', 'Student creating showing error.');
+            return back()->with('error', 'Teacher creating showing error.');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show(Teacher $teacher)
     {
-        return view('students.show', compact('student'));
+        return view('teachers.show', compact('teacher'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit(Teacher $teacher)
     {
-        return view('students.edit', compact('student'));
+        return view('teachers.edit', compact('teacher'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, Teacher $teacher)
     {
         $data = $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'address' => 'required',
-            'birthday' => 'required',
+            'address' => 'required', 'birthday' => 'required',
             'current_department' => 'required',
-            'current_class' => 'required',
-            'current_school' => 'required',
+            'profession' => 'required',
+            'subject' => 'required',
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -129,36 +127,36 @@ class StudentController extends Controller
             $img = Image::make($image->path());
             $img->fit(200, 200);
             $img->encode('jpg', 80);
-            $img->save(base_path('/uploads/students/') . $imageName);
+            $img->save(base_path('/uploads/teachers/') . $imageName);
             $data['image'] = $imageName;
         }
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = time() . '_file.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/students/'), $fileName);
+            $file->move(public_path('uploads/teachers/'), $fileName);
             $data['file'] = $fileName;
         }
 
-        $student = $student->update($data);
+        $teacher = $teacher->update($data);
 
-        if ($student) {
-            return redirect()->route('students.index')->with('success', 'Student updated successfully.');
+        if ($teacher) {
+            return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully.');
         } else {
-            return back()->with('error', 'Student update showing error.');
+            return back()->with('error', 'Teacher update showing error.');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy(Teacher $teacher)
     {
-        $student->delete();
+        $teacher->delete();
 
-        return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
+        return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfully.');
     }
 }

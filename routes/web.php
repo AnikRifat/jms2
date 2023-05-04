@@ -3,9 +3,11 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,18 +26,41 @@ Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
 Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
+Route::middleware('auth')->group(function () {
+    Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
+    Route::post('update/student-info', [StudentController::class, 'update'])->name('student.update');
+    Route::post('store/teacher-info', [TeacherController::class, 'store'])->name('teacher.store');
+    Route::post('update/teacher-info', [TeacherController::class, 'update'])->name('teacher.update');
+});
 
-Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
 
 Route::prefix('/user/dashboard')->middleware('auth')->group(function () {
-    Route::get('/{user}', [PublicController::class, 'userdashboard'])->name('user.dashboard');
+    Route::get('/Profile', [PublicController::class, 'userdashboard'])->name('user.dashboard');
+    Route::get('/', [CourseController::class, 'index'])->name('user.courses.index');
+    Route::get('/create-course', [PublicController::class, 'createcourse'])->name('user.course.create');
 });
+
+
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
 
 
 
     Route::get('/', [PublicController::class, 'dashboard'])->name('dashboard.index');
+
+
+    Route::prefix('courses')->group(function () {
+        // Hero-Routes
+        Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+        Route::get('/create', [CourseController::class, 'create'])->name('courses.create');
+        Route::post('/', [CourseController::class, 'store'])->name('courses.store');
+        Route::get('/{course}', [CourseController::class, 'show'])->name('courses.show');
+        Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+        Route::put('/{course}', [CourseController::class, 'update'])->name('courses.update');
+        Route::get('/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+        Route::get('/active/{course}', [CourseController::class, 'active'])->name('courses.active');
+        Route::get('/inactive/{course}', [CourseController::class, 'inactive'])->name('courses.inactive');
+    });
 
 
     Route::prefix('categories')->group(function () {
