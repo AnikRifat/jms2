@@ -39,13 +39,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $request->validate([
             'image' => 'required',
             'file' => 'required',
             'address' => 'required',
             'birthday' => 'required',
-            'current_depertment' => 'required',
+            'current_department' => 'required',
             'current_class' => 'required',
             'current_school' => 'required',
         ]);

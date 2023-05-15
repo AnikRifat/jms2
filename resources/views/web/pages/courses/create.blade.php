@@ -32,7 +32,16 @@
                                     <input type="text" name="title"
                                       placeholder="Learn Figma - UI/UX Design Essential Training">
                                 </div>
-
+                                <div class="col-12">
+                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course Lessons*</label>
+                                    <input type="text" name="lesson"
+                                      placeholder="Learn Figma - UI/UX Design Essential Training">
+                                </div>
+                                <div class="col-12">
+                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course proce*</label>
+                                    <input type="text" name="price"
+                                      placeholder="Learn Figma - UI/UX Design Essential Training">
+                                </div>
 
                                 <div class="col-12">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course Description*</label>
@@ -54,7 +63,7 @@
                                     <select name="subject_id" class="form-control">
                                         <option value="">Select Subject</option>
                                         @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        <option value="{{ $subject->id }}">{{ $subject->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -72,20 +81,10 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-lg rounded-0 btn-dark-1">Create Course</button>
+                                    <button type="submit" class="button -md -outline-purple-1 text-purple-1">Create Course</button>
                                 </div>
                             </form>
 
-
-                            <div class="row y-gap-20 justify-between pt-15">
-                                <div class="col-auto">
-                                    <button class="button -md -outline-purple-1 text-purple-1">Prev</button>
-                                </div>
-
-                                <div class="col-auto">
-                                    <button class="button -md -purple-1 text-white">Next</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

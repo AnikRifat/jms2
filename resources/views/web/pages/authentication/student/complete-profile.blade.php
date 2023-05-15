@@ -84,12 +84,14 @@
 
 
                                     <div class="col-md-6">
-
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Curent Group
-                                            (science/ars/commerce)</label>
-
-                                        <input type="text" name="current_depertment" placeholder="Depertment">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current Group (Science/Arts/Commerce)</label>
+                                        <select name="current_department" class="form-control">
+                                            <option value="science">Science</option>
+                                            <option value="arts">Arts</option>
+                                            <option value="commerce">Commerce</option>
+                                        </select>
                                     </div>
+                                    
 
 
                                     <div class="col-md-6">
@@ -100,11 +102,17 @@
                                     </div>
 
                                     <div class="col-md-6">
-
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current class</label>
-
-                                        <input type="text" name="current_class" placeholder="class">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current Class</label>
+                                        <select name="current_class" class="form-control">
+                                            @foreach ($categories as $category)
+                                                
+                                            <option value="{{ $category->title }}">{{ $category->title }}</option>
+                                            @endforeach
+                 
+                                            <!-- Add more options as needed -->
+                                        </select>
                                     </div>
+                                    
                                     <div class="col-12">
                                         <button type="submit" class="button -md -purple-1 text-white">Update
                                             Profile</button>

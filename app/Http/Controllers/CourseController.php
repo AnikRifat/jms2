@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CART;
 use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 
 // namespace Intervention\Image\Facades;
@@ -48,6 +50,8 @@ class CourseController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'title' => 'required',
+            'lesson' => 'required',
+            'price' => 'required',
             'description' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
@@ -82,11 +86,56 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
+
+    // Show Courses
     public function show(Course $course)
     {
-        return view('web.pages.course.view', compact('course'));
+        $courses = DB::table('courses')
+            ->join('teacher_information', 'courses.creator_id', '=', 'teacher_information.user_id')
+            ->join('users', 'teacher_information.user_id', '=', 'users.id')
+            ->get();
+        return view('web.pages.courses.course_list', compact('courses'));
     }
 
+    //Add Order
+    public function add(Request $request, $id)
+    {
+        //dd($id);
+        $courses = DB::table('courses')
+            ->join('teacher_information', 'courses.creator_id', '=', 'teacher_information.user_id')
+            ->join('users', 'teacher_information.user_id', '=', 'users.id')
+            ->where('users.id', $id)
+            ->first();
+        //dd($courses);
+        $cart = new CART();
+        $cart->name     = $courses->name;
+        $cart->user_id  = $courses->user_id;
+        $cart->course_id = $courses->id;
+        $cart->save();
+
+        return redirect()->back()->with('success', 'Course Purchased SuccessFully');
+    }
+
+    // show order
+    public function order()
+    {
+        $order = CART::all();
+
+        return view('web.pages.courses.order', compact('order'));
+    }
+
+    // search
+    public function search(Request $request)
+    {
+        $course = Course::latest()
+            ->leftjoin('subjects', 'courses.subject_id', '=', 'subjects.id')
+            ->select('subjects.title', 'subjects.description', 'subjects.image', 'courses.*')
+            ->where('subjects.title', 'like', '%' . $request->courses . '%')
+            ->Orwhere('courses.title', 'like', '%' . $request->courses . '%')
+            ->get();
+
+        return view('web.pages.courses.result', compact('course'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

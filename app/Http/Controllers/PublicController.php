@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Content;
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,13 +12,13 @@ class PublicController extends Controller
 {
     public function index()
     {
-
-        return view('web.pages.index');
+        $courses = Course::all();
+        return view('web.pages.index', compact('courses'));
     }
 
     public function dashboard()
     {
-        if (Auth::user()->role  == 0) {
+        if (Auth::user()->role == 0) {
             return view('admin.pages.index');
         } else {
             return redirect()->route('user.dashboard');
@@ -26,7 +27,9 @@ class PublicController extends Controller
 
     public function blogs()
     {
-        $blogs = Blog::where('status', '1')->orderBy('id', 'DESC')->get();
+        $blogs = Blog::where('status', '1')
+            ->orderBy('id', 'DESC')
+            ->get();
         return view('web.pages.blog.index', compact('blogs'));
     }
 
@@ -38,11 +41,9 @@ class PublicController extends Controller
     }
     public function completeprofile()
     {
-
         if (Auth::user()->complete == 1) {
             return redirect()->route('user.dashboard');
         } else {
-
             return view('web.pages.authentication.student.complete-profile');
         }
     }
@@ -61,5 +62,12 @@ class PublicController extends Controller
         $user = User::find(Auth::user()->id);
 
         return view('web.pages.courses.create', compact('user'));
+    }
+
+    public function courseDetails($course)
+    {
+$course = Course::find($course);
+
+        return view('web.pages.courses.details',compact('course'));
     }
 }

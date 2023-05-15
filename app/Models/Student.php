@@ -15,7 +15,7 @@ class Student extends Model
         'file',
         'address',
         'birthday',
-        'current_depertment',
+        'current_department',
         'current_class',
         'current_school'
     ];

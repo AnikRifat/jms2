@@ -18,8 +18,9 @@
                     </div>
 
                     <form class="search-field rounded-16 h-50 -reverse-button -w-340 ml-90 xl:ml-20 lg:d-none"
-                      action="https://creativelayers.net/themes/educrat-html/post">
-                        <input class="bg-light-4 pr-50" type="text" placeholder="What do you want to learn?">
+                      action="{{ route('search') }}" method="POST">
+                      @csrf
+                        <input class="bg-light-4 pr-50" type="text" placeholder="What do you want to learn?" name="courses">
                         <button class="text-light-1" type="submit">
                             <i class="icon-search text-20"></i>
                         </button>
@@ -247,7 +248,7 @@
                                         </div>
 
                                         <div class="sidebar__item ">
-                                            <a href="dshb-courses.html"
+                                            <a href=""
                                               class="d-flex items-center text-17 lh-1 fw-500 ">
                                                 <i class="text-20 icon-play-button mr-15"></i>
                                                 My Courses

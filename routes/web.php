@@ -26,6 +26,7 @@ Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
 Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
+Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'])->name('course.details');
 Route::middleware('auth')->group(function () {
     Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
     Route::post('update/student-info', [StudentController::class, 'update'])->name('student.update');
@@ -47,14 +48,17 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
 
     Route::get('/', [PublicController::class, 'dashboard'])->name('dashboard.index');
-
+    Route::post('/search', [CourseController::class, 'search'])->name('search'); //  search
+    Route::get('/search/view', [CourseController::class, 'result'])->name('result'); // show search
 
     Route::prefix('courses')->group(function () {
         // Hero-Routes
         Route::get('/', [CourseController::class, 'index'])->name('courses.index');
         Route::get('/create', [CourseController::class, 'create'])->name('courses.create');
         Route::post('/', [CourseController::class, 'store'])->name('courses.store');
-        Route::get('/{course}', [CourseController::class, 'show'])->name('courses.show');
+        Route::get('/course_list', [CourseController::class, 'show'])->name('courses.show');// course list
+        Route::get('/course_list/add/{id}', [CourseController::class, 'add'])->name('courses.add'); // add order
+        Route::get('/course_list/order', [CourseController::class, 'order'])->name('courses.order'); // show order
         Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
         Route::put('/{course}', [CourseController::class, 'update'])->name('courses.update');
         Route::get('/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
