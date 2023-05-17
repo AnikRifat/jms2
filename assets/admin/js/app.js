@@ -279,9 +279,9 @@
         a(".language").on("click", function (e) {
             n(a(this).attr("data-lang"));
         }),
-        a(window).on("load", function () {
-            a("#status").fadeOut(), a("#preloader").delay(350).fadeOut("slow");
-        }),
+        // a(window).on("load", function () {
+        //     a("#status").fadeOut(), a("#preloader").delay(350).fadeOut("slow");
+        // }),
         Waves.init(),
         a("#checkAll").on("change", function () {
             a(".table-check .form-check-input").prop(

@@ -47,7 +47,7 @@
                 <div>
 
                     <div class="sidebar__item ">
-                        <a href="{{route('courses.show')}}"
+                        <a href="{{route('course.all')}}"
                           class="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500">
                             <i class="text-20 icon-play-button mr-15"></i>
                             Courses

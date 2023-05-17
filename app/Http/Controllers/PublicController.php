@@ -12,7 +12,7 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::where('status', '1')->take('8')->get();
         return view('web.pages.index', compact('courses'));
     }
 
@@ -64,10 +64,21 @@ class PublicController extends Controller
         return view('web.pages.courses.create', compact('user'));
     }
 
+
+    public function courses()
+    {
+        $courses = Course::where('status', '1')->get();
+        return view('web.pages.courses.all', compact('courses'));
+    }
+    public function checkout($item, $type)
+    {
+
+        return view('web.pages.checkout', compact('item', 'type'));
+    }
     public function courseDetails($course)
     {
-$course = Course::find($course);
+        $course = Course::find($course);
 
-        return view('web.pages.courses.details',compact('course'));
+        return view('web.pages.courses.details', compact('course'));
     }
 }

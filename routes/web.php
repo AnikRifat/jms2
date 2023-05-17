@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -23,9 +24,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('index');
+Route::get('order/{item}/{type}', [OrderController::class, 'store'])->name('order.store');
+Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
 Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
 Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
+Route::get('/courses/all', [PublicController::class, 'courses'])->name('course.all');
 Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'])->name('course.details');
 Route::middleware('auth')->group(function () {
     Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
@@ -56,7 +60,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/', [CourseController::class, 'index'])->name('courses.index');
         Route::get('/create', [CourseController::class, 'create'])->name('courses.create');
         Route::post('/', [CourseController::class, 'store'])->name('courses.store');
-        Route::get('/course_list', [CourseController::class, 'show'])->name('courses.show');// course list
+        Route::get('/course_list', [CourseController::class, 'show'])->name('courses.show'); // course list
         Route::get('/course_list/add/{id}', [CourseController::class, 'add'])->name('courses.add'); // add order
         Route::get('/course_list/order', [CourseController::class, 'order'])->name('courses.order'); // show order
         Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');

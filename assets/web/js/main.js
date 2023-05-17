@@ -46,7 +46,7 @@ App.SMcontroller = new ScrollMagic.Controller();
 window.onload = function () {
   customEasingsInit();
   Preloader.init();
-  
+
   document.fonts.ready.then(function () {
     initComponents()
     initialReveal()
@@ -64,7 +64,7 @@ function initComponents() {
 
   SectionSlider()
   feather.replace()
-  
+
   countDown()
   headerSticky()
   dropDown()
@@ -93,7 +93,7 @@ function initComponents() {
 
   Select.init(".js-select")
   priceRangeSliderInit()
-  
+
   //
 	// your custom plugins init here
   //
@@ -117,18 +117,18 @@ function priceRangeSliderInit() {
         to: function (value) {
           return "$" + value
         },
-  
+
         from: function (value) {
           return value;
         }
       }
     })
-  
+
     const snapValues = [
       el.querySelector('.js-lower'),
       el.querySelector('.js-upper')
     ]
-  
+
     slider.noUiSlider.on('update', function (values, handle) {
       snapValues[handle].innerHTML = values[handle];
     })
@@ -158,7 +158,7 @@ function dashboardSidebarSwitch() {
   if (!target) return
 
   const buttons = target.querySelectorAll('[data-sidebar-menu-target]')
-  
+
   buttons.forEach(el => {
     el.addEventListener('click', () => {
       const attr = el.getAttribute('data-sidebar-menu-target')
@@ -178,9 +178,9 @@ function dashboardSidebarSwitch() {
 function calendarDate() {
   const target = document.querySelector('.js-sidebar-calendar')
   if (!target) return;
-  
+
   const buttons = target.querySelectorAll('.js-button')
-  
+
   buttons.forEach(el => {
     el.addEventListener('click', () => {
       const activeButton = target.querySelector('.-is-active')
@@ -436,14 +436,14 @@ function parallaxIt() {
   target.forEach(container => {
     const $this = container
     const targets = container.querySelectorAll('.js-mouse-move')
-    
+
     targets.forEach(el => {
       const movement = el.getAttribute('data-move')
 
       document.addEventListener('mousemove', (e) => {
         const relX = e.pageX - $this.offsetLeft
         const relY = e.pageY - $this.offsetTop
-      
+
         gsap.to(el, {
           x: (relX - $this.offsetWidth / 2) / $this.offsetWidth * movement,
           y: (relY - $this.offsetHeight / 2) / $this.offsetHeight * movement,
@@ -498,7 +498,7 @@ function fullScreenModeToggle() {
   const documentElement = document.documentElement;
   const buttons = document.querySelectorAll('[data-maximize]')
   if (!buttons) return
-  
+
   let state = false
 
   const closeFullscreen = () => {
@@ -522,7 +522,7 @@ function fullScreenModeToggle() {
       documentElement.msRequestFullscreen();
     }
   }
-  
+
   buttons.forEach(el => {
     el.addEventListener('click', () => {
       if (!state) {
@@ -567,33 +567,33 @@ function pieChart() {
   const getOrCreateLegendList = (chart, id) => {
     const legendContainer = document.getElementById(id);
     let listContainer = legendContainer.querySelector('ul');
-  
+
     if (!listContainer) {
       listContainer = document.createElement('ul');
       listContainer.style.display = 'flex';
       listContainer.style.flexDirection = 'row';
       listContainer.style.margin = 0;
       listContainer.style.padding = 0;
-  
+
       legendContainer.appendChild(listContainer);
     }
-  
+
     return listContainer;
   };
-  
+
   const htmlLegendPlugin = {
     id: 'htmlLegend',
     afterUpdate(chart, args, options) {
       const ul = getOrCreateLegendList(chart, options.containerID);
-  
+
       // Remove old legend items
       while (ul.firstChild) {
         ul.firstChild.remove();
       }
-  
+
       // Reuse the built-in legendItems generator
       const items = chart.options.plugins.legend.labels.generateLabels(chart);
-  
+
       items.forEach(item => {
         const li = document.createElement('li');
         li.style.alignItems = 'center';
@@ -601,7 +601,7 @@ function pieChart() {
         li.style.display = 'flex';
         li.style.flexDirection = 'row';
         li.style.marginLeft = '10px';
-  
+
         li.onclick = () => {
           const {type} = chart.config;
           if (type === 'pie' || type === 'doughnut') {
@@ -612,7 +612,7 @@ function pieChart() {
           }
           chart.update();
         };
-  
+
         // Color box
         const boxSpan = document.createElement('span');
         boxSpan.style.background = item.fillStyle;
@@ -622,17 +622,17 @@ function pieChart() {
         boxSpan.style.height = '20px';
         boxSpan.style.marginRight = '10px';
         boxSpan.style.width = '20px';
-  
+
         // Text
         const textContainer = document.createElement('p');
         textContainer.style.color = item.fontColor;
         textContainer.style.margin = 0;
         textContainer.style.padding = 0;
         textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
-  
+
         const text = document.createTextNode(item.text);
         textContainer.appendChild(text);
-  
+
         li.appendChild(boxSpan);
         li.appendChild(textContainer);
         ul.appendChild(li);
@@ -644,7 +644,7 @@ function pieChart() {
 function countDown() {
   const target = document.querySelector('.js-countdown')
   if (!target) return
-  
+
   const countDownDate = new Date("Jan 5, 2023 15:37:25").getTime()
 
   setInterval(function() {
@@ -692,20 +692,20 @@ function clickElToggle() {
 
     const attrActive = el.getAttribute('data-el-toggle-active')
     const activeElement = document.querySelector(attrActive)
-    
+
     el.addEventListener('click', () => {
       const allDD = document.querySelectorAll('.js-click-dropdown.-is-el-visible')
       if (allDD) {
         allDD.forEach((el) => el.classList.remove('-is-el-visible'))
       }
-      
+
       const allActiveDD = document.querySelectorAll('.-is-dd-active')
       if (allActiveDD) {
         allActiveDD.forEach((el) => el.classList.remove('-is-dd-active'))
       }
 
       openElement.classList.toggle('-is-el-visible')
-      if (activeElement) 
+      if (activeElement)
         activeElement.classList.toggle('-is-dd-active')
     })
   });
@@ -714,7 +714,7 @@ function clickElToggle() {
 function dropDown() {
   const target = document.querySelectorAll('.js-dropdown')
   if (!target) return;
-  
+
   target.forEach(el => {
     const items = el.querySelectorAll('.js-dropdown-list .js-dropdown-link')
     const title = el.querySelector('.js-dropdown-title')
@@ -763,7 +763,7 @@ function shopSlider() {
 
   for (let i = 0; i < sliderPaginationItems.length; i++) {
     const el = sliderPaginationItems[i];
-    
+
     el.addEventListener('click', (e) => {
       sliderInstance.slideTo(i)
     })
@@ -825,10 +825,10 @@ const Select = (function() {
   function multipleSelect(target) {
     const button = target.querySelector('.js-button')
     const title = button.querySelector('.js-button-title')
-    
+
     button.addEventListener('click', () => {
       let dropdown = target.querySelector('.js-dropdown')
-      
+
       if (dropdown.classList.contains('-is-visible')) {
         dropdown.classList.remove('-is-visible')
       } else {
@@ -858,7 +858,7 @@ const Select = (function() {
         } else {
           title.innerHTML = selectedValues.join(', ')
           target.setAttribute("data-select-value", selectedValues.join(', '))
-          
+
           Array.from(selectTag.options).forEach((option) => {
             option.selected = false
           })
@@ -884,14 +884,14 @@ const Select = (function() {
 
     button.addEventListener('click', () => {
       let dropdown = target.querySelector('.js-dropdown')
-      
+
       if (dropdown.classList.contains('-is-visible')) {
         dropdown.classList.remove('-is-visible')
       } else {
         closeAlldropdowns()
         dropdown.classList.add('-is-visible')
       }
-      
+
       if (target.classList.contains('js-liveSearch')) {
         target.querySelector('.js-search').focus()
       }
@@ -918,7 +918,7 @@ const Select = (function() {
   function liveSearch(target) {
     const search = target.querySelector('.js-search')
     const options = target.querySelectorAll('.js-options > *')
-    
+
     search.addEventListener('input', (event) => {
       let searchTerm = event.target.value.toLowerCase()
 
@@ -935,7 +935,7 @@ const Select = (function() {
   function closeAlldropdowns() {
     const targets = document.querySelectorAll('.js-select, .js-multiple-select')
     if (!targets) return
-    
+
     targets.forEach(el => {
       if (el.querySelector('.-is-visible')) {
         el.querySelector('.-is-visible').classList.remove('-is-visible')
@@ -952,7 +952,7 @@ window.onclick = function(event) {
   if (!event.target.closest('.js-select')) {
     const targets = document.querySelectorAll('.js-select')
     if (!targets) return
-    
+
     targets.forEach(el => {
       if (el.querySelector('.-is-visible')) {
         el.querySelector('.-is-visible').classList.remove('-is-visible')
@@ -963,7 +963,7 @@ window.onclick = function(event) {
   if (!event.target.closest('.js-multiple-select')) {
     const targets = document.querySelectorAll('.js-multiple-select')
     if (!targets) return
-    
+
     targets.forEach(el => {
       if (el.querySelector('.-is-visible')) {
         el.querySelector('.-is-visible').classList.remove('-is-visible')
@@ -979,7 +979,7 @@ window.onclick = function(event) {
     if (allDD) {
       allDD.forEach((el) => { el.classList.remove('-is-el-visible') })
     }
-  
+
     const allActiveDD = document.querySelectorAll('.-is-dd-active')
     if (allActiveDD) {
       allActiveDD.forEach((el) => el.classList.remove('-is-dd-active'))
@@ -1003,10 +1003,10 @@ const Accordion = (function() {
           items[l].classList.toggle('is-active')
           content.style.maxHeight = content.scrollHeight + "px"
         }
-        
+
         button.addEventListener("click", (e) => {
           items[l].classList.toggle('is-active');
-  
+
           if (content.style.maxHeight) {
             content.style.maxHeight = null
           } else {
@@ -1030,7 +1030,7 @@ const ShowMore = (function() {
     targets.forEach((el, i) => {
       const button = el.querySelector('.show-more__button')
       const content = el.querySelector('.show-more__content')
-      
+
       button.addEventListener("click", (e) => {
         el.classList.toggle('is-active')
 
@@ -1065,7 +1065,7 @@ const Tabs = (function() {
 
     for (let l = 0; l < controlsItems.length; l++) {
       const el = controlsItems[l];
-      
+
       el.addEventListener("click", (e) => {
         const selector = el.getAttribute('data-tab-target');
 
@@ -1114,7 +1114,7 @@ function SectionSlider() {
       prevNavElement = document.querySelector(`.${el.getAttribute('data-nav-prev')}`)
     if (el.getAttribute('data-nav-next'))
       nextNavElement = document.querySelector(`.${el.getAttribute('data-nav-next')}`)
-    
+
     let gap = 0;
     let loop = false;
     let centered = false;
@@ -1146,7 +1146,7 @@ function SectionSlider() {
         draggable: false,
       }
     }
-   
+
     const colsArray = el.getAttribute('data-slider-cols').split(' ');
 
     let cols_base = 1;
@@ -1174,7 +1174,7 @@ function SectionSlider() {
       loopAdditionalSlides: 1,
       preloadImages: false,
       lazy: true,
-      
+
       scrollbar: scrollbar,
       pagination: pagination,
 
@@ -1217,7 +1217,7 @@ const Header = (function() {
   let navList;
   let mobileFooter;
   let navListLinks;
-  
+
   let navBtnOpen;
   let navBtnClose;
   let navBtnListBack;
@@ -1237,7 +1237,7 @@ const Header = (function() {
     navBtnListBack = document.querySelectorAll('.js-nav-list-back');
     menuDeepLevel = 0;
   }
-  
+
   function init() {
     // if (!document.querySelector('.js-menu')) return
     updateVars()
@@ -1257,7 +1257,7 @@ const Header = (function() {
       el.addEventListener('click', () => {
         const visibleList = navList.querySelector('ul.-is-active');
         const parentList = visibleList.parentElement.parentElement;
-  
+
         menuDeepLevel--;
         menuListStepAnimate(visibleList, parentList, menuDeepLevel, parentList.parentElement.querySelector('li > a').innerHTML);
       })
@@ -1279,11 +1279,11 @@ const Header = (function() {
   }
 
   function menuListStepAnimate(hideList, showList, level) {
-    
+
     let hideListItems = hideList.children;
     hideListItems = Array.from(hideListItems);
     const hideListLinks = hideListItems.map(item => item.querySelector('li > a'));
-    
+
     let showListItems = showList.children;
     showListItems = Array.from(showListItems);
     const showListLinks = showListItems.map(item => item.querySelector('li > a'));
@@ -1301,7 +1301,7 @@ const Header = (function() {
           opacity: 0,
         })
       }
-      
+
       timeline.to(hideListLinks, {
         ease: 'quart.out',
         stagger: -0.04,
@@ -1343,7 +1343,7 @@ const Header = (function() {
       classList = header.getAttribute('data-add-bg')
       classList = `${classList} is-sticky`
     }
-  
+
     new ScrollMagic.Scene({
       offset: '6px',
     })
@@ -1397,7 +1397,7 @@ const RevealAnim = (function() {
 
     for (let i = 0; i < animationTarget.length; i++) {
       const el = animationTarget[i];
-    
+
       new ScrollMagic.Scene({
         offset: '350px',
         triggerElement: el,
@@ -1410,18 +1410,18 @@ const RevealAnim = (function() {
       .addTo(App.SMcontroller)
     }
   }
-  
+
   function container() {
-  
+
     const animationContainer = document.querySelectorAll('[data-anim-wrap]');
-  
+
     if (!animationContainer.length) {
       return;
     }
-    
+
     for (let i = 0; i < animationContainer.length; i++) {
       const el = animationContainer[i];
-    
+
       new ScrollMagic.Scene({
         offset: '350px',
         triggerElement: el,
@@ -1429,35 +1429,35 @@ const RevealAnim = (function() {
         reverse: false,
       })
       .on('enter', function (event) {
-        
+
         const animChilds = el.querySelectorAll('[data-anim-child]');
         el.classList.add('animated');
         animChilds.forEach(el => animateElement(el));
-        
+
       })
       .addTo(App.SMcontroller)
     }
-  
+
   }
-  
+
 
   function animateElement(target) {
-    
+
     let attrVal;
     let animDelay;
     let attrDelayPart;
-  
+
     if (target.getAttribute('data-anim')) {
       attrVal = target.getAttribute('data-anim');
     } else {
       attrVal = target.getAttribute('data-anim-child');
     }
-    
+
     if (attrVal.includes('delay-')) {
       attrDelayPart = attrVal.split(' ').pop();
       animDelay = attrDelayPart.substr(attrDelayPart.indexOf('-') + 1) / 10;
     }
-  
+
     if (attrVal.includes('counter')) {
       counter(target, animDelay);
     }
@@ -1477,13 +1477,13 @@ const RevealAnim = (function() {
   }
 
   function pieChart(target, animDelay = 0) {
-  
+
     const counterVal = target.getAttribute('data-percent');
     const chartBar = target.querySelector('.js-chart-bar');
-    
+
     if (counterVal < 0) { counterVal = 0;}
     if (counterVal > 100) { counterVal = 100;}
-    
+
     gsap.fromTo(chartBar, {
       drawSVG: `0%`,
     }, {
@@ -1491,33 +1491,33 @@ const RevealAnim = (function() {
       duration: 1.4,
       ease: 'power3.inOut',
       drawSVG: `${counterVal}%`,
-  
+
       onStart: () => {
         chartBar.classList.remove('bar-stroke-hidden');
       }
     });
-  
-  
+
+
     let object = { count: 0 };
     const barPercent = target.querySelector('.js-chart-percent');
-  
+
     gsap.to(object, {
       count: counterVal,
       delay: 0.45 + animDelay,
       duration: 1,
       ease: 'power3.inOut',
-      
+
       onUpdate: function() {
         barPercent.innerHTML = Math.round(object.count) + '%';
       },
     });
-  
+
   }
-  
+
   function lineChart(target, animDelay = 0) {
-  
+
     const counterVal = target.getAttribute('data-percent');
-  
+
     gsap.fromTo(target.querySelector('.js-bar'), {
       scaleX: 0,
     }, {
@@ -1526,53 +1526,53 @@ const RevealAnim = (function() {
       ease: 'power3.inOut',
       scaleX: counterVal / 100,
     })
-  
-  
+
+
     let object = { count: 0 };
     const barPercent = target.querySelector('.js-number');
-  
+
     gsap.to(object, {
       count: counterVal,
       delay: 0.45 + animDelay,
       duration: 1,
       ease: 'power3.inOut',
-      
+
       onUpdate: function() {
         barPercent.innerHTML = Math.round(object.count);
       },
     });
-  
+
   }
-  
+
   function counter(target, animDelay = 0) {
-  
+
     const counterVal = target.getAttribute('data-counter');
     const counterAdd = target.getAttribute('data-counter-add');
     const totalDelay = animDelay;
     let symbols = '';
-    
+
     let object = { count: 0 };
     const counterNum = target.querySelector('.js-counter-num');
 
     if (counterAdd) {
       symbols = counterAdd;
     }
-  
+
     gsap.to(object, {
       count: counterVal,
       delay: totalDelay,
       duration: 1.8,
       ease: 'power3.inOut',
-      
+
       onUpdate: function() {
         counterNum.innerHTML = Math.round(object.count) + symbols;
       },
     });
-  
+
   }
-  
+
   function splitLines(target, animDelay = 0) {
-  
+
     const lines = target.querySelectorAll('.split__line');
 
     gsap.to(lines, {
@@ -1582,7 +1582,7 @@ const RevealAnim = (function() {
       ease: 'power2.out',
       y: '0%',
     });
-  
+
   }
 
 
@@ -1601,7 +1601,7 @@ const RevealAnim = (function() {
 
 
 function splitTextIntoLines() {
-  
+
   let target;
 
   if (App.body.classList.contains('page-reveal-off')) {
@@ -1759,12 +1759,12 @@ const Preloader = (function() {
       effect: (target, config) => {
         document.documentElement.classList.add('html-overflow-hidden');
         const tl = gsap.timeline();
-        
+
         if (!document.body.classList.contains('preloader-visible')) {
           document.documentElement.classList.remove('html-overflow-hidden');
           return tl;
         }
-        
+
         return tl
         .to(bg, {
           ease: 'quart.inOut',
@@ -1785,7 +1785,7 @@ const Preloader = (function() {
       effect: (target, config) => {
         const tl = gsap.timeline();
         if (!preloader) return tl
-    
+
         return tl
         .to(bg, {
           ease: 'quart.inOut',
@@ -1800,7 +1800,7 @@ const Preloader = (function() {
       extendTimeline: true,
     })
   }
-  
+
   function hide() {
     gsap.registerEffect({
       name: 'preloaderHide',
@@ -1822,7 +1822,7 @@ const Preloader = (function() {
             document.body.classList.remove('overflow-hidden');
           },
         })
-    
+
       },
       extendTimeline: true,
     })

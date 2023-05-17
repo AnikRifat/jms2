@@ -10,7 +10,7 @@
                     <div class="col-auto">
                         <div data-anim="slide-up delay-1" class="is-in-view">
 
-                            <h1 class="page-header__title">Shop Checkout</h1>
+                            <h1 class="page-header__title">Checkout</h1>
 
                         </div>
 
