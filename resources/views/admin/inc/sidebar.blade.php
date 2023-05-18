@@ -5,7 +5,19 @@
 
 
         <li class="menu-title" key="t-menu">Web Contents</li>
+        {{-- Shop --}}
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="bx bx-home-circle"></i>
+                <span key="t-Shop">Shop</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('products.index') }}" key="t-list">All Shop</a></li>
+                <li><a href="{{ route('products.create') }}" key="t-create">Create Shop</a></li>
 
+            </ul>
+        </li>
+        {{-- End - Category --}}
         {{-- Category --}}
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">

@@ -5,10 +5,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,15 +33,20 @@ Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
 Route::get('/courses/all', [PublicController::class, 'courses'])->name('course.all');
 Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'])->name('course.details');
+Route::get('/products/all', [PublicController::class, 'products'])->name('product.all');
+Route::get('/product/details/{product}', [PublicController::class, 'productdetails'])->name('product.details');
 Route::middleware('auth')->group(function () {
     Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
-    Route::post('update/student-info', [StudentController::class, 'update'])->name('student.update');
+    // Route::post('update/student-info', [StudentController::class, 'update'])->name('student.update');
     Route::post('store/teacher-info', [TeacherController::class, 'store'])->name('teacher.store');
-    Route::post('update/teacher-info', [TeacherController::class, 'update'])->name('teacher.update');
+    // Route::post('update/teacher-info', [TeacherController::class, 'update'])->name('teacher.update');
 });
 
 
 Route::prefix('/user/dashboard')->middleware('auth')->group(function () {
+    Route::post('update/teacher/{user}', [UserController::class, 'teacher'])->name('teacher.update');
+    Route::post('update/student/{user}', [UserController::class, 'student'])->name('student.update');
+    Route::post('update/user/{user}', [UserController::class, 'update'])->name('user.update');
     Route::get('/Profile', [PublicController::class, 'userdashboard'])->name('user.dashboard');
     Route::get('/', [CourseController::class, 'index'])->name('user.courses.index');
     Route::get('/create-course', [PublicController::class, 'createcourse'])->name('user.course.create');
@@ -108,6 +115,18 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
         Route::get('/active/{blog}', [BlogController::class, 'active'])->name('blogs.active');
         Route::get('/inactive/{blog}', [BlogController::class, 'inactive'])->name('blogs.inactive');
+    });
+    Route::prefix('products')->group(function () {
+        // product-Routes
+        Route::get('/', [ProductController::class, 'index'])->name('products.index');
+        Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+        Route::post('/', [ProductController::class, 'store'])->name('products.store');
+        Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
+        Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+        Route::get('/active/{product}', [ProductController::class, 'active'])->name('products.active');
+        Route::get('/inactive/{product}', [ProductController::class, 'inactive'])->name('products.inactive');
     });
 
 

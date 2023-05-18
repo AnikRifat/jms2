@@ -54,7 +54,7 @@
                         </a>
                     </div>
 
-                    <div class="sidebar__item ">
+                    <div class="sidebar__item">
                         <a href="#" class="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500">
                             <i class="text-20 icon-book mr-15"></i>
                             Teachers
@@ -62,7 +62,8 @@
                     </div>
 
                     <div class="sidebar__item ">
-                        <a href="blog-list-1.html" class="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500">
+                        <a href="{{ route('product.all') }}"
+                          class="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500">
                             <i class="text-20 icon-list mr-15"></i>
                             Shop
                         </a>

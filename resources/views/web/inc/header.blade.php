@@ -19,8 +19,9 @@
 
                     <form class="search-field rounded-16 h-50 -reverse-button -w-340 ml-90 xl:ml-20 lg:d-none"
                       action="{{ route('search') }}" method="POST">
-                      @csrf
-                        <input class="bg-light-4 pr-50" type="text" placeholder="What do you want to learn?" name="courses">
+                        @csrf
+                        <input class="bg-light-4 pr-50" type="text" placeholder="What do you want to learn?"
+                          name="courses">
                         <button class="text-light-1" type="submit">
                             <i class="icon-search text-20"></i>
                         </button>
@@ -230,7 +231,22 @@
                     @auth
                     <div class="relative d-flex items-center ml-10">
                         <a href="#" data-el-toggle=".js-profile-toggle">
-                            <img class="size-50" src="{{ asset('') }}assets/web/img/misc/user-profile.png" alt="image">
+
+                            @if (Auth::user()->role == 1)
+
+                            <img class="size-50" src="{{ asset('uploads/students/'.Auth::user()->student->image) }}"
+                              alt="image">
+
+                            @elseif (Auth::user()->role == 2)
+                            <img class="size-50" src="{{ asset('uploads/teachers/'.Auth::user()->teacher->image) }}"
+                              alt="image">
+
+                            @else
+                            <img class="size-50" src="{{ asset('/') }}assets/web/img/misc/user-profile.png" alt="image">
+
+                            @endif
+
+
                         </a>
 
                         <div class="toggle-element js-profile-toggle">
@@ -240,60 +256,31 @@
                                     <div class="sidebar -dashboard">
 
                                         <div class="sidebar__item -is-active -dark-bg-dark-2">
+                                            <p class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
+                                                <i class="text-20 icon-discovery mr-15"></i>
+                                                {{ Auth::user()->name }}
+                                            </p>
+                                        </div>
+                                        <div class="sidebar__item">
                                             <a href="{{ route('user.dashboard') }}"
                                               class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                                                 <i class="text-20 icon-discovery mr-15"></i>
                                                 Dashboard
                                             </a>
                                         </div>
-
                                         <div class="sidebar__item ">
-                                            <a href=""
-                                              class="d-flex items-center text-17 lh-1 fw-500 ">
+                                            <a href="" class="d-flex items-center text-17 lh-1 fw-500 ">
+                                                <i class="text-20 icon-play-button mr-15"></i>
+                                                My Courses
+                                            </a>
+                                        </div>
+                                        <div class="sidebar__item ">
+                                            <a href="" class="d-flex items-center text-17 lh-1 fw-500 ">
                                                 <i class="text-20 icon-play-button mr-15"></i>
                                                 My Courses
                                             </a>
                                         </div>
 
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-bookmarks.html"
-                                              class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-bookmark mr-15"></i>
-                                                Bookmarks
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-messages.html"
-                                              class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-message mr-15"></i>
-                                                Messages
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-listing.html"
-                                              class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-list mr-15"></i>
-                                                Create Course
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-reviews.html"
-                                              class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-comment mr-15"></i>
-                                                Reviews
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-settings.html"
-                                              class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-setting mr-15"></i>
-                                                Settings
-                                            </a>
-                                        </div>
 
                                         <div class="sidebar__item ">
                                             <a onclick="event.preventDefault();

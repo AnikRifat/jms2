@@ -49,7 +49,7 @@ class StudentController extends Controller
             'current_school' => 'required',
         ]);
         // dd($data);
-        if ($request->hasFile('image')) {
+
             $image = $request->file('image');
             $imageName = time() . '.' . $image->extension();
 
@@ -58,14 +58,14 @@ class StudentController extends Controller
             $img->encode('jpg', 80);
             $img->save(base_path('/uploads/students/') . $imageName);
             $data['image'] = $imageName;
-        }
 
-        if ($request->hasFile('file')) {
+
+
             $file = $request->file('file');
             $fileName = time() . '_file.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/students/'), $fileName);
             $data['file'] = $fileName;
-        }
+
         $data['user_id'] = Auth::user()->id;
 
         $userData['complete'] = 1;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Content;
 use App\Models\Course;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,9 +66,21 @@ class PublicController extends Controller
     }
 
 
+    public function products()
+    {
+        $products = Product::where('status', '1')->get();
+        return view('web.pages.product.index', compact('products'));
+    }
+
+    public function productdetails($product)
+    {
+        $product = Product::find($product);
+
+        return view('web.pages.product.details', compact('product'));
+    }
     public function courses()
     {
-        $courses = Course::where('status', '1')->get();
+        $courses = Product::where('status', '1')->get();
         return view('web.pages.courses.all', compact('courses'));
     }
     public function checkout($item, $type)
