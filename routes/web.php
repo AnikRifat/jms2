@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('index');
-Route::get('order/{item}/{type}', [OrderController::class, 'store'])->name('order.store');
+Route::get('order/{item}', [OrderController::class, 'store'])->name('order.store');
 Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
 Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
 Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');

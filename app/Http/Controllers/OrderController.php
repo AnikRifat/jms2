@@ -34,13 +34,19 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($item, $type)
+    public function store(Request  $request, $item)
     {
+        $data = $request->validate([
+            'payment_type' => 'required',
+            'transaction_id' => 'required',
+            'type' => 'required',
+        ]);
         $data['item_id'] = $item;
-        $data['type'] = $type;
+
         $data['status'] = 2;
         $data['user_id'] = Auth::user()->id;
 
+        dd($data);
 
         $order = Order::create($data);
 
