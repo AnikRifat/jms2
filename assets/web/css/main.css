@@ -3817,7 +3817,8 @@ h6 {
 }
 
 .coursesCard.-type-1 .coursesCard__image img {
-    z-index: 1;
+    height: 300px;
+    object-fit: cover;
     transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
