@@ -11,8 +11,9 @@
 
                     <div class="header__logo ml-30 md:ml-20">
                         <a data-barba href="{{ route('index') }}">
-                            <img class="-light-d-none" src="{{ asset('') }}assets/web/img/general/logo.svg" alt="logo">
-                            <img class="-dark-d-none" src="{{ asset('') }}assets/web/img/general/logo-dark.svg"
+                            <img class="-light-d-none" src="{{ asset('uploads/content/' . $content->website_logo) }}"
+                              alt="logo">
+                            <img class="-dark-d-none" src="{{ asset('uploads/content/' . $content->website_logo) }}"
                               alt="logo">
                         </a>
                     </div>

@@ -146,6 +146,7 @@
                                               method="POST">
                                                 @csrf
                                                 <input type="hidden" value="{{ $type }}" name="type">
+                                                <input type="hidden" name="price" value="{{ $singleItem->price}}">
                                                 <input type="hidden" name="payment_type" value="Bkash">
                                                 <input type="hidden" value="{{ $singleItem->id }}" name="item_id">
                                                 <div class="mb-3">
@@ -173,6 +174,7 @@
                                               method="POST">
                                                 @csrf
                                                 <input type="hidden" value="{{ $type }}" name="type">
+                                                <input type="hidden" name="price" value="{{ $singleItem->price}}">
                                                 <input type="hidden" name="payment_type" value="Nagad">
                                                 <input type="hidden" value="{{ $singleItem->id }}" name="item_id">
                                                 <div class="mb-3">
@@ -200,6 +202,7 @@
                                               method="POST">
                                                 @csrf
                                                 <input type="hidden" value="{{ $type }}" name="type">
+                                                <input type="hidden" name="price" value="{{ $singleItem->price}}">
                                                 <input type="hidden" name="payment_type" value="Rocket">
                                                 <input type="hidden" value="{{ $singleItem->id }}" name="item_id">
                                                 <div class="mb-3">

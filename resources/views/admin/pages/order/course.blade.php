@@ -78,7 +78,19 @@
                                         <td>{{ $order->payment_type }}</td>
                                         <td>{{ $order->transaction_id }}</td>
                                         <td>
-                                            <!-- Add your actions here -->
+                                            @if ($order->status == 1)
+                                            <a class="btn btn-danger waves-effect btn-circle waves-light"
+                                              href="{{ route('orders.inactive', $order->id) }}">
+                                                <i class="fa fa-eye-slash"></i> </a>
+                                            @elseif($order->status == 2)
+                                            <a class="btn btn-success waves-effect btn-circle waves-light"
+                                              href="{{ route('orders.pending', $order->id) }}">
+                                                accept order </a>
+                                            @else
+                                            <a class="btn btn-success waves-effect btn-circle waves-light"
+                                              href="{{ route('orders.active', $order->id) }}">
+                                                <i class="fa fa-eye"></i> </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -94,21 +106,4 @@
     </div>
     <!-- End Page-content -->
 </div>
-@endsection
-
-@section('scripts')
-<script>
-    $(document).ready(function() {
-        // Initialize DataTables
-        $('#datatable-buttons').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
 @endsection

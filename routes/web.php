@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -35,6 +36,10 @@ Route::get('/courses/all', [PublicController::class, 'courses'])->name('course.a
 Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'])->name('course.details');
 Route::get('/products/all', [PublicController::class, 'products'])->name('product.all');
 Route::get('/product/details/{product}', [PublicController::class, 'productdetails'])->name('product.details');
+
+Route::post('/search', [SearchController::class, 'search'])->name('search'); //  search
+Route::get('/search/view', [SearchController::class, 'result'])->name('result'); // show search
+
 Route::middleware('auth')->group(function () {
     Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
     Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
@@ -61,8 +66,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
 
     Route::get('/', [PublicController::class, 'dashboard'])->name('dashboard.index');
-    Route::post('/search', [CourseController::class, 'search'])->name('search'); //  search
-    Route::get('/search/view', [CourseController::class, 'result'])->name('result'); // show search
+
 
     Route::prefix('courses')->group(function () {
         // Hero-Routes
@@ -131,6 +135,16 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/inactive/{product}', [ProductController::class, 'inactive'])->name('products.inactive');
     });
 
+    Route::prefix('courses')->group(function () {
+        // courses-Routes
+        Route::get('/', [CourseController::class, 'course'])->name('courses.all');
+        // Route::get('/{courses}', [CourseController::class, 'show'])->name('courses.show');
+        // Route::delete('/{courses}', [CourseController::class, 'destroy'])->name('courses.destroy');
+        Route::get('/pending/{course}', [CourseController::class, 'pending'])->name('courses.pending');
+        Route::get('/active/{course}', [CourseController::class, 'active'])->name('courses.active');
+        Route::get('/inactive/{course}', [CourseController::class, 'inactive'])->name('courses.inactive');
+    });
+
     Route::prefix('orders')->group(function () {
         // orders-Routes
         Route::get('/', [OrderController::class, 'index'])->name('orders.index');
@@ -138,8 +152,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/product', [OrderController::class, 'product'])->name('orders.product');
         // Route::get('/{orders}', [ordersController::class, 'show'])->name('orders.show');
         // Route::delete('/{orders}', [ordersController::class, 'destroy'])->name('orders.destroy');
-        // Route::get('/active/{orders}', [ordersController::class, 'active'])->name('orders.active');
-        // Route::get('/inactive/{orders}', [ordersController::class, 'inactive'])->name('orders.inactive');
+        Route::get('/pending/{order}', [OrderController::class, 'pending'])->name('orders.pending');
+        Route::get('/active/{order}', [OrderController::class, 'active'])->name('orders.active');
+        Route::get('/inactive/{order}', [OrderController::class, 'inactive'])->name('orders.inactive');
     });
     Route::prefix('content')->group(function () {
         // Hero-Routes

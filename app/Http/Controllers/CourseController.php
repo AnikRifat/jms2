@@ -27,7 +27,13 @@ class CourseController extends Controller
         // dd($courses);
         return view('web.pages.courses.index', compact('courses'));
     }
+    public function course()
+    {
 
+        $courses = Course::orderBy('id', 'DESC')->get();
+        // dd($courses);
+        return view('admin.pages.course.index', compact('courses'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -222,7 +228,7 @@ class CourseController extends Controller
 
         $course->status = '1';
         if ($course->save()) {
-            return redirect()->route('user.courses.index')->with('success', 'course Activated successfully.');
+            return redirect()->route('courses.all')->with('success', 'course Activated successfully.');
         } else {
             return back()->with('error', 'course Activation Unsuccessfull');
         }
@@ -240,7 +246,7 @@ class CourseController extends Controller
         // dd($course->status);
         $course->status = '0';
         if ($course->save()) {
-            return redirect()->route('user.courses.index')->with('success', 'course Deactivated successfully.');
+            return redirect()->route('courses.all')->with('success', 'course Deactivated successfully.');
         } else {
             return back()->with('error', 'course Dactivation Unsuccessfull.');
         }

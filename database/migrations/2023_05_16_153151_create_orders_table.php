@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('type')->comment('type->1 = course, type->2 = ecommerce');
             $table->string('status')->default('2');
             $table->string('phone');
+            $table->string('price');
             $table->string('payment_type');
             $table->string('transaction_id');
             $table->timestamps();

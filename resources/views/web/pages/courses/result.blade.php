@@ -2,74 +2,58 @@
 
 
 @section('main-body')
-<div class="dashboard-main">
-    <div class="dashboard__content bg-light-4">
-        <div class="row pb-50 mb-10">
+<section class="layout-pt-md layout-pb-lg">
+    <div data-anim-wrap class="container">
+        <div class="row justify-center text-center">
             <div class="col-auto">
 
+                <div class="sectionTitle ">
 
-            </div>
-        </div>
+                    <h2 class="sectionTitle__title ">Related Courses</h2>
 
 
-        <div class="row y-gap-30">
-            <div class="col-12">
-                <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
-                    <div class="tabs -active-purple-2 js-tabs">
-                        
-                        <table class="table table-boadered">
-                            <tr>
-                                <th>Course</th>
-                                <th>description</th>
-                                <th>duration</th>
-                            </tr>
-                            @foreach($course as $cour)
-                            <tr>
-                                <td>{{$cour->title}}</td>
-                                <td>{{$cour->description}}</td>
-                                <td>{{$cour->duration}}</td>
-                            </tr>
-                            @endforeach
-                        </table>
-
-                    </div>
                 </div>
+
             </div>
         </div>
+        @if($courses->count() > 0)
+        @include('web.component.courses')
+        @else
+        <div class="d-flex items-center justify-between bg-info-1 pl-30 pr-20 py-30 rounded-8">
+            <div class="text-info-2 lh-1 fw-500">No Search Related courses</div>
+
+        </div>
+        @endif
+    </div>
+
+</section>
+
+<section class="layout-pt-md layout-pb-lg">
+    <div data-anim-wrap class="container">
+        <div class="row justify-center text-center">
+            <div class="col-auto">
+
+                <div class="sectionTitle ">
+
+                    <h2 class="sectionTitle__title ">Related Products</h2>
+
+
+                </div>
+
+            </div>
+        </div>
+        @if($products->count() > 0)
+        @include('web.component.product')
+        @else
+        <div class="d-flex items-center justify-between bg-info-1 pl-30 pr-20 py-30 rounded-8">
+            <div class="text-info-2 lh-1 fw-500">No Search Related products</div>
+
+        </div>
+        @endif
+
 
     </div>
 
-    <footer class="footer -dashboard py-30">
-        <div class="row items-center justify-between">
-            <div class="col-auto">
-                <div class="text-13 lh-1">© 2022 Educrat. All Right Reserved.</div>
-            </div>
-
-            <div class="col-auto">
-                <div class="d-flex items-center">
-                    <div class="d-flex items-center flex-wrap x-gap-20">
-                        <div>
-                            <a href="help-center.html" class="text-13 lh-1">Help</a>
-                        </div>
-                        <div>
-                            <a href="terms.html" class="text-13 lh-1">Privacy Policy</a>
-                        </div>
-                        <div>
-                            <a href="#" class="text-13 lh-1">Cookie Notice</a>
-                        </div>
-                        <div>
-                            <a href="#" class="text-13 lh-1">Security</a>
-                        </div>
-                        <div>
-                            <a href="terms.html" class="text-13 lh-1">Terms of Use</a>
-                        </div>
-                    </div>
-
-                    <button class="button -md -rounded bg-light-4 text-light-1 ml-30">English</button>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
+</section>
 
 @endsection

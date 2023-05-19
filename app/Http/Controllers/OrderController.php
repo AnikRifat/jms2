@@ -55,6 +55,7 @@ class OrderController extends Controller
             'item_id' => 'required',
             'payment_type' => 'required',
             'phone' => 'required',
+            'price' => 'required',
             'transaction_id' => 'required',
         ]);
 
@@ -117,5 +118,49 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+    /**
+     * Active the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function Active(Order $order)
+    {
+        $order->status = '1';
+        if ($order->save()) {
+            return redirect()->back()->with('success', 'order Activated successfully.');
+        } else {
+            return back()->with('error', 'order Activation Unsuccessfull');
+        }
+    }
+    public function Pending(Order $order)
+    {
+
+        $order->status = '1';
+        if ($order->save()) {
+            return redirect()->back()->with('success', 'order Accepted successfully.');
+        } else {
+            return back()->with('error', 'order Activation Unsuccessfull');
+        }
+    }
+    /**
+     * Inactive  the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function Inactive(Order $order)
+
+    {
+        // dd($order->status);
+        $order->status = '0';
+        if ($order->save()) {
+            return redirect()->back()->with('success', 'order Deactivated successfully.');
+        } else {
+            return back()->with('error', 'order Dactivation Unsuccessfull.');
+        }
     }
 }
