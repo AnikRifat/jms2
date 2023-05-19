@@ -16684,6 +16684,20 @@ table.table td {
     width: 120px;
 }
 
+button.tabs__button.px-3.py-2.rounded-3.text-light.js-tabs-button.is-active {
+    background: #6440fb;
+}
+
+.tabs__controls.d-flex.justify-content-around.gap-2.mt-3.js-tabs-controls {
+    background: #f5f2ff;
+}
+
+img.payment-logo {
+    height: 120px;
+    padding: 10px;
+
+}
+
 .overflow-scroll {
     overflow: scroll;
 }

@@ -80,13 +80,19 @@ class PublicController extends Controller
     }
     public function courses()
     {
-        $courses = Product::where('status', '1')->get();
+        $courses = Course::where('status', '1')->get();
+        // dd($courses);
         return view('web.pages.courses.all', compact('courses'));
     }
     public function checkout($item, $type)
     {
-
-        return view('web.pages.checkout', compact('item', 'type'));
+        if ($type == 1) {
+            $singleItem = Course::find($item);
+        } elseif ($type == 2) {
+            $singleItem = Product::find($item);
+        }
+        // dd($singleItem);
+        return view('web.pages.checkout', compact('singleItem', 'type'));
     }
     public function courseDetails($course)
     {

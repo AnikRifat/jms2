@@ -231,19 +231,21 @@
                     @auth
                     <div class="relative d-flex items-center ml-10">
                         <a href="#" data-el-toggle=".js-profile-toggle">
-
+                            @if(Auth::user()->student || Auth::user()->teacher)
                             @if (Auth::user()->role == 1)
 
                             <img class="size-50" src="{{ asset('uploads/students/'.Auth::user()->student->image) }}"
                               alt="image">
 
-                            @elseif (Auth::user()->role == 2)
+                            @elseif(Auth::user()->role == 2)
                             <img class="size-50" src="{{ asset('uploads/teachers/'.Auth::user()->teacher->image) }}"
                               alt="image">
+                            @else
+                            <img class="size-50" src="{{ asset('/') }}assets/web/img/misc/user-profile.png" alt="image">
+                            @endif
 
                             @else
                             <img class="size-50" src="{{ asset('/') }}assets/web/img/misc/user-profile.png" alt="image">
-
                             @endif
 
 
@@ -265,7 +267,7 @@
                                             <a href="{{ route('user.dashboard') }}"
                                               class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                                                 <i class="text-20 icon-discovery mr-15"></i>
-                                                Dashboard
+                                                Settings
                                             </a>
                                         </div>
                                         <div class="sidebar__item ">

@@ -15,9 +15,23 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $orders = Order::all();
 
+        return view('admin.pages.order.index', compact('orders'));
+    }
+    public function product()
+    {
+        $orders = Order::where('type', '2')->get();
+
+        return view('admin.pages.order.product', compact('orders'));
+    }
+    public function course()
+    {
+        $orders = Order::where('type', '1')->get();
+
+
+        return view('admin.pages.order.course', compact('orders'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -34,27 +48,28 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request  $request, $item)
+    public function store(Request $request)
     {
         $data = $request->validate([
-            'payment_type' => 'required',
-            'transaction_id' => 'required',
             'type' => 'required',
+            'item_id' => 'required',
+            'payment_type' => 'required',
+            'phone' => 'required',
+            'transaction_id' => 'required',
         ]);
-        $data['item_id'] = $item;
 
-        $data['status'] = 2;
         $data['user_id'] = Auth::user()->id;
 
-        dd($data);
+
 
         $order = Order::create($data);
 
         if ($order) {
-            return back()->with('success', 'Order created successfully.');
+            // dd('success');
+            return back()->with('success', 'Order recived successfully.');
             # code...
         } else {
-            return back()->with('error', 'Order creating showing error.');
+            return back()->with('error', 'Order placing showing error.');
         }
     }
 

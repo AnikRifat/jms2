@@ -77,11 +77,12 @@
 
                                 <div class="col-md-6">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Image*</label>
-                                    <input type="file" name="image">
+                                    <input type="file" name="image" class="dropify">
                                 </div>
 
                                 <div class="col-12">
-                                    <button type="submit" class="button -md -outline-purple-1 text-purple-1">Create Course</button>
+                                    <button type="submit" class="button -md -outline-purple-1 text-purple-1">Create
+                                        Course</button>
                                 </div>
                             </form>
 

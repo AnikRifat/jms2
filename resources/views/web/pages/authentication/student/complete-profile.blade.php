@@ -27,7 +27,7 @@
                             <div class="border-top-light pt-30 mt-30">
                                 @if (Auth::user()->role == 1)
                                 <form action="{{ route('student.store') }}" method="POST"
-                                  class="contact-form row y-gap-30">
+                                  class="contact-form row y-gap-30" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-md-6">
                                         <div class="row y-gap-20 x-gap-20 items-center">
@@ -38,7 +38,8 @@
                                             </div>
 
                                             <div class="col-auto">
-                                                <label for="image" class="form-label">Upload Your P{icture}</label>
+                                                <label for="image" class="form-label">Upload Your Profile
+                                                    Picture</label>
                                                 <div class="text-14 lh-1 mt-10">PNG or JPG no bigger than 800px
                                                     wide and tall.</div>
 
@@ -56,7 +57,8 @@
                                             </div>
 
                                             <div class="col-auto">
-                                                <label for="file" class="form-label">Upload Your Document</label>
+                                                <label for="file" class="form-label">Upload Your Document( related with
+                                                    student identification)</label>
                                                 <div class="text-14 lh-1 mt-10">only PDF/JPG/JPEG are allowed</div>
 
 
@@ -70,7 +72,8 @@
 
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Birthday</label>
 
-                                        <input type="date" name="birthday" class="form-control" placeholder="Birthday">
+                                        <input type="date" name="birthday" class="form-control" placeholder="Birthday"
+                                          required>
                                     </div>
 
 
@@ -79,40 +82,41 @@
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address
                                             Line </label>
 
-                                        <input type="text" name="address" placeholder="Address Line 1">
+                                        <input type="text" name="address" placeholder="Address Line 1" required>
                                     </div>
 
 
                                     <div class="col-md-6">
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current Group (Science/Arts/Commerce)</label>
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current Group
+                                            (Science/Arts/Commerce)</label>
                                         <select name="current_department" class="form-control">
                                             <option value="science">Science</option>
                                             <option value="arts">Arts</option>
                                             <option value="commerce">Commerce</option>
                                         </select>
                                     </div>
-                                    
+
 
 
                                     <div class="col-md-6">
 
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current School</label>
 
-                                        <input type="text" name="current_school" placeholder="School">
+                                        <input type="text" name="current_school" placeholder="School" required>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current Class</label>
                                         <select name="current_class" class="form-control">
                                             @foreach ($categories as $category)
-                                                
+
                                             <option value="{{ $category->title }}">{{ $category->title }}</option>
                                             @endforeach
-                 
+
                                             <!-- Add more options as needed -->
                                         </select>
                                     </div>
-                                    
+
                                     <div class="col-12">
                                         <button type="submit" class="button -md -purple-1 text-white">Update
                                             Profile</button>
@@ -120,7 +124,7 @@
                                 </form>
                                 @else
                                 <form action="{{ route('teacher.store') }}" method="POST"
-                                  class="contact-form row y-gap-30">
+                                  class="contact-form row y-gap-30" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-md-6">
                                         <div class="row y-gap-20 x-gap-20 items-center">
@@ -149,7 +153,8 @@
                                             </div>
 
                                             <div class="col-auto">
-                                                <label for="file" class="form-label">Upload Your Document</label>
+                                                <label for="file" class="form-label">Upload Your Document (related with
+                                                    your Education Inetifiaction)</label>
                                                 <div class="text-14 lh-1 mt-10">only PDF/JPG/JPEG are allowed</div>
 
 
@@ -163,7 +168,8 @@
 
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Birthday</label>
 
-                                        <input type="date" name="birthday" class="form-control" placeholder="Birthday">
+                                        <input type="date" name="birthday" class="form-control" placeholder="Birthday"
+                                          required>
                                     </div>
 
 
@@ -172,7 +178,7 @@
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address
                                             Line </label>
 
-                                        <input type="text" name="address" placeholder="Address Line 1">
+                                        <input type="text" name="address" placeholder="Address Line 1" required>
                                     </div>
 
 

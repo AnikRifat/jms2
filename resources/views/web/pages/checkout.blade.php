@@ -29,120 +29,86 @@
     <section class="layout-pt-md layout-pb-lg">
         <div class="container">
             <div class="row y-gap-50">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="shopCheckout-form">
                         <form action="post" class="contact-form row x-gap-30 y-gap-30">
                             <div class="col-12">
                                 <h5 class="text-20">Billing details</h5>
                             </div>
                             <div class="col-sm-6">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">First name</label>
-                                <input type="text" name="firstName" placeholder="First name">
+                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">name</label>
+                                <input type="text" name="name" placeholder="name" value="{{ Auth::user()->name }}"
+                                  readonly>
                             </div>
                             <div class="col-sm-6">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Last name</label>
-                                <input type="text" name="lastName" placeholder="Last name">
+                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email</label>
+                                <input type="text" name="email" placeholder="email" value="{{ Auth::user()->email }}"
+                                  readonly>
                             </div>
-                            <div class="col-12">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Company name</label>
-                                <input type="text" name="company" placeholder="Company name">
-                            </div>
-
-                            <div class="col-12">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country / Region *</label>
-                                <select class="selectize wide js-selectize">
-                                    <option value="USA">USA</option>
-                                    <option value="Germany">Germany</option>
-                                    <option value="France">France</option>
-                                    <option value="Greece">Greece</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">House number adn street
-                                    name</label>
-                                <input type="text" name="address" placeholder="House number adn street name">
-                            </div>
-
                             <div class="col-sm-6">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Apartment, suite, unit etc.
-                                    (optional)</label>
-                                <input type="text" name="apartment"
-                                  placeholder="Apartment, suite, unit etc. (optional)">
+                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
+                                <input type="text" name="phone" placeholder="phone" value="{{ Auth::user()->phone }}"
+                                  readonly>
                             </div>
-
+                            @if (Auth::user()->role == 1)
                             <div class="col-sm-6">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Town / City *</label>
-                                <input type="text" name="city" placeholder="Town / City *">
+                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address</label>
+                                <input type="text" name="address" placeholder="address"
+                                  value="{{ Auth::user()->student->address }}" readonly>
                             </div>
-
+                            @elseif(Auth::user()->role == 2)
                             <div class="col-sm-6">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">State *</label>
-                                <input type="text" name="state" placeholder="State *">
+                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address</label>
+                                <input type="text" name="address" placeholder="address"
+                                  value="{{ Auth::user()->teacher->address }}" readonly>
                             </div>
+                            @endif
 
-                            <div class="col-sm-6">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">ZIP *</label>
-                                <input type="text" name="zip" placeholder="ZIP *">
-                            </div>
 
-                            <div class="col-sm-6">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone *</label>
-                                <input type="text" name="phone" placeholder="Phone *">
-                            </div>
 
-                            <div class="col-12">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email address *</label>
-                                <input type="email" name="email" placeholder="Email address *">
-                            </div>
-
-                            <div class="col-12">
-                                <h5 class="text-20 fw-500 pt-30">Additional information</h5>
-                            </div>
-                            <div class="col-12">
-                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Order notes (optional)</label>
-                                <textarea name="notes" id="form_notes" rows="8"
-                                  placeholder="Order notes (optional)"></textarea>
-                            </div>
                         </form>
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="">
                         <div class="pt-30 pb-15 bg-white border-light rounded-8 bg-light-4">
                             <h5 class="px-30 text-20 fw-500">
-                                Your order
+                                @if($type == 1)
+                                Course Checkout
+                                @elseif($type == 2)
+                                Product Checkout
+                                @endif
                             </h5>
 
                             <div class="d-flex justify-between px-30 mt-25">
                                 <div class="py-15 fw-500 text-dark-1">Product</div>
-                                <div class="py-15 fw-500 text-dark-1">Subtotal</div>
+                                <div class="py-15 fw-500 text-dark-1">Price</div>
                             </div>
 
                             <div class="d-flex justify-between border-top-dark px-30">
-                                <div class="py-15 text-grey">Hoodie x2</div>
-                                <div class="py-15 text-grey">$59.00</div>
-                            </div>
+                                @if ($type == 1)
+                                <div class="py-15 text-grey">{{ $singleItem->title }}</div>
+                                @else
+                                <div class="py-15 text-grey">{{ $singleItem->name }}</div>
+                                @endif
 
-                            <div class="d-flex justify-between px-30">
-                                <div class="py-15 text-grey">Seo Books x 1</div>
-                                <div class="py-15 text-grey">$67.00</div>
+                                <div class="py-15 text-grey">${{ $singleItem->price}}</div>
                             </div>
 
                             <div class="d-flex justify-between border-top-dark px-30">
                                 <div class="py-15 fw-500">Subtotal</div>
-                                <div class="py-15 fw-500">$178.00</div>
+                                <div class="py-15 fw-500">${{ $singleItem->price}}</div>
                             </div>
 
                             <div class="d-flex justify-between border-top-dark px-30">
                                 <div class="py-15 fw-500 text-dark-1">Shipping</div>
-                                <div class="py-15 fw-500 text-dark-1">$178.00</div>
+                                <div class="py-15 fw-500 text-dark-1">${{ $singleItem->price}}</div>
                             </div>
 
                             <div class="d-flex justify-between border-top-dark px-30">
                                 <div class="py-15 fw-500 text-dark-1">Total</div>
-                                <div class="py-15 fw-500 text-dark-1">$9,218.00</div>
+                                <div class="py-15 fw-500 text-dark-1">${{ $singleItem->price}}</div>
                             </div>
                         </div>
 
@@ -151,65 +117,121 @@
                                 Payment
                             </h5>
 
-                            <div class="mt-30">
-                                <div class="form-radio d-flex items-center">
-                                    <div class="radio">
-                                        <input type="radio" name="radio" checked="checked">
-                                        <div class="radio__mark">
-                                            <div class="radio__icon"></div>
+                            <div class="container">
+                                <div class="tabs tabs--pills js-tabs">
+                                    <div
+                                      class="tabs__controls d-flex justify-content-around gap-2 mt-3 js-tabs-controls">
+                                        <button class="tabs__button px-3 py-2 rounded-3 text-light js-tabs-button"
+                                          data-tab-target=".-tab-item-1" type="button">
+                                            <img src="{{ asset('/') }}assets/web/img/bkash_logo.png" alt="Bkash Logo"
+                                              class="payment-logo">
+                                        </button>
+                                        <button class="tabs__button px-3 py-2 rounded-3 text-light js-tabs-button"
+                                          data-tab-target=".-tab-item-2" type="button">
+                                            <img src="{{ asset('/') }}assets/web/img/nagad_logo.png" alt="Nagad Logo"
+                                              class="payment-logo">
+                                        </button>
+                                        <button
+                                          class="tabs__button px-3 py-2 rounded-3 text-light js-tabs-button is-active"
+                                          data-tab-target=".-tab-item-3" type="button">
+                                            <img src="{{ asset('/') }}assets/web/img/rocket_logo.png" alt="Rocket Logo"
+                                              class="payment-logo">
+                                        </button>
+                                    </div>
+
+                                    <div class="tabs__content mt-4 js-tabs-content">
+                                        <div class="tabs__pane -tab-item-1">
+                                            <!-- Bkash Payment Form -->
+                                            <form class="contact-form" action="{{ route('order.store') }}"
+                                              method="POST">
+                                                @csrf
+                                                <input type="hidden" value="{{ $type }}" name="type">
+                                                <input type="hidden" name="payment_type" value="Bkash">
+                                                <input type="hidden" value="{{ $singleItem->id }}" name="item_id">
+                                                <div class="mb-3">
+                                                    <label for="bkash-phone" class="form-label">Phone No.</label>
+                                                    <input type="text" id="bkash-phone" name="phone"
+                                                      class="form-control" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="bkash-transaction-id" class="form-label">Transaction
+                                                        ID</label>
+                                                    <input type="text" id="bkash-transaction-id" name="transaction_id"
+                                                      class="form-control" required>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="submit" class="button -icon -red-1 text-white">Pay
+                                                        with
+                                                        Bkash</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="tabs__pane -tab-item-2">
+                                            <!-- Nagad Payment Form -->
+                                            <form class="contact-form" action="{{ route('order.store') }}"
+                                              method="POST">
+                                                @csrf
+                                                <input type="hidden" value="{{ $type }}" name="type">
+                                                <input type="hidden" name="payment_type" value="Nagad">
+                                                <input type="hidden" value="{{ $singleItem->id }}" name="item_id">
+                                                <div class="mb-3">
+                                                    <label for="nagad-phone" class="form-label">Phone No.</label>
+                                                    <input type="text" id="nagad-phone" name="phone" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="nagad-transaction-id" class="form-label">Transaction
+                                                        ID</label>
+                                                    <input type="text" id="nagad-transaction-id" name="transaction_id"
+                                                      class="form-control" required>
+                                                </div>
+                                                <div class="text-center">
+
+                                                    <button type="submit" class="button -icon -orange-1 text-white">Pay
+                                                        with
+                                                        Nagad</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="tabs__pane -tab-item-3 is-active">
+                                            <!-- Rocket Payment Form -->
+                                            <form class="contact-form" action="{{ route('order.store') }}"
+                                              method="POST">
+                                                @csrf
+                                                <input type="hidden" value="{{ $type }}" name="type">
+                                                <input type="hidden" name="payment_type" value="Rocket">
+                                                <input type="hidden" value="{{ $singleItem->id }}" name="item_id">
+                                                <div class="mb-3">
+                                                    <label for="rocket-phone" class="form-label">Phone No.</label>
+                                                    <input type="text" id="rocket-phone" name="phone"
+                                                      class="form-control" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="rocket-transaction-id" class="form-label">Transaction
+                                                        ID</label>
+                                                    <input type="text" id="rocket-transaction-id" name="transaction_id"
+                                                      class="form-control" required>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="submit" class="button -icon -purple-1 text-white">Pay
+                                                        with
+                                                        Rocket</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <h5 class="ml-15 text-15 lh-1 fw-500 text-dark-1">Direct bank transfer</h5>
                                 </div>
-                                <p class="ml-25 pl-5 mt-25">Make your payment directly into our bank account. Please use
-                                    your Order ID as the payment reference. Your order will not be shipped until the
-                                    funds have cleared in our account.</p>
                             </div>
+
 
                             <div class="mt-30">
-                                <div class="form-radio d-flex items-center">
-                                    <div class="radio">
-                                        <input type="radio" name="radio" checked="checked">
-                                        <div class="radio__mark">
-                                            <div class="radio__icon"></div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ml-15 text-15 lh-1 text-dark-1">Check payments</h5>
-                                </div>
+                                <button class="button -md -accent col-12 -uppercase text-white">Place order</button>
                             </div>
-
-                            <div class="mt-30">
-                                <div class="form-radio d-flex items-center">
-                                    <div class="radio">
-                                        <input type="radio" name="radio" checked="checked">
-                                        <div class="radio__mark">
-                                            <div class="radio__icon"></div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ml-15 text-15 lh-1 text-dark-1">Cash on delivery</h5>
-                                </div>
-                            </div>
-
-                            <div class="mt-30">
-                                <div class="form-radio d-flex items-center">
-                                    <div class="radio">
-                                        <input type="radio" name="radio" checked="checked">
-                                        <div class="radio__mark">
-                                            <div class="radio__icon"></div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ml-15 text-15 lh-1 text-dark-1">PayPal</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-30">
-                            <button class="button -md -accent col-12 -uppercase text-white">Place order</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
 </div>

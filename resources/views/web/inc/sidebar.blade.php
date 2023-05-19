@@ -3,7 +3,7 @@
     @if (request()->routeIs('user.*'))
     <div class="sidebar -dashboard">
 
-        <div class="sidebar__item -is-active -dark-bg-dark-2">
+        <div class="sidebar__item ">
             <a href="{{ route('user.dashboard') }}" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                 <i class="text-20 icon-discovery mr-15"></i>
                 Dashboard
@@ -24,18 +24,19 @@
             </a>
         </div>
 
-        <div class="sidebar__item ">
-            <a href="dshb-settings.html" class="d-flex items-center text-17 lh-1 fw-500 ">
-                <i class="text-20 icon-setting mr-15"></i>
-                Settings
-            </a>
-        </div>
+
 
         <div class="sidebar__item ">
-            <a href="#" class="d-flex items-center text-17 lh-1 fw-500 ">
+
+            <a onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();" class="d-flex items-center text-17 lh-1 fw-500 ">
                 <i class="text-20 icon-power mr-15"></i>
                 Logout
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+
         </div>
 
     </div>

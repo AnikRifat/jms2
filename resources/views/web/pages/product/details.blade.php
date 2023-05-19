@@ -55,7 +55,8 @@
                         <div class="shopSingle-info__action row x-gap-20 y-gap-20 pt-30">
 
                             <div class="col-auto">
-                                <button class="button h-50 px-45 -purple-1 text-white">Add to cart</button>
+                                <a href="{{route('checkout.store', ['item' => $product->id, 'type' => '2'])}}"
+                                  class="button h-50 px-45 -purple-1 text-white">Buy Now</a>
                             </div>
                         </div>
 

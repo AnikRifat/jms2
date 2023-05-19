@@ -26,8 +26,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('index');
-Route::get('order/{item}', [OrderController::class, 'store'])->name('order.store');
-Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
+
+
 Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
 Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
@@ -36,6 +36,8 @@ Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'
 Route::get('/products/all', [PublicController::class, 'products'])->name('product.all');
 Route::get('/product/details/{product}', [PublicController::class, 'productdetails'])->name('product.details');
 Route::middleware('auth')->group(function () {
+    Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
     Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
     // Route::post('update/student-info', [StudentController::class, 'update'])->name('student.update');
     Route::post('store/teacher-info', [TeacherController::class, 'store'])->name('teacher.store');
@@ -129,7 +131,16 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/inactive/{product}', [ProductController::class, 'inactive'])->name('products.inactive');
     });
 
-
+    Route::prefix('orders')->group(function () {
+        // orders-Routes
+        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/course', [OrderController::class, 'course'])->name('orders.course');
+        Route::get('/product', [OrderController::class, 'product'])->name('orders.product');
+        // Route::get('/{orders}', [ordersController::class, 'show'])->name('orders.show');
+        // Route::delete('/{orders}', [ordersController::class, 'destroy'])->name('orders.destroy');
+        // Route::get('/active/{orders}', [ordersController::class, 'active'])->name('orders.active');
+        // Route::get('/inactive/{orders}', [ordersController::class, 'inactive'])->name('orders.inactive');
+    });
     Route::prefix('content')->group(function () {
         // Hero-Routes
         Route::get('/about/{content}/edit', [ContentController::class, 'editAbout'])->name('about.edit');
