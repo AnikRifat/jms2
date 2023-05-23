@@ -10,6 +10,23 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        // dd($users);
+        return view('admin.pages.users.index', compact('users'));
+    }
+    public function studentlist()
+    {
+        $users = User::where('role' == 1)->get();
+        return view('admin.pages.users.index', compact('users'));
+    }
+    public function teacherlist()
+    {
+        $users = User::where('role' == 2)->get();
+        return view('admin.pages.users.index', compact('users'));
+    }
+
     public function update(Request $request, User $user)
     {
         $data = $request->validate([

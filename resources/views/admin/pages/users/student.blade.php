@@ -56,14 +56,7 @@
                                     <tr>
                                         <td>{{ $order->id }}</td>
                                         <td>{{ $order->user->name }}</td>
-                                        <td>
-                                            @if ($order->type == 1)
-                                            {{ $order->course->title }}
-                                            @else
-                                            {{ $order->product->name }}
-                                            @endif
-
-                                        </td>
+                                        <td>{{ $order->course->title }}</td>
                                         @if ($order->type == 1)
                                         <td><span class="badge badge-soft-info">Course</span></td>
                                         @else
@@ -98,17 +91,6 @@
                                               href="{{ route('orders.active', $order->id) }}">
                                                 <i class="fa fa-eye"></i> </a>
                                             @endif
-
-                                            {{-- <a class="btn btn-primary waves-effect btn-circle waves-light"
-                                              href="{{ route('orders.edit', $order->id) }}">
-                                            <i class="fa fa-edit"></i> </a>
-                                            <form hidden action="{{ route('orders.destroy', $order->id) }}"
-                                              id="form{{ $order->id }}" method="get">
-                                                @csrf
-                                            </form>
-                                            <button class="btn btn-danger waves-effect btn-circle waves-light"
-                                              onclick="deleteItem({{ $order->id }});" type="button">
-                                                <i class="fa fa-trash"></i> </button> --}}
                                         </td>
                                     </tr>
                                     @endforeach
@@ -125,24 +107,3 @@
     <!-- End Page-content -->
 </div>
 @endsection
-
-{{-- @section('scripts')
-<script>
-    function deleteItem(id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log('ok');
-                    document.getElementById(`form${id}`).submit();
-                }
-            })
-        }
-</script>
-@endsection --}}

@@ -156,6 +156,13 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/active/{order}', [OrderController::class, 'active'])->name('orders.active');
         Route::get('/inactive/{order}', [OrderController::class, 'inactive'])->name('orders.inactive');
     });
+
+    Route::prefix('users')->group(function () {
+        // users-Routes
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::get('/student', [UserController::class, 'studentlist'])->name('users.student');
+        Route::get('/teacher', [UserController::class, 'teacherlist'])->name('users.teacher');
+    });
     Route::prefix('content')->group(function () {
         // Hero-Routes
         Route::get('/about/{content}/edit', [ContentController::class, 'editAbout'])->name('about.edit');

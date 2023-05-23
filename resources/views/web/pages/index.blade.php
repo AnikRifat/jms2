@@ -29,7 +29,7 @@
 
     </section>
 
-    @include('web.component.testimonial')
+    {{-- @include('web.component.testimonial') --}}
 
 
 
