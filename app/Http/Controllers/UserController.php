@@ -18,12 +18,12 @@ class UserController extends Controller
     }
     public function studentlist()
     {
-        $users = User::where('role' == 1)->get();
+        $users = User::where('role', 1)->get();
         return view('admin.pages.users.index', compact('users'));
     }
     public function teacherlist()
     {
-        $users = User::where('role' == 2)->get();
+        $users = User::where('role', 2)->get();
         return view('admin.pages.users.index', compact('users'));
     }
 

@@ -20,11 +20,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Orders</h4>
+                        <h4 class="mb-sm-0 font-size-18">Students</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item">Dashboards</li>
-                                <li class="breadcrumb-item active">Orders</li>
+                                <li class="breadcrumb-item active">Students</li>
                             </ol>
                         </div>
                     </div>
@@ -37,61 +37,54 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                            <table id="datatable-buttons" class="table table-busered dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>User</th>
-                                        <th>Item</th>
-                                        <th>Type</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        {{-- <th>Type</th>
                                         <th>Status</th>
                                         <th>Phone</th>
                                         <th>Payment Type</th>
-                                        <th>Transaction ID</th>
-                                        <th>Action</th>
+                                        <th>Transaction ID</th> --}}
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($orders as $order)
+                                    @foreach ($users as $user)
                                     <tr>
-                                        <td>{{ $order->id }}</td>
-                                        <td>{{ $order->user->name }}</td>
-                                        <td>{{ $order->course->title }}</td>
-                                        @if ($order->type == 1)
-                                        <td><span class="badge badge-soft-info">Course</span></td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->phone }}</td>
+                                        {{-- <td>
+                                            @if ($user->status == 1)
+                                            <a class="btn btn-danger waves-effect btn-circle waves-light"
+                                              href="{{ route('users.inactive', $user->id) }}">
+                                        <i class="fa fa-eye-slash"></i> </a>
+                                        @elseif($user->status == 2)
+                                        <a class="btn btn-success waves-effect btn-circle waves-light"
+                                          href="{{ route('users.pending', $user->id) }}">
+                                            accept user </a>
                                         @else
-                                        <td><span class="badge badge-soft-warning">Product</span></td>
+                                        <a class="btn btn-success waves-effect btn-circle waves-light"
+                                          href="{{ route('users.active', $user->id) }}">
+                                            <i class="fa fa-eye"></i> </a>
                                         @endif
 
-                                        <td>
-                                            @if ($order->status == 1)
-                                            <span
-                                              class="badge rounded-pill badge-soft-success font-size-11">Active</span>
-                                            @elseif ($order->status == 2)
-                                            <span class="badge rounded-pill badge-soft-dark font-size-11">Pending</span>
-                                            @else
-                                            <span
-                                              class="badge rounded-pill badge-soft-danger font-size-11">Inactive</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $order->phone }}</td>
-                                        <td>{{ $order->payment_type }}</td>
-                                        <td>{{ $order->transaction_id }}</td>
-                                        <td>
-                                            @if ($order->status == 1)
-                                            <a class="btn btn-danger waves-effect btn-circle waves-light"
-                                              href="{{ route('orders.inactive', $order->id) }}">
-                                                <i class="fa fa-eye-slash"></i> </a>
-                                            @elseif($order->status == 2)
-                                            <a class="btn btn-success waves-effect btn-circle waves-light"
-                                              href="{{ route('orders.pending', $order->id) }}">
-                                                accept order </a>
-                                            @else
-                                            <a class="btn btn-success waves-effect btn-circle waves-light"
-                                              href="{{ route('orders.active', $order->id) }}">
-                                                <i class="fa fa-eye"></i> </a>
-                                            @endif
-                                        </td>
+                                        {{-- <a class="btn btn-primary waves-effect btn-circle waves-light"
+                                              href="{{ route('users.edit', $user->id) }}">
+                                        <i class="fa fa-edit"></i> </a>
+                                        <form hidden action="{{ route('users.destroy', $user->id) }}"
+                                          id="form{{ $user->id }}" method="get">
+                                            @csrf
+                                        </form>
+                                        <button class="btn btn-danger waves-effect btn-circle waves-light"
+                                          onclick="deleteItem({{ $user->id }});" type="button">
+                                            <i class="fa fa-trash"></i> </button>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -107,3 +100,24 @@
     <!-- End Page-content -->
 </div>
 @endsection
+
+{{-- @section('scripts')
+<script>
+    function deleteItem(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log('ok');
+                    document.getElementById(`form${id}`).submit();
+                }
+            })
+        }
+</script>
+@endsection --}}
