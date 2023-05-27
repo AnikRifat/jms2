@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,6 +52,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'type' => 'required',
             'item_id' => 'required',
@@ -59,15 +62,37 @@ class OrderController extends Controller
             'transaction_id' => 'required',
         ]);
 
+        $profit = 25;
         $data['user_id'] = Auth::user()->id;
+
 
 
 
         $order = Order::create($data);
 
         if ($order) {
+            if ($data['type'] == 1) {
+
+                $percentage = (25 / 100) * $data['price'];
+                $teacher = $percentage;
+                $owner = $data['price'] - $percentage;
+
+                $item = Course::find($data['item_id']);
+
+                $transaction['order_id'] = $order->id;
+                $transaction['transaction_id'] = $item->price;
+                $transaction['teacher_id'] = $item->creator_id;
+                $transaction['amount'] = $item->price;
+                $transaction['ratio'] = $profit;
+                $transaction['teacher'] = $teacher;
+                $transaction['owner'] = $owner;
+
+                Transaction::create($transaction);
+
+                return back()->with('success', 'Order recived successfully.');
+            }
             // dd('success');
-            return back()->with('success', 'Order recived successfully.');
+
             # code...
         } else {
             return back()->with('error', 'Order placing showing error.');

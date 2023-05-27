@@ -20,11 +20,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Students</h4>
+                        <h4 class="mb-sm-0 font-size-18">Teachers</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item">Dashboards</li>
-                                <li class="breadcrumb-item active">Students</li>
+                                <li class="breadcrumb-item active">Teachers</li>
                             </ol>
                         </div>
                     </div>
@@ -108,24 +108,20 @@
                 <p class="mb-4">User Email: <span class="text-primary">{{ $user->email }}</span></p>
                 <p class="mb-4">User Phone: <span class="text-primary">{{ $user->phone }}</span></p>
                 <p class="mb-4">User document: <span class="text-primary">{{ $user->phone }}</span></p>
-                @if($user->student)
-                <img src="{{ asset('') }}uploads/students/{{ $user->student->image }}" height="200" alt="">
-                <p class="mb-4">User birthday: <span class="text-primary">{{ $user->student->birthday }}</span></p>
-                <p class="mb-4">User Depertment: <span
-                      class="text-primary">{{ $user->student->current_department }}</span></p>
-                <p class="mb-4">User Class: <span class="text-primary">{{ $user->student->current_class }}</span>
-                <p class="mb-4">User school: <span class="text-primary">{{ $user->student->current_school }}</span>
+                @if ($user->teacher)
+                <img src="{{ asset('') }}uploads/teachers/{{ $user->teacher->image }}" height="200" alt="">
+                <p class="mb-4">User birthday: <span class="text-primary">{{ $user->teacher->birthday }}</span></p>
+                <p class="mb-4">User profession: <span class="text-primary">{{ $user->teacher->profession }}</span></p>
+                <p class="mb-4">User subject: <span class="text-primary">{{ $user->teacher->subjects->title }}</span>
                 </p>
                 @else
                 <h3 class="text-bold text-danger">Profile not completed yet</h3>
                 @endif
 
 
-
-
             </div>
             <div class="modal-footer">
-                {{-- <a href="{{ route('users.confirm',$user->id) }}" class="btn btn-success">Accept</a> --}}
+                <a href="{{ route('users.confirm',$user->id) }}" class="btn btn-success">Accept</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

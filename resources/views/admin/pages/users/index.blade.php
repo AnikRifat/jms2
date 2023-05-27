@@ -41,6 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Staus</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
@@ -56,35 +57,27 @@
                                     @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $user->id }}</td>
+                                        <td>
+                                            @if ($user->allow == 0)
+                                            <span class="badge rounded-pill badge-soft-success font-size-11">Need
+                                                Cormation</span>
+                                            @else
+                                            <span
+                                              class="badge rounded-pill badge-soft-danger font-size-11">Active</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
-                                        {{-- <td>
-                                            @if ($user->status == 1)
-                                            <a class="btn btn-danger waves-effect btn-circle waves-light"
-                                              href="{{ route('users.inactive', $user->id) }}">
-                                        <i class="fa fa-eye-slash"></i> </a>
-                                        @elseif($user->status == 2)
-                                        <a class="btn btn-success waves-effect btn-circle waves-light"
-                                          href="{{ route('users.pending', $user->id) }}">
-                                            accept user </a>
-                                        @else
-                                        <a class="btn btn-success waves-effect btn-circle waves-light"
-                                          href="{{ route('users.active', $user->id) }}">
-                                            <i class="fa fa-eye"></i> </a>
-                                        @endif
+                                        <td>
+                                            <button type="button"
+                                              class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
+                                              data-bs-toggle="modal"
+                                              data-bs-target=".transaction-detailModal-{{ $user->id }}">
+                                                View Details
+                                            </button>
+                                        </td>
 
-                                        {{-- <a class="btn btn-primary waves-effect btn-circle waves-light"
-                                              href="{{ route('users.edit', $user->id) }}">
-                                        <i class="fa fa-edit"></i> </a>
-                                        <form hidden action="{{ route('users.destroy', $user->id) }}"
-                                          id="form{{ $user->id }}" method="get">
-                                            @csrf
-                                        </form>
-                                        <button class="btn btn-danger waves-effect btn-circle waves-light"
-                                          onclick="deleteItem({{ $user->id }});" type="button">
-                                            <i class="fa fa-trash"></i> </button>
-                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -99,6 +92,55 @@
     </div>
     <!-- End Page-content -->
 </div>
+
+@foreach ($users as $user)
+<div class="modal fade bs-example-modal-lg transaction-detailModal-{{ $user->id }}" tabindex="-1"
+  aria-labelledby="transaction-detailModalLabel" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transaction-detailModalLabel">User Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-2">User Name: <span class="text-primary">{{ $user->name }}</span></p>
+                <p class="mb-4">User Email: <span class="text-primary">{{ $user->email }}</span></p>
+                <p class="mb-4">User Phone: <span class="text-primary">{{ $user->phone }}</span></p>
+                <p class="mb-4">User document: <span class="text-primary">{{ $user->phone }}</span></p>
+                @if($user->complete == 1)
+                @if($user->role == 1)
+                <img src="{{ asset('') }}uploads/students/{{ $user->student->image }}" height="200" alt="">
+                <p class="mb-4">User birthday: <span class="text-primary">{{ $user->student->birthday }}</span></p>
+                <p class="mb-4">User Depertment: <span
+                      class="text-primary">{{ $user->student->current_department }}</span></p>
+                <p class="mb-4">User Class: <span class="text-primary">{{ $user->student->current_class }}</span>
+                <p class="mb-4">User school: <span class="text-primary">{{ $user->student->current_school }}</span>
+
+                    @elseif ($user->role == 2)
+
+                    <img src="{{ asset('') }}uploads/teachers/{{ $user->teacher->image }}" height="200" alt="">
+                <p class="mb-4">User birthday: <span class="text-primary">{{ $user->teacher->birthday }}</span></p>
+                <p class="mb-4">User profession: <span class="text-primary">{{ $user->teacher->profession }}</span></p>
+                <p class="mb-4">User subject: <span class="text-primary">{{ $user->teacher->subjects->title }}</span>
+                </p>@else
+                <h3 class="text-bold text-danger">Profile not completed yet</h3>
+                @endif
+
+                @else
+                <h3 class="text-bold text-danger">Profile not completed yet</h3>
+
+                @endif
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('users.confirm',$user->id) }}" class="btn btn-success">Accept</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
 
 {{-- @section('scripts')

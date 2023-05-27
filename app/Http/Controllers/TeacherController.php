@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,6 +11,11 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class TeacherController extends Controller
 {
+
+    public function chat($student)
+    {
+        $chat = Chat::Where('student_id', $student)->where('teacher_id', Auth::user()->id)->get();
+    }
     /**
      * Display a listing of the resource.
      *

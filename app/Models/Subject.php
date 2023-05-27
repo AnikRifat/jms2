@@ -10,6 +10,10 @@ class Subject extends Model
     use HasFactory;
     protected $table = 'subjects';
     protected $fillable  = ['title', 'description', 'status', 'category_id', 'order', 'image'];
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
 
     public function packages()
     {

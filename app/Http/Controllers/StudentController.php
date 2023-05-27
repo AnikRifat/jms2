@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,6 +11,10 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class StudentController extends Controller
 {
+    public function chat($teacher)
+    {
+        $chat = Chat::Where('student_id', Auth::user()->id)->where('teacher_id', $teacher)->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,21 +55,21 @@ class StudentController extends Controller
         ]);
         // dd($data);
 
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->extension();
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->extension();
 
-            $img = Image::make($image->path());
-            $img->fit(200, 200);
-            $img->encode('jpg', 80);
-            $img->save(base_path('/uploads/students/') . $imageName);
-            $data['image'] = $imageName;
+        $img = Image::make($image->path());
+        $img->fit(200, 200);
+        $img->encode('jpg', 80);
+        $img->save(base_path('/uploads/students/') . $imageName);
+        $data['image'] = $imageName;
 
 
 
-            $file = $request->file('file');
-            $fileName = time() . '_file.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/students/'), $fileName);
-            $data['file'] = $fileName;
+        $file = $request->file('file');
+        $fileName = time() . '_file.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads/students/'), $fileName);
+        $data['file'] = $fileName;
 
         $data['user_id'] = Auth::user()->id;
 

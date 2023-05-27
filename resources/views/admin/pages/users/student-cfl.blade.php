@@ -115,17 +115,14 @@
                       class="text-primary">{{ $user->student->current_department }}</span></p>
                 <p class="mb-4">User Class: <span class="text-primary">{{ $user->student->current_class }}</span>
                 <p class="mb-4">User school: <span class="text-primary">{{ $user->student->current_school }}</span>
-                </p>
-                @else
+                    @else
                 <h3 class="text-bold text-danger">Profile not completed yet</h3>
                 @endif
 
 
-
-
             </div>
             <div class="modal-footer">
-                {{-- <a href="{{ route('users.confirm',$user->id) }}" class="btn btn-success">Accept</a> --}}
+                <a href="{{ route('users.confirm',$user->id) }}" class="btn btn-success">Accept</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

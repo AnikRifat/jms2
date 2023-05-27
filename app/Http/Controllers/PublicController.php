@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class PublicController extends Controller
 {
+    public function cp()
+    {
+        return view('web.pages.error.complete-profile');
+    }
+    public function na()
+    {
+        return view('web.pages.error.not-allowed');
+    }
+
     public function index()
     {
         $courses = Course::where('status', '1')->take('8')->get();

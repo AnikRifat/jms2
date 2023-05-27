@@ -14,7 +14,10 @@
             <ul class="sub-menu" aria-expanded="false">
                 <li><a href="{{ route('users.index') }}" key="t-list">All users</a></li>
                 <li><a href="{{ route('users.student') }}" key="t-list">student</a></li>
+                <li><a href="{{ route('users.student.confirmation') }}" key="t-list">student confirmation</a></li>
                 <li><a href="{{ route('users.teacher') }}" key="t-list">teacher</a></li>
+                <li><a href="{{ route('users.teacher.confirmation') }}" key="t-list">teacher confirmation</a></li>
+
 
             </ul>
         </li>
@@ -31,7 +34,17 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="bx bx-home-circle"></i>
+                <span key="t-Shop">Reports</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('profit.index') }}" key="t-list">Profit mergin</a></li>
 
+
+            </ul>
+        </li>
         <a href="javascript: void(0);" class="has-arrow waves-effect">
             <i class="bx bx-home-circle"></i>
             <span key="t-Shop">Courses</span>

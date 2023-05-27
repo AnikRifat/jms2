@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\OrderController;
@@ -11,8 +12,10 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +29,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PublicController::class, 'index'])->name('index');
+Route::get('/mail', function () {
+    $data = array('name' => "Virat Gandhi");
 
+    $mail = Mail::send(['text' => 'email.test'], $data, function ($message) {
+        $message->to('reafatul@gmail.com')->subject('Laravel Basic Testing Mail');
+    });
+    dd($mail);
+    echo "Basic Email Sent. Check your inbox.";
+});
+
+Route::get('/', [PublicController::class, 'index'])->name('index');
+Route::get('/Complete-Profile-202', [PublicController::class, 'cp'])->name('cp');
+Route::get('/not-allowed', [PublicController::class, 'na'])->name('na');
 
 Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
 Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');
@@ -41,24 +55,27 @@ Route::post('/search', [SearchController::class, 'search'])->name('search'); // 
 Route::get('/search/view', [SearchController::class, 'result'])->name('result'); // show search
 
 Route::middleware('auth')->group(function () {
-    Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
-    Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
     Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
-    // Route::post('update/student-info', [StudentController::class, 'update'])->name('student.update');
     Route::post('store/teacher-info', [TeacherController::class, 'store'])->name('teacher.store');
-    // Route::post('update/teacher-info', [TeacherController::class, 'update'])->name('teacher.update');
 });
 
-
-Route::prefix('/user/dashboard')->middleware('auth')->group(function () {
+Route::prefix('/user/dashboard')->middleware(['auth', 'allow'])->group(function () {
+    Route::get('/Profile', [PublicController::class, 'userdashboard'])->name('user.dashboard');
+    Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
+    Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
     Route::post('update/teacher/{user}', [UserController::class, 'teacher'])->name('teacher.update');
     Route::post('update/student/{user}', [UserController::class, 'student'])->name('student.update');
     Route::post('update/user/{user}', [UserController::class, 'update'])->name('user.update');
-    Route::get('/Profile', [PublicController::class, 'userdashboard'])->name('user.dashboard');
+
     Route::get('/', [CourseController::class, 'index'])->name('user.courses.index');
     Route::get('/create-course', [PublicController::class, 'createcourse'])->name('user.course.create');
 });
 
+Route::prefix('chat')->middleware(['auth', 'allow'])->group(function () {
+    Route::get('/{student}', [TeacherController::class, 'chat'])->name('chat.show.teacher');
+    Route::get('/{teacher}', [StudentController::class, 'chat'])->name('chat.show.student');
+    Route::get('/', [ChatController::class, 'store'])->name('chat.save');
+});
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
@@ -145,6 +162,12 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/inactive/{course}', [CourseController::class, 'inactive'])->name('courses.inactive');
     });
 
+    Route::prefix('report')->group(function () {
+        // orders-Routes
+        Route::get('/profit', [TransactionController::class, 'index'])->name('profit.index');
+    });
+
+
     Route::prefix('orders')->group(function () {
         // orders-Routes
         Route::get('/', [OrderController::class, 'index'])->name('orders.index');
@@ -160,8 +183,11 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::prefix('users')->group(function () {
         // users-Routes
         Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::get('/confirm/{user}', [UserController::class, 'confirm'])->name('users.confirm');
         Route::get('/student', [UserController::class, 'studentlist'])->name('users.student');
         Route::get('/teacher', [UserController::class, 'teacherlist'])->name('users.teacher');
+        Route::get('/studentconfirmation', [UserController::class, 'studentconfirmationlist'])->name('users.student.confirmation');
+        Route::get('/teacherconfirmation', [UserController::class, 'teacherconfirmationlist'])->name('users.teacher.confirmation');
     });
     Route::prefix('content')->group(function () {
         // Hero-Routes

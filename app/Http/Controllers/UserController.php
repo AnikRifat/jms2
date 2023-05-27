@@ -10,16 +10,39 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
+    public function confirm($user)
+    {
+        $userData = User::find($user);
+
+        $data['allow'] = '1';
+
+        $confirmed = $userData->update($data);
+        if ($confirmed) {
+            return redirect()->back()->with('success', 'User Confirmed Successfully');
+        } else {
+            return redirect()->back()->with('error', 'User Confirmation Unsuccessfull');
+        }
+    }
     public function index()
     {
         $users = User::all();
         // dd($users);
         return view('admin.pages.users.index', compact('users'));
     }
+    public function studentconfirmationlist()
+    {
+        $users = User::where('role', 1)->where('allow', 0)->get();
+        return view('admin.pages.users.student-cfl', compact('users'));
+    }
     public function studentlist()
     {
         $users = User::where('role', 1)->get();
         return view('admin.pages.users.index', compact('users'));
+    }
+    public function teacherconfirmationlist()
+    {
+        $users = User::where('allow', 0)->where('role', 2)->get();
+        return view('admin.pages.users.teacher-cfl', compact('users'));
     }
     public function teacherlist()
     {
