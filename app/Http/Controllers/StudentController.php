@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Models\Order;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,9 +12,24 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class StudentController extends Controller
 {
+    public function inbox()
+    {
+        // dd('ok');
+        // $chat = Chat::Where('student_id', Auth::user()->id)->where('teacher_id', $teacher)->get();
+
+        $orders = Order::where('type', 1)->where('user_id', Auth::user()->id)->pluck('user_id')
+            ->unique();
+        $teacher = false;
+        return view('web.pages.chat.student', compact('orders', 'teacher'));
+    }
     public function chat($teacher)
     {
-        $chat = Chat::Where('student_id', Auth::user()->id)->where('teacher_id', $teacher)->get();
+        $chats = Chat::Where('student_id', Auth::user()->id)->where('teacher_id', $teacher)->get();
+        // dd($chats);
+        $orders = Order::where('type', 1)->where('user_id', Auth::user()->id)->get();
+        $teacher = User::find($teacher);
+        $student = User::find(Auth::user()->id);
+        return view('web.pages.chat.student', compact('orders', 'chats', 'teacher', 'student'));
     }
     /**
      * Display a listing of the resource.

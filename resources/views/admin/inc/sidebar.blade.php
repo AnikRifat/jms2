@@ -50,9 +50,8 @@
             <span key="t-Shop">Courses</span>
         </a>
         <ul class="sub-menu" aria-expanded="false">
+            <li><a href="{{ route('durations.index') }}" key="t-list">Timelines</a></li>
             <li><a href="{{ route('courses.all') }}" key="t-list">All Courses</a></li>
-            {{-- <li><a href="{{ route('orders.product') }}" key="t-list">Product</a></li>
-            <li><a href="{{ route('orders.course') }}" key="t-list">Course</a></li> --}}
 
         </ul>
         </li>

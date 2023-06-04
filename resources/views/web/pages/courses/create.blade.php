@@ -72,7 +72,10 @@
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Duration*</label>
                                     <input type="text" name="duration" placeholder="Duration">
                                 </div>
-
+                                <div class="col-md-6">
+                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Class Link*</label>
+                                    <input type="text" name="meeting_link" placeholder="Class Link">
+                                </div>
                                 <input type="text" name="creator_id" value="{{Auth::user()->id}}" hidden>
 
                                 <div class="col-md-6">

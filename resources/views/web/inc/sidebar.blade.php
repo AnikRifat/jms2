@@ -9,14 +9,37 @@
                 Dashboard
             </a>
         </div>
+
         @if(Auth::user()->role == 2)
+        <div class="sidebar__item ">
+            <a href="{{ route('chat.inbox.teacher') }}"
+              class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
+                <i class="text-20 icon-discovery mr-15"></i>
+                Chat
+            </a>
+        </div>
         <div class="sidebar__item ">
             <a href="{{route('user.courses.index')}}" class="d-flex items-center text-17 lh-1 fw-500 ">
                 <i class="text-20 icon-play-button mr-15"></i>
                 My Courses
             </a>
         </div>
-
+        @else
+        <div class="sidebar__item ">
+            <a href="{{ route('chat.inbox.student') }}"
+              class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
+                <i class="text-20 icon-discovery mr-15"></i>
+                Chat
+            </a>
+        </div>
+        <div class="sidebar__item ">
+            <a href="{{route('user.courses.student')}}" class="d-flex items-center text-17 lh-1 fw-500 ">
+                <i class="text-20 icon-play-button mr-15"></i>
+                My Courses
+            </a>
+        </div>
+        @endif
+        @if(Auth::user()->role == 2)
         <div class="sidebar__item ">
             <a href="{{route('user.course.create')}}" class="d-flex items-center text-17 lh-1 fw-500 ">
                 <i class="text-20 icon-list mr-15"></i>
@@ -24,6 +47,8 @@
             </a>
         </div>
         @endif
+
+
 
 
         <div class="sidebar__item ">

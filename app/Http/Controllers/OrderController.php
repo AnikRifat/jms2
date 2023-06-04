@@ -80,7 +80,7 @@ class OrderController extends Controller
                 $item = Course::find($data['item_id']);
 
                 $transaction['order_id'] = $order->id;
-                $transaction['transaction_id'] = $item->price;
+                $transaction['transaction_id'] = $data['transaction_id'];
                 $transaction['teacher_id'] = $item->creator_id;
                 $transaction['amount'] = $item->price;
                 $transaction['ratio'] = $profit;

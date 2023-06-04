@@ -74,6 +74,13 @@ class PublicController extends Controller
         return view('web.pages.courses.create', compact('user'));
     }
 
+    public function editcourse($id)
+    {
+        $course = Course::find($id);
+        $user = User::find(Auth::user()->id);
+
+        return view('web.pages.courses.edit', compact('user', 'course'));
+    }
 
     public function products()
     {

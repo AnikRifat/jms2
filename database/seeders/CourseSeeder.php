@@ -74,6 +74,7 @@ class CourseSeeder extends Seeder
             Course::create([
                 'title' => $course['title'],
                 'price' => $course['price'],
+                'meeting_link' => 'https://us05web.zoom.us/j/86754974617?pwd=T3J3a0ZDL1E2SnRxY1o1TUlTR1hCUT09',
                 'lesson' => $course['lesson'],
                 'description' => $course['description'],
                 'class_id' => $faker->numberBetween(1, 2),

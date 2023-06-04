@@ -22,6 +22,7 @@ class CreateCourseTable extends Migration
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('creator_id');
+            $table->string('meeting_link')->nullable();
             $table->string('duration')->nullable();
             $table->string('image')->nullable();
             $table->tinyInteger('status')->default('1');

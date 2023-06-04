@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DurationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicController;
@@ -68,17 +69,24 @@ Route::prefix('/user/dashboard')->middleware(['auth', 'allow'])->group(function 
     Route::post('update/user/{user}', [UserController::class, 'update'])->name('user.update');
 
     Route::get('/', [CourseController::class, 'index'])->name('user.courses.index');
+    Route::get('/my-courses', [CourseController::class, 'courses'])->name('user.courses.student');
     Route::get('/create-course', [PublicController::class, 'createcourse'])->name('user.course.create');
+
+    Route::get('/update-course', [PublicController::class, 'updatecourse'])->name('user.course.update');
 });
 
-Route::prefix('chat')->middleware(['auth', 'allow'])->group(function () {
-    Route::get('/{student}', [TeacherController::class, 'chat'])->name('chat.show.teacher');
-    Route::get('/{teacher}', [StudentController::class, 'chat'])->name('chat.show.student');
-    Route::get('/', [ChatController::class, 'store'])->name('chat.save');
+Route::prefix('chat/inbox')->middleware(['auth', 'allow'])->group(function () {
+
+    Route::get('/teacher', [TeacherController::class, 'inbox'])->name('chat.inbox.teacher');
+    Route::get('/student', [StudentController::class, 'inbox'])->name('chat.inbox.student');
+    Route::get('/teacher/{teacher}', [StudentController::class, 'chat'])->name('chat.show.student');
+    Route::get('/student/{student}', [TeacherController::class, 'chat'])->name('chat.show.teacher');
+
+
+    Route::post('/', [ChatController::class, 'store'])->name('chat.save');
 });
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
-
 
 
 
@@ -94,7 +102,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/course_list/add/{id}', [CourseController::class, 'add'])->name('courses.add'); // add order
         Route::get('/course_list/order', [CourseController::class, 'order'])->name('courses.order'); // show order
         Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
-        Route::put('/{course}', [CourseController::class, 'update'])->name('courses.update');
+        Route::post('/{course}', [CourseController::class, 'update'])->name('courses.update');
         Route::get('/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
         Route::get('/active/{course}', [CourseController::class, 'active'])->name('courses.active');
         Route::get('/inactive/{course}', [CourseController::class, 'inactive'])->name('courses.inactive');
@@ -126,6 +134,19 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/active/{subject}', [SubjectController::class, 'active'])->name('subjects.active');
         Route::get('/inactive/{subject}', [SubjectController::class, 'inactive'])->name('subjects.inactive');
     });
+
+
+    Route::prefix('durations')->group(function () {
+        // duration-Routes
+        Route::get('/', [DurationController::class, 'index'])->name('durations.index');
+        Route::post('/', [DurationController::class, 'store'])->name('durations.store');
+        Route::get('/{duration}/edit', [DurationController::class, 'edit'])->name('durations.edit');
+        Route::put('/{duration}', [DurationController::class, 'update'])->name('durations.update');
+        Route::get('/{duration}', [DurationController::class, 'destroy'])->name('durations.destroy');
+        Route::get('/active/{duration}', [DurationController::class, 'active'])->name('durations.active');
+        Route::get('/inactive/{duration}', [DurationController::class, 'inactive'])->name('durations.inactive');
+    });
+
 
     Route::prefix('blogs')->group(function () {
         // Blog-Routes

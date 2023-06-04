@@ -12,9 +12,35 @@ use Intervention\Image\ImageManagerStatic as Image;
 class TeacherController extends Controller
 {
 
+    public function inbox()
+    {
+        // dd('ok');
+        // $chat = Chat::Where('teacher_id', Auth::user()->id)->where('student_id', $student)->get();
+
+        $studentIds = Chat::where('teacher_id',  Auth::user()->id)
+            ->pluck('student_id')
+            ->unique()
+            ->toArray();
+        $users = User::whereIn('id', $studentIds)->get();
+        // dd($studentIds);
+        // $chat = Chat::Where('teacher_id', Auth::user()->id)->where('teacher_id',)->limit(1)->get();
+        // dd($chat);
+        // $orders = Order::where('type', 1)->where('user_id', $transaction->student_id)->get();
+        $student = false;
+        return view('web.pages.chat.teacher', compact('student', 'users'));
+    }
     public function chat($student)
     {
-        $chat = Chat::Where('student_id', $student)->where('teacher_id', Auth::user()->id)->get();
+        // dd($student);
+        $chats = Chat::Where('teacher_id', Auth::user()->id)->where('student_id', $student)->get();
+        $studentIds = Chat::where('teacher_id',  Auth::user()->id)
+            ->pluck('student_id')
+            ->unique()
+            ->toArray();
+        $users = User::whereIn('id', $studentIds)->get();
+        $student = User::find($student);
+        $teacher = User::find(Auth::user()->id);
+        return view('web.pages.chat.teacher', compact('chats', 'student', 'teacher', 'users'));
     }
     /**
      * Display a listing of the resource.

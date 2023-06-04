@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CART;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,27 @@ class CourseController extends Controller
         $courses = Course::orderBy('id', 'DESC')->where('creator_id', Auth::user()->id)->get();
         // dd($courses);
         return view('web.pages.courses.index', compact('courses'));
+    }
+
+    public function courses()
+    {
+
+        $orders = Order::orderBy('id', 'DESC')->where('type', 1)->where('user_id', Auth::user()->id)->get();
+        // dd($orders);
+        // foreach ($orders as $order) {
+        //     dd($order->course);
+        // }
+        // if ($order) {
+        //     $course = $order->course;
+        //     // Access the properties of the related course
+        //     $courseName = $course->name;
+        //     $courseDescription = $course->description;
+        //     // ...
+        // } else {
+        //     // Handle the case when no order is found
+        //     dd("No order found.");
+        // }
+        return view('web.pages.courses.student', compact('orders'));
     }
     public function course()
     {
@@ -63,6 +85,7 @@ class CourseController extends Controller
             'subject_id' => 'required',
             'creator_id' => 'required',
             'duration' => 'required',
+            'meeting_link' => 'required',
             'image' => 'required|image|max:2048', // max file size of 2MB
         ]);
 
@@ -151,7 +174,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $categories = Category::all();
-        return view('web.pages.course.edit', compact('course', 'categories'));
+        return view('web.pages.courses.edit', compact('course', 'categories'));
     }
 
     /**
@@ -170,6 +193,7 @@ class CourseController extends Controller
             'subject_id' => 'required',
             'creator_id' => 'required',
             'duration' => 'required',
+            'meeting_link' => 'required',
         ]);
 
         if ($request->hasFile('image')) {

@@ -20,6 +20,7 @@ class Course extends Model
         'class_id',
         'subject_id',
         'creator_id',
+        'meeting_link',
         'duration',
         'image',
         'status'
