@@ -45,6 +45,28 @@ class SearchController extends Controller
         return view('web.pages.courses.result', compact('courses', 'products'));
     }
 
+
+    public function filter(Request $request)
+    {
+
+        $subject = $request->input('subject_id');
+        $duration = $request->input('duration');
+
+        $courses = Course::query()
+            ->where(function ($query) use ($subject, $duration) {
+                if ($subject) {
+                    $query->where('subject_id', $subject);
+                }
+                if ($duration) {
+                    $query->orWhere('duration', $duration);
+                }
+            })
+            ->get();
+        // dd($courses);
+        $products = false;
+        return view('web.pages.courses.result', compact('courses', 'products'));
+    }
+
     /**
      * Display the specified resource.
      *

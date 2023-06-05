@@ -29,4 +29,8 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
+    public function durationName()
+    {
+        return $this->belongsTo(Duration::class, 'duration')->select('timeline');
+    }
 }

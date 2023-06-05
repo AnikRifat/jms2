@@ -19,7 +19,7 @@ class AllowedMiddleware
     {
 
         if (Auth::check() && Auth::user()->allow != 1) {
-            return redirect()->route('na');
+            return redirect()->route('profile.complete');
         }
 
         return $next($request);

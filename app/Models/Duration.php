@@ -10,4 +10,6 @@ class Duration extends Model
     use HasFactory;
 
     protected $fillable = ['timeline', 'status'];
+
+
 }

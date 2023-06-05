@@ -79,7 +79,7 @@
                                         <td>{{ $course->description }}</td>
                                         <td>{{ $course->lesson }}</td>
                                         {{-- <td>{{ $course->subject }}</td> --}}
-                                        <td>{{ $course->duration }}</td>
+                                        <td>{{ $course->durationName->timeline }}</td>
                                         <td>
                                             @if ($course->image)
                                             <img src="{{ asset('uploads/courses/' . $course->image) }}"

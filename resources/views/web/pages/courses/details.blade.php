@@ -65,7 +65,7 @@
                                         <div class="icon-clock-2"></div>
                                         <div class="ml-10">Duration</div>
                                     </div>
-                                    <div>{{ $course->duration }}</div>
+                                    <div>{{ $course->durationName->timeline }}</div>
                                 </div>
 
                                 <div class="d-flex justify-between py-8 border-top-light">

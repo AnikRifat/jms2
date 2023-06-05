@@ -80,7 +80,7 @@ class CourseSeeder extends Seeder
                 'class_id' => $faker->numberBetween(1, 2),
                 'subject_id' => $faker->numberBetween(1, 7),
                 'creator_id' => 3,
-                'duration' => $faker->randomElement(['2 hours', '3 hours', '4 hours']),
+                'duration' => $faker->randomElement(['1', '2', '3']),
                 'image' => $course['image'],
                 'status' => 1,
             ]);

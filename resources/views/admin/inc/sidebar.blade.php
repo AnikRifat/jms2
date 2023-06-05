@@ -45,15 +45,16 @@
 
             </ul>
         </li>
-        <a href="javascript: void(0);" class="has-arrow waves-effect">
-            <i class="bx bx-home-circle"></i>
-            <span key="t-Shop">Courses</span>
-        </a>
-        <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{{ route('durations.index') }}" key="t-list">Timelines</a></li>
-            <li><a href="{{ route('courses.all') }}" key="t-list">All Courses</a></li>
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="bx bx-home-circle"></i>
+                <span key="t-Shop">Courses</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('durations.index') }}" key="t-list">Timelines</a></li>
+                <li><a href="{{ route('courses.all') }}" key="t-list">All Courses</a></li>
 
-        </ul>
+            </ul>
         </li>
 
         {{-- Shop --}}

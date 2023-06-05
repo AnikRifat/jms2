@@ -20,6 +20,6 @@ class CheckProfile
         if (Auth::user()->complete == 1) {
             return $next($request);
         }
-        return redirect()->route('cp');
+        return redirect()->route('profile.complete');
     }
 }

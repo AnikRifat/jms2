@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Content;
 use App\Models\Course;
 use App\Models\Product;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,11 @@ class PublicController extends Controller
     public function dashboard()
     {
         if (Auth::user()->role == 0) {
-            return view('admin.pages.index');
+            $students = User::where('role', 1)->get();
+
+            $hsc = Student::where('current_class', 'Hsc')->get();
+            $ssc = Student::where('current_class', 'SSC')->get();
+            return view('admin.pages.index', compact('students', 'hsc', 'ssc'));
         } else {
             return redirect()->route('user.dashboard');
         }
@@ -62,6 +67,9 @@ class PublicController extends Controller
     {
         $user = User::find(Auth::user()->id);
         if (Auth::user()->complete == 1) {
+
+
+
             return view('web.pages.dashboard.index', compact('user'));
         } else {
             return view('web.pages.authentication.student.complete-profile');

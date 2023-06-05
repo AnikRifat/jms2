@@ -15,7 +15,16 @@ class DurationSeeder extends Seeder
     public function run()
     {
         Duration::create([
-            'timeline' => '9 am - 3 am',
+            'timeline' => '9 am - 12 pm',
+            'status' => 1,
+        ]);
+
+        Duration::create([
+            'timeline' => '12 pm - 3 pm',
+            'status' => 1,
+        ]);
+        Duration::create([
+            'timeline' => '3 pm - 6 pm',
             'status' => 1,
         ]);
     }

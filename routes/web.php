@@ -52,6 +52,7 @@ Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'
 Route::get('/products/all', [PublicController::class, 'products'])->name('product.all');
 Route::get('/product/details/{product}', [PublicController::class, 'productdetails'])->name('product.details');
 
+Route::post('/filter', [SearchController::class, 'filter'])->name('filter');
 Route::post('/search', [SearchController::class, 'search'])->name('search'); //  search
 Route::get('/search/view', [SearchController::class, 'result'])->name('result'); // show search
 

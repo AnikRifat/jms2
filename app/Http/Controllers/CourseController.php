@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CART;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Duration;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,8 +65,9 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $durations = Duration::where('status', 1)->get();
         // dd(public_path());
-        return view('web.pages.courses.create', compact('categories'));
+        return view('web.pages.courses.create', compact('categories', 'durations'));
     }
 
     /**
@@ -174,7 +176,8 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $categories = Category::all();
-        return view('web.pages.courses.edit', compact('course', 'categories'));
+        $durations = Duration::where('status', 1)->get();
+        return view('web.pages.courses.edit', compact('course', 'categories', 'durations'));
     }
 
     /**

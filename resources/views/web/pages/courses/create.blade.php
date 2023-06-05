@@ -68,10 +68,17 @@
                                     </select>
                                 </div>
 
+
                                 <div class="col-md-6">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Duration*</label>
-                                    <input type="text" name="duration" placeholder="Duration">
+                                    <select name="duration" class="form-control">
+                                        <option value="">Select duration</option>
+                                        @foreach($durations as $duration)
+                                        <option value="{{ $duration->id }}">{{ $duration->title }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
                                 <div class="col-md-6">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Class Link*</label>
                                     <input type="text" name="meeting_link" placeholder="Class Link">
