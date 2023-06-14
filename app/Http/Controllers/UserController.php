@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
@@ -18,6 +19,14 @@ class UserController extends Controller
 
         $confirmed = $userData->update($data);
         if ($confirmed) {
+            $userdata = array(
+                'name' => $userData->name,
+            );
+            $email = $userData->email;
+
+            Mail::send(['text' => 'email.course-purchase'], $userdata, function ($message) use ($email) {
+                $message->to($email)->subject('CLekhapora - Account Confirmation');
+            });
             return redirect()->back()->with('success', 'User Confirmed Successfully');
         } else {
             return redirect()->back()->with('error', 'User Confirmation Unsuccessfull');

@@ -31,13 +31,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/mail', function () {
-    $data = array('name' => "Virat Gandhi");
 
-    $mail = Mail::send(['text' => 'email.test'], $data, function ($message) {
-        $message->to('reafatul@gmail.com')->subject('Laravel Basic Testing Mail');
-    });
-    dd($mail);
-    echo "Basic Email Sent. Check your inbox.";
 });
 
 Route::get('/', [PublicController::class, 'index'])->name('index');

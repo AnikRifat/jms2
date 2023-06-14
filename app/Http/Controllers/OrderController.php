@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -73,6 +74,20 @@ class OrderController extends Controller
         if ($order) {
             if ($data['type'] == 1) {
 
+
+                $userdata = array(
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                    'totalAmount' => $data['price'],
+                    'productName' => $data['price'],
+                    'orderNumber' => $data['transaction_id'],
+                );
+                $email = Auth::user()->email;
+
+                Mail::send(['text' => 'email.course-purchase'], $userdata, function ($message) use ($email) {
+                    $message->to($email)->subject('CLekhapora - course order');
+                });
+
                 $percentage = (25 / 100) * $data['price'];
                 $teacher = $percentage;
                 $owner = $data['price'] - $percentage;
@@ -89,7 +104,21 @@ class OrderController extends Controller
 
                 Transaction::create($transaction);
 
+
                 return back()->with('success', 'Order recived successfully.');
+            } else {
+                $userdata = array(
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                    'totalAmount' => $data['price'],
+                    'productName' => $data['price'],
+                    'orderNumber' => $data['transaction_id'],
+                );
+                $email = Auth::user()->email;
+
+                Mail::send(['text' => 'email.product-purchase'], $userdata, function ($message) use ($email) {
+                    $message->to($email)->subject('CLekhapora - product order');
+                });
             }
             // dd('success');
 

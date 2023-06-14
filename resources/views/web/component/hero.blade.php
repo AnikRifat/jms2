@@ -15,6 +15,7 @@
                         You can access 7900+ different courses from 600<br class="lg:d-none"> professional trainers for
                         free
                     </p>
+                    @if(Auth::user())
 
                     <div data-anim-child="slide-up delay-5" class="is-in-view">
                         <div class="masthead-form bg-white rounded-16 mt-30 px-10 py-10">
@@ -53,10 +54,9 @@
                             </form>
                         </div>
                     </div>
+                    @endif
 
-                    <div data-anim-child="slide-up delay-6" class="is-in-view">
-                        <div class="text-white mt-20">Trending Search: Development, Business, Design, Merketing</div>
-                    </div>
+
                 </div>
             </div>
 

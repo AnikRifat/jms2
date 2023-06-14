@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -68,6 +69,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // dd($data);
+
+        // $data = array('name' => "Virat Gandhi");
+        // dd($data);
+        // Mail::send(['text' => 'email.test'], $data, function ($message) {
+        //     $message->to('reafatul@gmail.com')->subject('Welcome to Lekhapora - Your Learning Journey Begins!');
+        // });
+
+        $userdata = array('name' => $data['name'], 'email' => $data['email']);
+        $email = $data['email'];
+
+        Mail::send(['text' => 'email.test'], $userdata, function ($message) use ($email) {
+            $message->to($email)->subject('User Registration Done');
+        });
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

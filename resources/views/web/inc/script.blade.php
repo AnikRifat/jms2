@@ -20,7 +20,18 @@
     Swal();
 </script>
 @endif
-
+@foreach ($errors->all() as $error)
+<script>
+    Swal.fire({
+  position: "top-end",
+  icon: "Error",
+  title: "{{ $error}}",
+  showConfirmButton: !1,
+  timer: 3000
+  })
+  Swal();
+</script>
+@endforeach
 
 @if ($massage = Session::get('error'))
 <script>
