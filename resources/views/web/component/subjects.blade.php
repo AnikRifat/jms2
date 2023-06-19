@@ -5,9 +5,8 @@
 
                 <div class="sectionTitle ">
 
-                    <h2 class="sectionTitle__title ">Latest Subjects</h2>
+                    <h2 class="sectionTitle__title "> Subjects</h2>
 
-                    <p class="sectionTitle__text ">10,000+ </p>
 
                 </div>
 
@@ -15,8 +14,8 @@
 
             <div class="col-auto">
 
-                <a href="#" class="button -icon -purple-3 text-purple-1">
-                    All Courses
+                <a href="{{ route('subject.all') }}" class="button -icon -purple-3 text-purple-1">
+                    All Subjects
                     <i class="icon-arrow-top-right text-13 ml-10"></i>
                 </a>
 
@@ -25,17 +24,18 @@
 
         <div class="pt-60 lg:pt-40">
             <div class="overflow-hidden js-section-slider" data-loop data-gap="30" data-pagination
-                data-slider-cols="xl-6 lg-6 md-4 sm-3 base-2">
+              data-slider-cols="xl-6 lg-6 md-4 sm-3 base-2">
                 <div class="swiper-wrapper">
 
                     @foreach ($subjects as $item)
-                        <div class="swiper-slide">
-                            <div class="">
-                                <img class="w-1/1" src="{{ asset('uploads/subjects/' . $item->image) }}"
-                                    alt="book">
-                                <h5 class="text-17 fw-500 mt-15">{{ $item->title }}</h5>
-                            </div>
+                    <div class="swiper-slide">
+                        <div class="bg-dark-2 text-center my-5">
+                            <a href="{{ route('subject.details',$item->id) }}">
+                                <img class="w-1/1" src="{{ asset('uploads/subjects/' . $item->image) }}" alt="book">
+                                <h5 class="text-white fw-500 py-5 text-11 ">{{ $item->title }}</h5>
+                            </a>
                         </div>
+                    </div>
                     @endforeach
 
 

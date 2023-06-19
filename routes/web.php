@@ -16,7 +16,6 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +30,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/mail', function () {
-
 });
 
 Route::get('/', [PublicController::class, 'index'])->name('index');
@@ -45,6 +43,10 @@ Route::get('/courses/all', [PublicController::class, 'courses'])->name('course.a
 Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'])->name('course.details');
 Route::get('/products/all', [PublicController::class, 'products'])->name('product.all');
 Route::get('/product/details/{product}', [PublicController::class, 'productdetails'])->name('product.details');
+Route::get('/teachers/all', [PublicController::class, 'teachers'])->name('teacher.all');
+Route::get('/teacher/courses/{teacher}', [PublicController::class, 'teacherdetails'])->name('teacher.details');
+Route::get('/subjects/all', [PublicController::class, 'subjects'])->name('subject.all');
+Route::get('/subject/courses/{subject}', [PublicController::class, 'subjectdetails'])->name('subject.details');
 
 Route::post('/filter', [SearchController::class, 'filter'])->name('filter');
 Route::post('/search', [SearchController::class, 'search'])->name('search'); //  search

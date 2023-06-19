@@ -28,6 +28,7 @@
         </div>
 
     </section>
+    {{-- @include('web.component.instructors') --}}
 
     {{-- @include('web.component.testimonial') --}}
 
@@ -94,7 +95,6 @@
         </div>
     </section>
 
-    @include('web.component.instructors')
     <section class="layout-pt-lg layout-pb-lg bg-light-3">
         <div data-anim-wrap class="container">
             <div class="row y-gap-20 items-center">

@@ -1,7 +1,7 @@
 <div class="dashboard__sidebar -base scroll-bar-1 border-right-light lg:px-30">
 
     @if (request()->routeIs('user.*'))
-    <div class="sidebar -dashboard">
+    <div class="sidebar -dashboard mt-5">
 
         <div class="sidebar__item ">
             <a href="{{ route('user.dashboard') }}" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
@@ -11,6 +11,7 @@
         </div>
 
         @if(Auth::user()->role == 2)
+
         <div class="sidebar__item ">
             <a href="{{ route('chat.inbox.teacher') }}"
               class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
@@ -25,6 +26,12 @@
             </a>
         </div>
         @else
+        <div class="sidebar__item">
+            <a href="{{ route('teacher.all') }}" class="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500">
+                <i class="text-20 icon-book mr-15"></i>
+                Teachers
+            </a>
+        </div>
         <div class="sidebar__item ">
             <a href="{{ route('chat.inbox.student') }}"
               class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
@@ -80,12 +87,7 @@
                         </a>
                     </div>
 
-                    <div class="sidebar__item">
-                        <a href="#" class="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500">
-                            <i class="text-20 icon-book mr-15"></i>
-                            Teachers
-                        </a>
-                    </div>
+
 
                     <div class="sidebar__item ">
                         <a href="{{ route('product.all') }}"

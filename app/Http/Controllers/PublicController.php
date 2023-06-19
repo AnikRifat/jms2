@@ -7,6 +7,7 @@ use App\Models\Content;
 use App\Models\Course;
 use App\Models\Product;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,8 @@ class PublicController extends Controller
     public function index()
     {
         $courses = Course::where('status', '1')->take('8')->get();
-        return view('web.pages.index', compact('courses'));
+        $teachers = User::where('role', 2)->where('allow', '1')->take(8)->get();
+        return view('web.pages.index', compact('courses', 'teachers'));
     }
 
     public function dashboard()
@@ -90,6 +92,19 @@ class PublicController extends Controller
         return view('web.pages.courses.edit', compact('user', 'course'));
     }
 
+    public function subjects()
+    {
+        $subjects = Subject::where('status', '1')->get();
+        return view('web.pages.subject.index', compact('subjects'));
+    }
+
+    public function subjectdetails($subject)
+    {
+        $subjectitem = Subject::find($subject);
+        $courses = Course::where('status', '1')->where('subject_id', $subject)->get();
+        // dd($courses);
+        return view('web.pages.subject.details', compact('courses', 'subjectitem'));
+    }
     public function products()
     {
         $products = Product::where('status', '1')->get();
@@ -123,5 +138,20 @@ class PublicController extends Controller
         $course = Course::find($course);
 
         return view('web.pages.courses.details', compact('course'));
+    }
+
+
+    public function teachers()
+    {
+        $teachers = User::where('role', 2)->where('allow', '1')->get();
+        return view('web.pages.teacher.index', compact('teachers'));
+    }
+
+    public function teacherdetails($teacher)
+    {
+        $teacher = User::find($teacher);
+
+        // dd($teacher->teacher->courses);
+        return view('web.pages.teacher.details', compact('teacher'));
     }
 }

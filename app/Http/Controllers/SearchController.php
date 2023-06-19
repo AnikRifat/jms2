@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -62,9 +63,23 @@ class SearchController extends Controller
                 }
             })
             ->get();
+
+        $creators = Course::query()
+            ->where(function ($query) use ($subject, $duration) {
+                if ($subject) {
+                    $query->where('subject_id', $subject);
+                }
+                if ($duration) {
+                    $query->orWhere('duration', $duration);
+                }
+            })
+            ->distinct('creator_id')
+            ->pluck('creator_id');
+        $teachers = User::whereIn('id', $creators)->get();
+        // dd($teachers);
         // dd($courses);
         $products = false;
-        return view('web.pages.courses.result', compact('courses', 'products'));
+        return view('web.pages.courses.result', compact('courses', 'products', 'teachers'));
     }
 
     /**

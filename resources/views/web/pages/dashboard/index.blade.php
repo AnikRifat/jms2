@@ -3,12 +3,63 @@
 @section('main-body')
 <div class="main-body">
     <div class="dashboard-user">
-        <div class="dashboard__content bg-light-4">
+        <div class="dashboard__content bg-blue-4">
             <div class="row pb-50 mb-10">
                 <div class="col-auto">
-                    <h1 class="text-30 lh-12 fw-700">Settings</h1>
-                    <div class="mt-10">Lorem ipsum dolor sit amet, consectetur.</div>
+                    <h1 data-anim-child="slide-up delay-3" class="masthead__title text-white is-in-view">
+                        Dashboard
+                    </h1>
+
                 </div>
+                <div class="masthead">
+                    <div class="masthead__content">
+                        <h1 class="text-30 lh-12 fw-700"> Find a perfect Online Course</h1>
+
+                        @if(Auth::user())
+
+                        <div data-anim-child="slide-up delay-5" class="is-in-view">
+                            <div class="masthead-form bg-white rounded-16 mt-30 px-10 py-10">
+                                <form action="{{ route('filter') }}" method="POST"
+                                  class=" d-flex x-gap-30 y-gap-10 items-center flex-wrap">
+                                    @csrf
+
+                                    <div class="masthead-form__item">
+                                        <select class="form-control" name="subject_id">
+                                            <option value="">---select---</option>
+                                            @foreach($subjects as $subject)
+                                            <option value="{{ $subject->id }}">
+                                                {{ $subject->title }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="masthead-form__item">
+                                        <select class="form-control" name="duration">
+                                            <option value="">---select---</option>
+
+                                            @foreach($durations as $duration)
+                                            <option value="{{ $duration->id }}">
+                                                {{ $duration->timeline }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
+                                    <div class="masthead-form__button">
+                                        <button type="submit"
+                                          class="button -icon -purple-3 text-purple-1">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        @endif
+
+
+                    </div>
+                </div>
+
             </div>
             <div class="row y-gap-30">
                 <div class="col-12">

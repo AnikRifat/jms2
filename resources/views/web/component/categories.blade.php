@@ -6,8 +6,6 @@
                 <div class="sectionTitle ">
 
                     <h2 class="sectionTitle__title ">Top Subjects</h2>
-
-                    <p class="sectionTitle__text ">10,000+ unique online course list designs</p>
                 </div>
 
             </div>
@@ -25,18 +23,18 @@
         <div data-anim-wrap="" class="row y-gap-30 pt-50 animated">
 
             @foreach ($categories as $category)
-                <div class="col-xl-3 col-md-6 is-in-view" data-anim-child="scale delay-1">
-                    <a href="#" class="categoryCard -type-4">
-                        <div class="categoryCard__icon bg-light-3">
-                            <img src="{{ asset('uploads/categories/' . $category->image) }}" alt="">
+            <div class="col-xl-3 col-md-6 is-in-view" data-anim-child="scale delay-1">
+                <a href="#" class="categoryCard -type-4">
+                    <div class="categoryCard__icon bg-light-3">
+                        <img src="{{ asset('uploads/categories/' . $category->image) }}" alt="">
+                    </div>
+                    <div class="categoryCard__content mt-10">
+                        <h4 class="categoryCard__title text-17 fw-500">{{ $category->title }}</h4>
+                        <div class="categoryCard__text text-13 text-light-1 lh-1 mt-5">{{ $category->description }}
                         </div>
-                        <div class="categoryCard__content mt-10">
-                            <h4 class="categoryCard__title text-17 fw-500">{{ $category->title }}</h4>
-                            <div class="categoryCard__text text-13 text-light-1 lh-1 mt-5">{{ $category->description }}
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
+            </div>
             @endforeach
 
 

@@ -18,6 +18,10 @@ class Teacher extends Model
         'profession', 'subject'
     ];
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'creator_id', 'user_id');
+    }
     public function subjects()
     {
         return $this->belongsTo(Subject::class, 'subject');
