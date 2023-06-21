@@ -10,6 +10,7 @@ use App\Models\Student;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
 {
@@ -150,8 +151,15 @@ class PublicController extends Controller
     public function teacherdetails($teacher)
     {
         $teacher = User::find($teacher);
+        $isPurchased = DB::table('courses')
+            ->join('orders', 'courses.id', '=', 'orders.item_id')
+            ->where('orders.user_id', Auth::user()->id)
+            ->where('courses.creator_id', $teacher->id)
+            ->exists();
 
+        // dd($isPurchased);
+        // $order = Order::where('user_id',Auth::user()->id)
         // dd($teacher->teacher->courses);
-        return view('web.pages.teacher.details', compact('teacher'));
+        return view('web.pages.teacher.details', compact('teacher', 'isPurchased'));
     }
 }

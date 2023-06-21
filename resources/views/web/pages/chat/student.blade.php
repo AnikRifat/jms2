@@ -7,7 +7,6 @@
         <div class="col-auto">
 
             <h1 class="text-30 lh-12 fw-700">Messages</h1>
-            <div class="mt-10">Lorem ipsum dolor sit amet, consectetur.</div>
 
         </div>
     </div>
@@ -22,8 +21,12 @@
 
                 <div class="py-30 px-30">
                     <div class="y-gap-30">
+                        {{-- @php
+                        dd($orders) ;
+                        @endphp --}}
                         @foreach ($orders as $item)
                         <div class="d-flex justify-between">
+
                             <a href="{{ route('chat.show.student',$item->course->creator->id) }}">
                                 <div class="d-flex items-center">
 

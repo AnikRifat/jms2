@@ -107,7 +107,7 @@ class TeacherController extends Controller
 
         if ($teacher && $updateUser) {
             // dd('success');
-            return redirect()->route('user.dashboard')->with('success', 'Teacher profile completed successfully.');
+            return redirect()->route('index')->with('success', 'Teacher profile completed successfully, Plz Wait for confirmation');
         } else {
 
             return back()->with('error', 'Teacher creating showing error.');

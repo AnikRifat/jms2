@@ -19,7 +19,7 @@ class Transaction extends Model
         'teacher',
         'owner',
     ];
-    public function teacher()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }

@@ -45,6 +45,19 @@
   Swal();
 </script>
 @endif
+
+@if ($massage = Session::get('warning'))
+<script>
+    Swal.fire({
+  position: "center",
+  icon: "warning",
+  title: "{{ $massage }}",
+  showConfirmButton: !1,
+  timer: 3000
+  })
+  Swal();
+</script>
+@endif
 <script>
     $(document).ready(function() {
         // Initialize Dropify

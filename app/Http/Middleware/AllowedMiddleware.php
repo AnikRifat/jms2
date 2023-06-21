@@ -19,7 +19,7 @@ class AllowedMiddleware
     {
 
         if (Auth::check() && Auth::user()->allow != 1) {
-            return redirect()->route('profile.complete');
+            return redirect()->route('index')->with('warning', 'Teacher profile created successfully, Plz Wait for confirmation');
         }
 
         return $next($request);

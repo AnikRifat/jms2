@@ -17,8 +17,8 @@ class StudentController extends Controller
         // dd('ok');
         // $chat = Chat::Where('student_id', Auth::user()->id)->where('teacher_id', $teacher)->get();
 
-        $orders = Order::where('type', 1)->where('user_id', Auth::user()->id)->pluck('user_id')
-            ->unique();
+        $orders = Order::where('type', 1)->where('user_id', Auth::user()->id)->distinct()->get();
+        // dd($orders);
         $teacher = false;
         return view('web.pages.chat.student', compact('orders', 'teacher'));
     }
@@ -96,7 +96,7 @@ class StudentController extends Controller
 
         if ($student && $updateUser) {
             // dd('success');
-            return redirect()->route('user.dashboard')->with('success', 'Student profile completed successfully.');
+            return redirect()->route('index')->with('success', 'Student profile completed successfully, Plz Wait for confirmation');
         } else {
 
             return back()->with('error', 'Student creating showing error.');
