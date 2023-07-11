@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
-                                <input type="text" name="phone" placeholder="phone" value="{{ Auth::user()->phone }}"
+                                <input type="tel" name="phone" placeholder="phone" value="{{ Auth::user()->phone }}"
                                   readonly>
                             </div>
                             @if (Auth::user()->role == 1)

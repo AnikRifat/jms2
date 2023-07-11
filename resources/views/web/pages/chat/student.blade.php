@@ -16,7 +16,7 @@
         <div class="col-xl-4">
             <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
                 <div class="d-flex items-center py-20 px-30 border-bottom-light">
-                    <h2 class="text-17 lh-1 fw-500">Basic Information</h2>
+                    <h2 class="text-17 lh-1 fw-500">Chats</h2>
                 </div>
 
                 <div class="py-30 px-30">
@@ -42,10 +42,7 @@
 
                                 </div>
                             </a>
-                            <div class="d-flex items-end flex-column pt-8">
-                                <div class="text-13 lh-1">35 mins</div>
 
-                            </div>
                         </div>
                         @endforeach
 

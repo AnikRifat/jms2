@@ -28,6 +28,7 @@ class StudentController extends Controller
         // dd($chats);
         $orders = Order::where('type', 1)->where('user_id', Auth::user()->id)->get();
         $teacher = User::find($teacher);
+
         $student = User::find(Auth::user()->id);
         return view('web.pages.chat.student', compact('orders', 'chats', 'teacher', 'student'));
     }

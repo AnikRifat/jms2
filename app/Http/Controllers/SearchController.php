@@ -43,7 +43,8 @@ class SearchController extends Controller
             ->get();
         $products = Product::latest()
             ->where('name', 'like', '%' . $request->courses . '%')->orWhere('description', 'like', '%' . $request->courses . '%')->get();
-        return view('web.pages.courses.result', compact('courses', 'products'));
+        $teachers = false;
+        return view('web.pages.courses.result', compact('courses', 'products', 'teachers'));
     }
 
 
@@ -52,13 +53,15 @@ class SearchController extends Controller
 
         $subject = $request->input('subject_id');
         $duration = $request->input('duration');
-
+        // dd($duration);
         $courses = Course::query()
             ->where(function ($query) use ($subject, $duration) {
-                if ($subject) {
+
+                if ($subject && $duration) {
+                    $query->where('subject_id', $subject)->Where('duration', $duration);
+                } else if ($subject) {
                     $query->where('subject_id', $subject);
-                }
-                if ($duration) {
+                } else if ($duration) {
                     $query->orWhere('duration', $duration);
                 }
             })

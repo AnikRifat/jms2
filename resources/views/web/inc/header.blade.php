@@ -242,7 +242,8 @@
                             @endif
 
                             @else
-                            <img class="size-50" src="{{ asset('/') }}assets/web/img/misc/user-profile.png" alt="image">
+                            <img class="size-50" src="{{ asset('/') }}assets/web/img/misc/user-profile-2.png"
+                              alt="image">
                             @endif
 
 
@@ -254,7 +255,7 @@
 
                                     <div class="sidebar -dashboard">
 
-                                        <div class="sidebar__item -is-active -dark-bg-dark-2">
+                                        <div class="sidebar__item bg-dark">
                                             <p class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                                                 <i class="text-20 icon-discovery mr-15"></i>
                                                 {{ Auth::user()->name }}

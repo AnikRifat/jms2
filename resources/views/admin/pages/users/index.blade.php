@@ -50,7 +50,7 @@
                                         <th>Phone</th>
                                         <th>Payment Type</th>
                                         <th>Transaction ID</th> --}}
-                                        {{-- <th>Action</th> --}}
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,6 +76,15 @@
                                               data-bs-target=".transaction-detailModal-{{ $user->id }}">
                                                 View Details
                                             </button>
+                                        </td>
+                                        <td>
+                                            <form hidden action="{{ route('users.destroy', $user->id) }}"
+                                              id="form{{ $user->id }}" method="get">
+                                                @csrf
+                                            </form>
+                                            <button class="btn btn-danger waves-effect btn-circle waves-light"
+                                              onclick="deleteItem({{ $user->id }});" type="button">
+                                                <i class="fa fa-trash"></i> </button>
                                         </td>
 
                                     </tr>
@@ -143,7 +152,7 @@
 @endforeach
 @endsection
 
-{{-- @section('scripts')
+@section('scripts')
 <script>
     function deleteItem(id) {
             Swal.fire({
@@ -162,4 +171,4 @@
             })
         }
 </script>
-@endsection --}}
+@endsection

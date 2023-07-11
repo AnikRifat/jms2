@@ -95,49 +95,8 @@
         </div>
     </section>
 
-    <section class="layout-pt-lg layout-pb-lg bg-light-3">
-        <div data-anim-wrap class="container">
-            <div class="row y-gap-20 items-center">
-                <div class="col-xl-7 col-lg-7">
-                    <div data-anim-child="slide-up delay-1" class="app-image">
-                        <img src="{{ asset('') }}assets/web/img/app/1.png" alt="image">
-                    </div>
-                </div>
 
-                <div class="col-lg-5">
-                    <div class="app-content">
-                        <h2 data-anim-child="slide-up delay-3" class="app-content__title">Learn From<br>
-                            <span>Anywhere</span>
-                        </h2>
-                        <p data-anim-child="slide-up delay-4" class="app-content__text">Take classes on the
-                            go with the educrat app. Stream or download to watch on the plane, the subway, or
-                            wherever you learn best.</p>
-                        <div data-anim-child="slide-up delay-5" class="app-content__buttons">
-                            <a href="#"><img src="{{ asset('') }}assets/web/img/app/buttons/1.svg" alt="button"></a>
-                            <a href="#"><img src="{{ asset('') }}assets/web/img/app/buttons/2.svg" alt="button"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    @include('web.component.blog')
 
-    <section class="layout-pt-md layout-pb-md bg-purple-1">
-        <div class="container">
-            <div class="row y-gap-20 justify-between items-center">
-                <div class="col-xl-4 col-lg-5">
-                    <h2 class="text-30 lh-15 text-white">
-                        Join more than <span class="text-green-1">8 million learners</span> worldwide
-                    </h2>
-                </div>
-
-                <div class="col-auto">
-                    <a href="#" class="button -md -green-1 text-dark-1">Start Learning For Free</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
 </div>
 @endsection

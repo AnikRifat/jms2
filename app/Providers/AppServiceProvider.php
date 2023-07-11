@@ -39,7 +39,5 @@ class AppServiceProvider extends ServiceProvider
 
         $durations = Duration::orderBy('id', 'DESC')->where('status', '1')->get();
         view()->share('durations', $durations);
-        // $blogs = Blog::orderBy('id', 'DESC')->get();
-        // view()->share('blogs', $blogs);
     }
 }

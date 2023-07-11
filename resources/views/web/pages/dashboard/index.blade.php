@@ -15,7 +15,7 @@
                     <div class="masthead__content">
                         <h1 class="text-30 lh-12 fw-700"> Find a perfect Online Course</h1>
 
-                        @if(Auth::user())
+                        @if(Auth::user() && (Auth::user()->role == 1))
 
                         <div data-anim-child="slide-up delay-5" class="is-in-view">
                             <div class="masthead-form bg-white rounded-16 mt-30 px-10 py-10">
@@ -54,6 +54,7 @@
                                 </form>
                             </div>
                         </div>
+
                         @endif
 
 
@@ -97,7 +98,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
-                                                <input type="text" placeholder="Phone" name="phone"
+                                                <input type="tel" placeholder="Phone" name="phone"
                                                   value="{{ $user->phone }}">
                                             </div>
                                             <div class="col-md-6">

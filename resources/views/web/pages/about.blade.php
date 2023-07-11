@@ -88,7 +88,7 @@
 
                             <div class="col-sm-6">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone *</label>
-                                <input type="text" name="phone" placeholder="Phone *">
+                                <input type="tel" name="phone" placeholder="Phone *">
                             </div>
 
                             <div class="col-12">

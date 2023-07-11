@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="website_phone" class="form-label">Website Phone</label>
-                                        <input type="phone" class="form-control" id="website_phone" name="website_phone"
+                                        <input type="tel" class="form-control" id="website_phone" name="website_phone"
                                           value="{{ $content->website_phone }}" required>
                                     </div>
                                     <div class="col-md-6">

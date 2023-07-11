@@ -74,7 +74,9 @@
                                     <select name="duration" class="form-control">
                                         <option value="">Select duration</option>
                                         @foreach($durations as $duration)
-                                        <option value="{{ $duration->id }}">{{ $duration->title }}</option>
+                                        <option class="text-dark-1" value="{{ $duration->id }}">
+                                            {{ $duration->timeline }}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>

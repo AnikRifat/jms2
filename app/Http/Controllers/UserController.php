@@ -64,7 +64,7 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'phone' => 'required',
+            'phone' => ['numeric', 'required'],
         ]);
 
         if ($user->update($data)) {
@@ -151,5 +151,16 @@ class UserController extends Controller
         } else {
             return back()->with('error', 'Teacher update showing error.');
         }
+    }
+
+    public function destroy(User $user)
+    {
+        // delete the subject's image file, if it exists
+
+
+        // delete the subject from the database
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'user deleted successfully.');
     }
 }

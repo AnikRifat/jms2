@@ -201,6 +201,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::prefix('users')->group(function () {
         // users-Routes
         Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::get('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::get('/confirm/{user}', [UserController::class, 'confirm'])->name('users.confirm');
         Route::get('/student', [UserController::class, 'studentlist'])->name('users.student');
         Route::get('/teacher', [UserController::class, 'teacherlist'])->name('users.teacher');

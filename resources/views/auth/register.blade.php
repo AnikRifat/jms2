@@ -30,7 +30,7 @@
 
                                 <div class="col-lg-6">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10" for="phone">Phone *</label>
-                                    <input type="text" id="phone" value="{{ old('phone') }}" name="phone"
+                                    <input type="tel" id="phone" value="{{ old('phone') }}" name="phone"
                                       placeholder="Phone" required>
                                     @error('phone')
                                     <span class="text-red-500">{{ $message }}</span>

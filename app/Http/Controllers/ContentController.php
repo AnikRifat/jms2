@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\Content;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ContentController extends Controller
 {
@@ -69,7 +69,7 @@ class ContentController extends Controller
     {
         $validatedData = $request->validate([
             'website_email' => 'required',
-            'website_phone' => 'required',
+            'website_phone' =>  ['required', 'numeric', 'max:255'],
             'website_address' => 'required',
         ]);
 

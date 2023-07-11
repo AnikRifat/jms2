@@ -20,7 +20,7 @@ class CreateContentsTable extends Migration
             $table->string('website_logo');
             $table->string('website_favicon');
             $table->string('website_email');
-            $table->string('website_phone');
+            $table->integer('website_phone');
             $table->string('website_address');
             $table->longText('about_content');
             $table->string('about_image');
