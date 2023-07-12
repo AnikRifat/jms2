@@ -33,7 +33,7 @@ class PublicController extends Controller
     public function dashboard()
     {
         if (Auth::user()->role == 0) {
-            $students = User::where('role', 1)->get();
+            $students = User::where('role', 1)->where('allow', 1)->get();
 
             $hsc = Student::where('current_class', 'Hsc')->get();
             $ssc = Student::where('current_class', 'SSC')->get();
