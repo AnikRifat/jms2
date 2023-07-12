@@ -18,8 +18,18 @@ class CheckProfile
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->complete == 1) {
-            return $next($request);
+            if (Auth::user()->allow == 1) {
+                return $next($request);
+            }
         }
-        return redirect()->route('profile.complete');
+        if (Auth::user()->complete == 0) {
+            $message = 'You Have to complete your Profile first';
+
+            return redirect()->route('profile.complete')->with('warning', $message);
+        } else {
+            $message = 'You or not allowed plz contact eith us';
+
+            return redirect()->route('profile.complete')->with('warning', $message);
+        }
     }
 }

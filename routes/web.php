@@ -57,22 +57,24 @@ Route::middleware('auth')->group(function () {
     Route::post('store/teacher-info', [TeacherController::class, 'store'])->name('teacher.store');
 });
 
-Route::prefix('/user/dashboard')->middleware(['auth', 'allow'])->group(function () {
+Route::prefix('/user/dashboard')->middleware(['auth', 'checkProfile'])->group(function () {
     Route::get('/Profile', [PublicController::class, 'userdashboard'])->name('user.dashboard');
-    Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
-    Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
+
     Route::post('update/teacher/{user}', [UserController::class, 'teacher'])->name('teacher.update');
     Route::post('update/student/{user}', [UserController::class, 'student'])->name('student.update');
     Route::post('update/user/{user}', [UserController::class, 'update'])->name('user.update');
+});
+Route::prefix('/user/dashboard')->middleware(['auth', 'checkProfile'])->group(function () {
 
+    Route::get('checkout/{item}/{type}', [PublicController::class, 'checkout'])->name('checkout.store');
+    Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
     Route::get('/', [CourseController::class, 'index'])->name('user.courses.index');
     Route::get('/my-courses', [CourseController::class, 'courses'])->name('user.courses.student');
     Route::get('/create-course', [PublicController::class, 'createcourse'])->name('user.course.create');
 
     Route::get('/update-course', [PublicController::class, 'updatecourse'])->name('user.course.update');
 });
-
-Route::prefix('chat/inbox')->middleware(['auth', 'allow'])->group(function () {
+Route::prefix('chat/inbox')->middleware(['auth', 'checkProfile'])->group(function () {
 
     Route::get('/teacher', [TeacherController::class, 'inbox'])->name('chat.inbox.teacher');
     Route::get('/student', [StudentController::class, 'inbox'])->name('chat.inbox.student');

@@ -25,7 +25,7 @@ class CreateCourseTable extends Migration
             $table->string('meeting_link')->nullable();
             $table->string('duration')->nullable();
             $table->string('image')->nullable();
-            $table->tinyInteger('status')->default('1');
+            $table->tinyInteger('status')->default('2');
             $table->timestamps();
         });
     }

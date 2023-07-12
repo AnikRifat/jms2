@@ -59,11 +59,8 @@ class PublicController extends Controller
     }
     public function completeprofile()
     {
-        if (Auth::user()->complete == 1) {
-            return redirect()->route('user.dashboard');
-        } else {
-            return view('web.pages.authentication.student.complete-profile');
-        }
+
+        return view('web.pages.authentication.student.complete-profile');
     }
 
     public function userdashboard()
