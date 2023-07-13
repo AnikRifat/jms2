@@ -40,11 +40,13 @@ class UserController extends Controller
     }
     public function studentconfirmationlist()
     {
+        dd('ok');
         $users = User::where('role', 1)->where('allow', 0)->get();
         return view('admin.pages.users.student-cfl', compact('users'));
     }
     public function studentlist()
     {
+        dd('ok');
         $users = User::where('role', 1)->get();
         return view('admin.pages.users.index', compact('users'));
     }

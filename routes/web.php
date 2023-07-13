@@ -205,10 +205,10 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::get('/confirm/{user}', [UserController::class, 'confirm'])->name('users.confirm');
-        Route::get('/student', [UserController::class, 'studentlist'])->name('users.student');
-        Route::get('/teacher', [UserController::class, 'teacherlist'])->name('users.teacher');
-        Route::get('/studentconfirmation', [UserController::class, 'studentconfirmationlist'])->name('users.student.confirmation');
-        Route::get('/teacherconfirmation', [UserController::class, 'teacherconfirmationlist'])->name('users.teacher.confirmation');
+        Route::get('/student/list', [UserController::class, 'studentlist'])->name('users.student');
+        Route::get('/teacher/list', [UserController::class, 'teacherlist'])->name('users.teacher');
+        Route::get('/studentconfirmation//list', [UserController::class, 'studentconfirmationlist'])->name('users.student.confirmation');
+        Route::get('/teacherconfirmation/list', [UserController::class, 'teacherconfirmationlist'])->name('users.teacher.confirmation');
     });
     Route::prefix('content')->group(function () {
         // Hero-Routes

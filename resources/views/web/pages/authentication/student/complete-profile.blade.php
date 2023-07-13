@@ -72,8 +72,8 @@
 
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Birthday</label>
 
-                                        <input type="date" name="birthday" class="form-control" placeholder="Birthday"
-                                          required>
+                                        <input type="date" name="birthday" class="form-control" max="2015-12-31"
+                                          placeholder="Birthday" required>
                                     </div>
 
 
@@ -169,7 +169,7 @@
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Birthday</label>
 
                                         <input type="date" name="birthday" class="form-control" placeholder="Birthday"
-                                          required>
+                                          max="2015-12-31" required>
                                     </div>
 
 

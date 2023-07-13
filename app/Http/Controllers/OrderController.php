@@ -62,7 +62,7 @@ class OrderController extends Controller
             'price' => 'required',
             'transaction_id' => 'required',
         ]);
-
+        // dd($data);
         $profit = 25;
         $data['user_id'] = Auth::user()->id;
 
@@ -70,7 +70,7 @@ class OrderController extends Controller
 
 
         $order = Order::create($data);
-
+        dd($order);
         if ($order) {
             if ($data['type'] == 1) {
 
@@ -117,8 +117,9 @@ class OrderController extends Controller
                 $email = Auth::user()->email;
 
                 Mail::send(['text' => 'email.product-purchase'], $userdata, function ($message) use ($email) {
-                    $message->to($email)->subject('CLekhapora - product order');
+                    $message->to($email)->subject('Lekhapora - product order');
                 });
+                return back()->with('success', 'Order recived successfully.');
             }
             // dd('success');
 
