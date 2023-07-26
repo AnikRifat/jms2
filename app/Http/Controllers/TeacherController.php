@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Models\Course;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,25 +23,26 @@ class TeacherController extends Controller
             ->unique()
             ->toArray();
         $users = User::whereIn('id', $studentIds)->get();
-        // dd($studentIds);
-        // $chat = Chat::Where('teacher_id', Auth::user()->id)->where('teacher_id',)->limit(1)->get();
-        // dd($chat);
-        // $orders = Order::where('type', 1)->where('user_id', $transaction->student_id)->get();
+        $teacherCourses = Course::where('creator_id', Auth::user()->id)->where('status', 1)->get();
+
         $student = false;
-        return view('web.pages.chat.teacher', compact('student', 'users'));
+        return view('web.pages.chat.teacher', compact('student', 'users', 'teacherCourses'));
     }
-    public function chat($student)
+    public function chat($student, $courseId)
     {
         // dd($student);
-        $chats = Chat::Where('teacher_id', Auth::user()->id)->where('student_id', $student)->get();
+        $chats = Chat::Where('teacher_id', Auth::user()->id)->where('student_id', $student)->where('course_id', $courseId)->get();
         $studentIds = Chat::where('teacher_id',  Auth::user()->id)
             ->pluck('student_id')
             ->unique()
             ->toArray();
         $users = User::whereIn('id', $studentIds)->get();
+
+        $teacherCourses = Course::where('creator_id', Auth::user()->id)->where('status', 1)->get();
+
         $student = User::find($student);
         $teacher = User::find(Auth::user()->id);
-        return view('web.pages.chat.teacher', compact('chats', 'student', 'teacher', 'users'));
+        return view('web.pages.chat.teacher', compact('chats', 'student', 'teacher', 'users', 'teacherCourses'));
     }
     /**
      * Display a listing of the resource.

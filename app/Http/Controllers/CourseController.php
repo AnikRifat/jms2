@@ -81,7 +81,7 @@ class CourseController extends Controller
         $data = $request->validate([
             'title' => 'required',
             'lesson' => 'required',
-            'price' => 'required',
+            'price' => 'numeric|required',
             'description' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
@@ -179,7 +179,16 @@ class CourseController extends Controller
         $durations = Duration::where('status', 1)->get();
         return view('web.pages.courses.edit', compact('course', 'categories', 'durations'));
     }
+    public function archive(Course $course)
+    {
+        $course->status = '3';
 
+        if ($course->update()) {
+            return back()->with('success', 'Course Archived Successfully');
+        } else {
+            return back()->with('error', 'Course Archive Unsuccessfull');
+        }
+    }
     /**
      * Update the specified resource in storage.
      *

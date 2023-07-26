@@ -13,6 +13,7 @@ class Chat extends Model
 
     protected $fillable = [
         'sender',
+        'course_id',
         'student_id',
         'teacher_id',
         'text',

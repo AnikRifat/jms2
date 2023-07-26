@@ -70,7 +70,7 @@ class OrderController extends Controller
 
 
         $order = Order::create($data);
-        dd($order);
+        // dd($order);
         if ($order) {
             if ($data['type'] == 1) {
 
@@ -79,7 +79,7 @@ class OrderController extends Controller
                     'name' => Auth::user()->name,
                     'email' => Auth::user()->email,
                     'totalAmount' => $data['price'],
-                    'productName' => $data['price'],
+                    'productName' => $data['name'],
                     'orderNumber' => $data['transaction_id'],
                 );
                 $email = Auth::user()->email;
@@ -97,6 +97,8 @@ class OrderController extends Controller
                 $transaction['order_id'] = $order->id;
                 $transaction['transaction_id'] = $data['transaction_id'];
                 $transaction['teacher_id'] = $item->creator_id;
+                $transaction['student_id'] = Auth::user()->id;
+
                 $transaction['amount'] = $item->price;
                 $transaction['ratio'] = $profit;
                 $transaction['teacher'] = $teacher;
@@ -105,13 +107,13 @@ class OrderController extends Controller
                 Transaction::create($transaction);
 
 
-                return back()->with('success', 'Order recived successfully.');
+                return redirect()->route('index')->with('success', 'Order recived successfully.');
             } else {
                 $userdata = array(
                     'name' => Auth::user()->name,
                     'email' => Auth::user()->email,
                     'totalAmount' => $data['price'],
-                    'productName' => $data['price'],
+                    'productName' => $data['name'],
                     'orderNumber' => $data['transaction_id'],
                 );
                 $email = Auth::user()->email;
@@ -119,7 +121,27 @@ class OrderController extends Controller
                 Mail::send(['text' => 'email.product-purchase'], $userdata, function ($message) use ($email) {
                     $message->to($email)->subject('Lekhapora - product order');
                 });
-                return back()->with('success', 'Order recived successfully.');
+
+
+
+                // $percentage = (25 / 100) * $data['price'];
+                // $teacher = $percentage;
+                // $owner = $data['price'] - $percentage;
+
+                $item = Course::find($data['item_id']);
+
+                $transaction['order_id'] = $order->id;
+                $transaction['transaction_id'] = $data['transaction_id'];
+                $transaction['student_id'] = Auth::user()->id;
+                $transaction['teacher_id'] = '0';
+                $transaction['amount'] = $item->price;
+                $transaction['ratio'] = '100';
+                $transaction['teacher'] = '0';
+                $transaction['owner'] = $item->price;
+
+                Transaction::create($transaction);
+
+                return redirect()->route('index')->with('success', 'Order recived successfully.');
             }
             // dd('success');
 

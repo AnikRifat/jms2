@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\Duration;
@@ -39,5 +40,9 @@ class AppServiceProvider extends ServiceProvider
 
         $durations = Duration::orderBy('id', 'DESC')->where('status', '1')->get();
         view()->share('durations', $durations);
+
+
+        $blogs = Blog::orderBy('id', 'DESC')->where('status', '1')->get();
+        view()->share('blogs', $blogs);
     }
 }

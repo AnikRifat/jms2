@@ -16719,3 +16719,7 @@ img.payment-logo {
     border-radius: 100%;
     background: white;
 }
+
+button.absolute-button {
+    z-index: 100000;
+}

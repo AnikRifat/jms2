@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
@@ -38,6 +37,7 @@ class ChatController extends Controller
     {
         $validatedData = $request->validate([
             'sender' => 'required',
+            'course_id' => 'required',
             'student_id' => 'required',
             'teacher_id' => 'required',
             'text' => 'required',

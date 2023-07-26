@@ -40,7 +40,8 @@
                 <span key="t-Shop">Reports</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{ route('profit.index') }}" key="t-list">Profit mergin</a></li>
+                <li><a href="{{ route('profit.course.index') }}" key="t-list">Courses</a></li>
+                <li><a href="{{ route('profit.shop.index') }}" key="t-list">Shop</a></li>
 
 
             </ul>

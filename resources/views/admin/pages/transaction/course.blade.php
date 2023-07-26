@@ -24,13 +24,31 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item">Dashboards</li>
-                                <li class="breadcrumb-item active">Transactions</li>
+                                <li class="breadcrumb-item active">Course ladger sheet</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- end page title -->
+            <div class="row mt-3">
+
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label for="filterTeacher" class="form-label">Filter by Teacher</label>
+                        <select id="filterTeacher" class="form-select">
+                            <option value="0">All Teachers</option>
+                            @foreach ($teachers as $t)
+                            <option value="{{ $t->id }}">{{ $t->name }}</option>
+                            @endforeach
+                            <!-- Add options for teachers here -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button id="filterButton" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-xl-12">
@@ -50,7 +68,8 @@
                                         <th>Created At</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <!-- Update the table body to an empty tbody -->
+                                <tbody id="filteredData">
                                     @foreach ($transactions as $transaction)
                                     <tr>
                                         <td>{{ $transaction->order->course->title }}</td>
@@ -60,23 +79,7 @@
                                             {{ $transaction->amount }}
 
                                         </td>
-                                        {{-- @if ($transaction->type == 1)
-                                        <td><span class="badge badge-soft-info">Course</span></td>
-                                        @else
-                                        <td><span class="badge badge-soft-warning">Product</span></td>
-                                        @endif --}}
 
-                                        {{-- <td>
-                                            @if ($transaction->status == 1)
-                                            <span
-                                              class="badge rounded-pill badge-soft-success font-size-11">Active</span>
-                                            @elseif ($transaction->status == 2)
-                                            <span class="badge rounded-pill badge-soft-dark font-size-11">Pending</span>
-                                            @else
-                                            <span
-                                              class="badge rounded-pill badge-soft-danger font-size-11">Inactive</span>
-                                            @endif
-                                        </td> --}}
                                         <td>{{ $transaction->ratio }} %</td>
                                         <td>{{ $transaction->teacher }} $</td>
                                         <td>{{ $transaction->owner }} $</td>
@@ -85,6 +88,8 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
+
+                                <!-- Add this script to load data using AJAX -->
                             </table>
                         </div>
                     </div>
@@ -98,23 +103,74 @@
 </div>
 @endsection
 
-{{-- @section('scripts')
+
+
+<!-- ... (your existing code) -->
+
+@section('scripts')
+<!-- ... (your existing code) -->
+
 <script>
-    function deleteItem(id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log('ok');
-                    document.getElementById(`form${id}`).submit();
+    $(document).ready(function() {
+    // Function to fetch data based on selected filters
+    function fetchData() {
+        var teacherId = $('#filterTeacher').val();
+
+        // Send AJAX request
+        $.ajax({
+            url: '{{ url('api/coursefilter') }}',
+            type: 'GET',
+            data: {
+                teacherId: teacherId,
+            },
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                // Check if the response is an array
+                if (Array.isArray(response)) {
+                    updateTable(response);
+                } else {
+                    console.error('Invalid response format. Expected an array.');
                 }
-            })
-        }
+            },
+            error: function(error) {
+                // Handle error if needed
+                console.error('Error occurred during AJAX request:', error);
+            }
+        });
+    }
+
+    // Update the table on page load
+    // fetchData();
+
+    // Add event listeners to update the table whenever filters change
+    $('#filterButton').click(function() {
+        // console.log('ok');
+        fetchData();
+    });
+
+    function updateTable(data) {
+        // Clear the existing table data
+        $('#filteredData').empty();
+
+        // Loop through the data and add rows to the table
+        data.forEach(function(item) {
+            var row = '<tr>';
+            row += '<td>' + item.coursetitle + '</td>';
+            row += '<td>' + item.transaction_id + '</td>';
+            row += '<td>' + item.creator_name + '</td>';
+            row += '<td>' + item.amount + '</td>';
+            row += '<td>' + item.ratio + ' %</td>';
+            row += '<td>' + item.teacher + ' $</td>';
+            row += '<td>' + item.owner + ' $</td>';
+            row += '<td>' + item.created_at + '</td>';
+            row += '</tr>';
+            $('#filteredData').append(row);
+        });
+    }
+});
+
 </script>
-@endsection --}}
+@endsection
+
+<!-- ... (your existing code) -->

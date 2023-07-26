@@ -37,7 +37,7 @@ Route::get('/Complete-Profile-202', [PublicController::class, 'cp'])->name('cp')
 Route::get('/not-allowed', [PublicController::class, 'na'])->name('na');
 
 Route::get('/complete-profile', [PublicController::class, 'completeprofile'])->name('profile.complete');
-Route::get('/blog/{blog}', [PublicController::class, 'blogDetails'])->name('blog.details');
+Route::get('/blog/{blogId}', [PublicController::class, 'blogDetails'])->name('blog.details');
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('blogs.all');
 Route::get('/courses/all', [PublicController::class, 'courses'])->name('course.all');
 Route::get('/course/details/{course}', [PublicController::class, 'coursedetails'])->name('course.details');
@@ -101,6 +101,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/course_list/add/{id}', [CourseController::class, 'add'])->name('courses.add'); // add order
         Route::get('/course_list/order', [CourseController::class, 'order'])->name('courses.order'); // show order
         Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+        Route::get('/{course}/archive', [CourseController::class, 'archive'])->name('courses.archive');
         Route::post('/{course}', [CourseController::class, 'update'])->name('courses.update');
         Route::get('/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
         Route::get('/active/{course}', [CourseController::class, 'active'])->name('courses.active');
@@ -184,7 +185,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::prefix('report')->group(function () {
         // orders-Routes
-        Route::get('/profit', [TransactionController::class, 'index'])->name('profit.index');
+        Route::get('/Course', [TransactionController::class, 'course'])->name('profit.course.index');
+        Route::get('/shop', [TransactionController::class, 'shop'])->name('profit.shop.index');
+
     });
 
 

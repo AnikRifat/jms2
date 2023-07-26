@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Content;
 use App\Models\Course;
 use App\Models\Product;
 use App\Models\Student;
@@ -51,11 +50,11 @@ class PublicController extends Controller
         return view('web.pages.blog.index', compact('blogs'));
     }
 
-    public function blogDetails($title)
+    public function blogDetails($blogId)
     {
-        $blog = Blog::where('title', $title)->first();
-        $content = Content::find(1);
-        return view('web.pages.blog.details', compact('blog', 'content'));
+        $blog  = Blog::find($blogId);
+        // dd($blog);
+        return view('web.pages.blog.details', compact('blog'));
     }
     public function completeprofile()
     {
@@ -141,7 +140,7 @@ class PublicController extends Controller
 
     public function teachers()
     {
-        $teachers = User::where('role', 2)->where('allow', '1')->get();
+        $teachers = User::where('role', 2)->where('allow', '1')->where('complete', '1')->get();
         return view('web.pages.teacher.index', compact('teachers'));
     }
 

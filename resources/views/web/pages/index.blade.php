@@ -32,8 +32,46 @@
 
     {{-- @include('web.component.testimonial') --}}
 
+    <section class="page-header -type-1">
+        <div class="container">
+            <div class="page-header__content">
+                <div class="row justify-center text-center">
+                    <div class="col-auto">
+                        <div data-anim="slide-up delay-1" class="is-in-view">
+
+                            <h1 class="page-header__title">Blogs</h1>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
 
+
+        </div>
+    </section>
+    <section class="layout-pt-sm layout-pb-lg">
+        <div data-anim-wrap="" class="container animated">
+            <div class="row y-gap-30">
+                @foreach ($blogs as $blog)
+                <div data-anim-child="slide-up delay-4" class="col-lg-4 col-md-6 is-in-view">
+                    <a href="{{ route('blog.details',$blog->id) }}" class="blogCard -type-1">
+                        <div class="blogCard__image">
+                            <img class="w-1/1 rounded-8" src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="image">
+                        </div>
+                        <div class="blogCard__content mt-20">
+                            {{-- <div class="blogCard__category">EDUCATION</div> --}}
+                            <h4 class="blogCard__title text-20 lh-15 fw-500 mt-5">{{ $blog->title }}</h4>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </section>
     <section class="layout-pt-lg layout-pb-lg bg-dark-2">
         <div data-anim-wrap class="container">
             <div class="row justify-center text-center">

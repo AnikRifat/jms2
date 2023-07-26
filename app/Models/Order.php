@@ -26,4 +26,8 @@ class Order extends Model
     {
         return $this->belongsTo(Course::class, 'item_id');
     }
+    public function item()
+    {
+        return $this->morphTo();
+    }
 }

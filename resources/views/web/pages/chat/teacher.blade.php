@@ -7,7 +7,6 @@
         <div class="col-auto">
 
             <h1 class="text-30 lh-12 fw-700">Messages</h1>
-            <div class="mt-10">Lorem ipsum dolor sit amet, consectetur.</div>
 
         </div>
     </div>
@@ -15,16 +14,36 @@
 
     <div class="row y-gap-30">
         <div class="col-xl-4">
+            @foreach ($teacherCourses as $course)
             <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
                 <div class="d-flex items-center py-20 px-30 border-bottom-light">
-                    <h2 class="text-17 lh-1 fw-500">Basic Information</h2>
+                    <h2 class="text-17 lh-1 fw-500">{{ $course->title }}</h2>
                 </div>
 
                 <div class="py-30 px-30">
                     <div class="y-gap-30">
-                        @foreach ($users as $item)
+                        @php
+                        $chats = App\Models\Order::where('course_id',$course->id)->get();
+                        // $students = DB::table('users')
+                        // ->join('orders', 'users.id', '=', 'orders.user_id')
+                        // ->where('orders.item_id', $cid)
+                        // ->where('orders.type', 'App\Models\Course')
+                        // ->select('users.*')
+                        // ->get();
+
+                        // dd($students);
+                        @endphp
+
+
+                        @foreach ($orders as $order)
+
+                        @php
+                        $students = App\Models\User::where('id',$order->user_id)->get();
+
+                        @endphp
+                        @foreach ($students as $item)
                         <div class="d-flex justify-between">
-                            <a href="{{ route('chat.show.teacher',$item->id) }}">
+                            <a href="{{ route('chat.show.teacher',$item->id,) }}">
                                 <div class="d-flex items-center">
 
                                     <div class="shrink-0">
@@ -39,18 +58,22 @@
 
                         </div>
                         </a>
-                        <div class="d-flex items-end flex-column pt-8">
-                            <div class="text-13 lh-1">35 mins</div>
 
-                        </div>
                     </div>
                     @endforeach
+                    @endforeach
+
+
+
+                    {{-- @endforeach --}}
 
 
 
 
                 </div>
             </div>
+            @endforeach
+
         </div>
     </div>
 
@@ -60,7 +83,8 @@
             <div class="d-flex items-center justify-between py-20 px-30 border-bottom-light">
                 <div class="d-flex items-center">
                     <div class="shrink-0">
-                        <img src="{{ asset('') }}assets/web/img/avatars/small/2.png" alt="image" class="size-50">
+                        <img src="{{  asset('') }}uploads/students/{{  $student->student->image }}" alt="image"
+                          class="size-50">
                     </div>
                     <div class="ml-10">
                         <div class="lh-11 fw-500 text-dark-1">{{$student->name }}</div>
@@ -79,8 +103,8 @@
                     <div class="col-xl-7 col-lg-10">
                         <div class="d-flex items-center">
                             <div class="shrink-0">
-                                <img src="{{ asset('') }}assets/web/img/avatars/small/4.png" alt="image"
-                                  class="size-50">
+                                <img src="{{ asset('uploads') }}/students/{{  $chat->student->student->image }}"
+                                  alt="image" class="size-50">
                             </div>
                             <div class="lh-11 fw-500 text-dark-1 ml-10">{{ $chat->student->name }}</div>
                             <div class="text-14 lh-11 ml-10">{{ $chat->created_at->format('d M h:i:a') }}</div>
@@ -97,7 +121,7 @@
                             <div class="text-14 lh-11 mr-10">{{ $chat->created_at->format('d M h:i:a') }}</div>
                             <div class="lh-11 fw-500 text-dark-1 mr-10">You</div>
                             <div class="shrink-0">
-                                <img src="{{ asset('') }}assets/web/img/avatars/small/3.png" alt="image"
+                                <img src="{{ asset('uploads/teachers/'.Auth::user()->teacher->image) }}" alt="image"
                                   class="size-50">
                             </div>
                         </div>

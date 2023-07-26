@@ -14,6 +14,7 @@ class Transaction extends Model
         'order_id',
         'transaction_id',
         'teacher_id',
+        'student_id',
         'amount',
         'ratio',
         'teacher',
@@ -23,7 +24,10 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
-
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
     public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');

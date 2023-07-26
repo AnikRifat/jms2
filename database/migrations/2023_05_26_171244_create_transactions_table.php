@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->string('transaction_id');
             $table->unsignedBigInteger('teacher_id');
+            $table->unsignedBigInteger('student_id');
             $table->decimal('amount', 8, 2);
             $table->decimal('ratio', 8, 2);
             $table->string('teacher');

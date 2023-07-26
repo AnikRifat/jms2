@@ -60,7 +60,8 @@
                 <div class="d-flex items-center justify-between py-20 px-30 border-bottom-light">
                     <div class="d-flex items-center">
                         <div class="shrink-0">
-                            <img src="{{ asset('') }}assets/web/img/avatars/small/2.png" alt="image" class="size-50">
+                            <img src="{{ asset('') }}uploads/teachers/{{ $teacher->teacher->image }}" alt="image"
+                              class="size-50">
                         </div>
                         <div class="ml-10">
                             <div class="lh-11 fw-500 text-dark-1">{{$teacher->name }}</div>
@@ -79,8 +80,9 @@
                         <div class="col-xl-7 col-lg-10">
                             <div class="d-flex items-center">
                                 <div class="shrink-0">
-                                    <img src="{{ asset('') }}assets/web/img/avatars/small/4.png" alt="image"
-                                      class="size-50">
+                                    <img
+                                      src="{{ asset('') }}assets/uploads/teachers/{{ $chat->teacher->teacher->image }}"
+                                      alt="image" class="size-50">
                                 </div>
                                 <div class="lh-11 fw-500 text-dark-1 ml-10">{{ $chat->teacher->name }}</div>
                                 <div class="text-14 lh-11 ml-10">{{ $chat->created_at->format('d M h:i:a') }}</div>
@@ -97,7 +99,7 @@
                                 <div class="text-14 lh-11 mr-10">{{ $chat->created_at->format('d M h:i:a') }}</div>
                                 <div class="lh-11 fw-500 text-dark-1 mr-10">You</div>
                                 <div class="shrink-0">
-                                    <img src="{{ asset('') }}assets/web/img/avatars/small/3.png" alt="image"
+                                    <img src="{{ asset('uploads/students/'.Auth::user()->student->image) }}" alt="image"
                                       class="size-50">
                                 </div>
                             </div>
