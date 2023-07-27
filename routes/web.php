@@ -73,6 +73,8 @@ Route::prefix('/user/dashboard')->middleware(['auth', 'checkProfile'])->group(fu
     Route::get('/create-course', [PublicController::class, 'createcourse'])->name('user.course.create');
 
     Route::get('/update-course', [PublicController::class, 'updatecourse'])->name('user.course.update');
+    Route::get('/sales', [PublicController::class, 'sales'])->name('user.sales');
+    Route::get('/purchase', [PublicController::class, 'purchase'])->name('user.purchase');
 });
 Route::prefix('chat/inbox')->middleware(['auth', 'checkProfile'])->group(function () {
 
@@ -87,9 +89,12 @@ Route::prefix('chat/inbox')->middleware(['auth', 'checkProfile'])->group(functio
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
+    Route::get('/sale/invoice/{transactionId}', [TransactionController::class, 'invoice'])->name('generate.invoice');
+    Route::get('/sale/view/{transactionId}', [TransactionController::class, 'view'])->name('generate.view');
 
 
     Route::get('/', [PublicController::class, 'dashboard'])->name('dashboard.index');
+
 
 
     Route::prefix('courses')->group(function () {
@@ -187,7 +192,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         // orders-Routes
         Route::get('/Course', [TransactionController::class, 'course'])->name('profit.course.index');
         Route::get('/shop', [TransactionController::class, 'shop'])->name('profit.shop.index');
-
+        Route::get('/sale', [TransactionController::class, 'sale'])->name('profit.sale.index');
     });
 
 

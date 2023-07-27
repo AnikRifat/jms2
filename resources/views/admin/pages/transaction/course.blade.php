@@ -83,7 +83,7 @@
                                         <td>{{ $transaction->ratio }} %</td>
                                         <td>{{ $transaction->teacher }} $</td>
                                         <td>{{ $transaction->owner }} $</td>
-                                        <td>{{ $transaction->created_at->format('d M Y') }}</td>
+                                        <td>{{ $transaction->created_at->format('d-mm-y h:i:a') }}</td>
 
                                     </tr>
                                     @endforeach

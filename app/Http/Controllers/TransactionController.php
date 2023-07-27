@@ -5,11 +5,106 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    // app/Http/Controllers/TransactionController.php
+
+    public function view($transactionId)
+    {
+        // Fetch the sale data based on the $transactionId (you may use the existing logic or adjust it as needed)
+        $transaction = Transaction::findOrFail($transactionId);
+        $invoice = 'LP-' . str_pad($transaction->order_id, 10, '0', STR_PAD_LEFT);
+
+        $sale = [
+            'invoice' => $invoice,
+            'order_no' => $transaction->order_id,
+            'type' => $transaction->order->type == 1 ? 'Course' : 'Product',
+            'item_title' => $transaction->order->type == 1 ? $transaction->order->course->title : $transaction->order->product->name,
+            'transaction_id' => $transaction->transaction_id,
+            'seller' => $transaction->order->type == 1 ? $transaction->creator->name : 'In House',
+            'amount' => $transaction->amount,
+            'created_at' => $transaction->created_at->format('d-mm-y'),
+        ];
+        $salesData[] = $sale;
+
+        // Create a view with the sale data (you can create a blade view or use a raw HTML string)
+        $view = view('admin.pages.transaction.sale_invoice', compact('sale'));
+
+        // Generate the PDF using dompdf
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($view->render());
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $dompdf->render();
+
+        return $view;
+        // Download the PDF with a unique filename (you can customize the filename as needed)
+        // return $dompdf->stream("sale_invoice_{$transaction->order_id}.pdf");
+    }
+    public function invoice($transactionId)
+    {
+        // Fetch the sale data based on the $transactionId (you may use the existing logic or adjust it as needed)
+        $transaction = Transaction::findOrFail($transactionId);
+        $invoice = 'LP-' . str_pad($transaction->order_id, 10, '0', STR_PAD_LEFT);
+
+        $sale = [
+            'invoice' => $invoice,
+            'order_no' => $transaction->order_id,
+            'type' => $transaction->order->type == 1 ? 'Course' : 'Product',
+            'item_title' => $transaction->order->type == 1 ? $transaction->order->course->title : $transaction->order->product->name,
+            'transaction_id' => $transaction->transaction_id,
+            'seller' => $transaction->order->type == 1 ? $transaction->creator->name : 'In House',
+            'amount' => $transaction->amount,
+            'created_at' => $transaction->created_at->format('d-mm-y'),
+        ];
+        $salesData[] = $sale;
+
+        // Create a view with the sale data (you can create a blade view or use a raw HTML string)
+        $view = view('admin.pages.transaction.sale_invoice', compact('sale'));
+
+        // Generate the PDF using dompdf
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($view->render());
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $dompdf->render();
+
+        // return $view;
+        // Download the PDF with a unique filename (you can customize the filename as needed)
+        return $dompdf->stream("sale_invoice_{$transaction->order_id}.pdf");
+    }
+    public function sale()
+    {
+        $transactions = Transaction::all();
+
+        $salesData = [];
+
+        foreach ($transactions as $item) {
+            $invoice = 'LP-' . str_pad($item->order_id, 10, '0', STR_PAD_LEFT); // Generate invoice number using order_id
+
+            // Determine the item type based on 'type' field
+
+
+            $sale = [
+                'invoice' => $invoice,
+                'order_no' => $item->order_id,
+                'type' => $item->order->type == 1 ? 'Course' : 'Product',
+                'item_title' => $item->order->type == 1 ? $item->order->course->title : $item->order->product->name,
+                'transaction_id' => $item->transaction_id,
+                'seller' => $item->order->type == 1 ? $item->creator->name : 'In House',
+                'amount' => $item->amount,
+                'created_at' => $item->created_at->format('d-mm-y h:i:a'),
+            ];
+            $salesData[] = $sale;
+        }
+        // dd($salesData);
+        // Pass the salesData to the view
+        return view('admin.pages.transaction.sales', compact('salesData'));
+    }
     public function coursefilter(Request $request)
     {
         $teacherId = $request->input('teacherId');
@@ -38,7 +133,7 @@ class TransactionController extends Controller
                 'ratio' => $item->ratio,
                 'teacher' => $item->teacher,
                 'owner' => $item->owner,
-                'created_at' => $item->created_at,
+                'created_at' => $item->created_at->format('d-mm-y h:i:a'),
             ];
         }
 
@@ -69,7 +164,7 @@ class TransactionController extends Controller
                 'amount' => $item->amount,
                 'ratio' => $item->ratio,
                 'owner' => $item->owner,
-                'created_at' => $item->created_at,
+                'created_at' => $item->created_at->format('d-mm-y h:i:a'),
             ];
         }
 

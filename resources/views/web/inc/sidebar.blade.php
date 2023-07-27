@@ -25,6 +25,12 @@
                 My Courses
             </a>
         </div>
+        <div class="sidebar__item ">
+            <a href="{{ route('user.sales') }}" class="d-flex items-center text-17 lh-1 fw-500 ">
+                <i class="text-20 icon-play-button mr-15"></i>
+                Sale List
+            </a>
+        </div>
         @else
         <div class="sidebar__item">
             <a href="{{ route('teacher.all') }}" class="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500">
@@ -45,6 +51,12 @@
                 My Courses
             </a>
         </div>
+        <div class="sidebar__item ">
+            <a href="{{ route('user.purchase') }}" class="d-flex items-center text-17 lh-1 fw-500 ">
+                <i class="text-20 icon-list mr-15"></i>
+                Purchase List
+            </a>
+        </div>
         @endif
         @if(Auth::user()->role == 2)
         <div class="sidebar__item ">
@@ -53,6 +65,7 @@
                 Create Course
             </a>
         </div>
+
         @endif
 
 

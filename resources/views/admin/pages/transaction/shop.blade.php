@@ -63,8 +63,7 @@
                                         <th>student Name</th>
                                         <th>Amount</th>
                                         <th>Ratio</th>
-                                        {{-- <th>Teacher</th> --}}
-                                        <th>Owner</th>
+
                                         <th>Created At</th>
                                     </tr>
                                 </thead>
@@ -81,9 +80,8 @@
                                         </td>
 
                                         <td>{{ $transaction->ratio }} %</td>
-                                        {{-- <td>{{ $transaction->teacher }} $</td> --}}
-                                        <td>{{ $transaction->owner }} $</td>
-                                        <td>{{ $transaction->created_at->format('d M Y') }}</td>
+
+                                        <td>{{ $transaction->created_at->format('d-mm-y h:i:a')}}</td>
 
                                     </tr>
                                     @endforeach
@@ -161,8 +159,6 @@
             row += '<td>' + item.student_name + '</td>';
             row += '<td>' + item.amount + '</td>';
             row += '<td>' + item.ratio + ' %</td>';
-            row += '<td>' + item.teacher + ' $</td>';
-            row += '<td>' + item.owner + ' $</td>';
             row += '<td>' + item.created_at + '</td>';
             row += '</tr>';
             $('#filteredData').append(row);

@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Product;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -157,5 +158,66 @@ class PublicController extends Controller
         // $order = Order::where('user_id',Auth::user()->id)
         // dd($teacher->teacher->courses);
         return view('web.pages.teacher.details', compact('teacher', 'isPurchased'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public function sales()
+    {
+        $user_id = Auth::user()->id;
+        $transactions = Transaction::whereHas('order', function ($query) use ($user_id) {
+            $query->where('teacher_id', $user_id);
+        })->get();
+
+        $saleData = [];
+        $totalProfitAmount = 0;
+        foreach ($transactions as $item) {
+            $sale = [
+                'order_no' => $item->order_id,
+                'coursetitle' => $item->order->course->title,
+                'course_amount' => $item->amount,
+                'ratio' => $item->ratio,
+                'profit_amount' => $item->owner,
+                'student_name' => $item->student->name,
+                'created_at' => $item->created_at->format('d-mm-y'),
+            ];
+            $totalProfitAmount += $item->owner;
+            $saleData[] = $sale;
+        }
+
+        return view('web.pages.dashboard.sale', compact('saleData', 'totalProfitAmount'));
+    }
+    public function purchase()
+    {
+        $user_id = Auth::user()->id;
+        $transactions = Transaction::whereHas('order', function ($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        })->get();
+
+        $purchasedData = [];
+
+        foreach ($transactions as $transaction) {
+            $sale = [
+                'order_no' => $transaction->order_id,
+                'type' => $transaction->order->type == 1 ? 'Course' : 'Product',
+                'item_title' => $transaction->order->type == 1 ? $transaction->order->course->title : $transaction->order->product->name,
+                'transaction_id' => $transaction->transaction_id,
+                'seller' => $transaction->order->type == 1 ? $transaction->creator->name : 'In House',
+                'amount' => $transaction->amount,
+                'created_at' => $transaction->created_at->format('d-mm-y h:i:a'),
+            ];
+
+            $purchasedData[] = $sale;
+        }
+        // dd($purchasedData);
+        return view('web.pages.dashboard.purchase', compact('purchasedData'));
     }
 }

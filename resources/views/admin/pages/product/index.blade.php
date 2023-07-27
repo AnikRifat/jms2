@@ -68,7 +68,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ $product->description }}</td>
+                                        <td>{!!$product->description !!}</td>
                                         <td>{{ $product->price }}</td>
                                         <td>
                                             @if ($product->image)
