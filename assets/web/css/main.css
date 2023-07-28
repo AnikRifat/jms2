@@ -16723,3 +16723,7 @@ img.payment-logo {
 button.absolute-button {
     z-index: 100000;
 }
+
+.header__logo img {
+    height: 49px;
+}

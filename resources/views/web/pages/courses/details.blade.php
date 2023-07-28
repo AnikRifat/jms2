@@ -52,13 +52,7 @@
                             </div>
                             <div class="mt-25">
 
-                                <div class="d-flex justify-between py-8 ">
-                                    <div class="d-flex items-center text-dark-1">
-                                        <div class="icon-video-file"></div>
-                                        <div class="ml-10">Lessons</div>
-                                    </div>
-                                    <div>{{ $course->lesson }}</div>
-                                </div>
+                               
 
                                 <div class="d-flex justify-between py-8 border-top-light">
                                     <div class="d-flex items-center text-dark-1">

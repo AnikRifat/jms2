@@ -25,7 +25,6 @@
                             <div class="mr-8">
                                 <img src="{{ asset('') }}assets/web/img/coursesCards/icons/1.svg" alt="icon">
                             </div>
-                            <div class="text-14 lh-1">{{ $item->lesson }} lesson</div>
                         </div>
 
                         <div class="d-flex items-center">

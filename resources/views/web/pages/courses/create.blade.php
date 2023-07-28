@@ -1,6 +1,11 @@
 @extends('web.app.app')
 
-
+@push('style')
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+@endpush
 @section('main-body')
 <div class="main-body">
     <div class="dashboard-user">
@@ -9,7 +14,6 @@
                 <div class="col-auto">
 
                     <h1 class="text-30 lh-12 fw-700">Create New Course</h1>
-                    <div class="mt-10">Lorem ipsum dolor sit amet, consectetur.</div>
 
                 </div>
             </div>
@@ -32,20 +36,16 @@
                                     <input type="text" name="title"
                                       placeholder="Learn Figma - UI/UX Design Essential Training">
                                 </div>
+
                                 <div class="col-12">
-                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course Lessons*</label>
-                                    <input type="text" name="lesson"
-                                      placeholder="Learn Figma - UI/UX Design Essential Training">
-                                </div>
-                                <div class="col-12">
-                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course proce*</label>
-                                    <input type="text" name="price"
-                                      placeholder="Learn Figma - UI/UX Design Essential Training">
+                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course price*</label>
+                                    <input type="text" name="price" placeholder="99.00">
                                 </div>
 
                                 <div class="col-12">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course Description*</label>
-                                    <textarea name="description" placeholder="Description" rows="7"></textarea>
+                                    <textarea name="description" id="summernote" placeholder="Description"
+                                      rows="7"></textarea>
                                 </div>
 
                                 <div class="col-md-6">
@@ -111,4 +111,21 @@
 
 
 </div>
+
+<script>
+    $('#summernote').summernote({
+      placeholder: 'Hello i am html ediotr',
+      tabsize: 2,
+      height: 120,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+</script>
 @endsection

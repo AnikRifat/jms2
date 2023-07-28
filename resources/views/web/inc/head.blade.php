@@ -23,5 +23,6 @@
     <link rel="stylesheet" href="{{ asset('') }}assets/web/css/vendors.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/web/css/main.css">
 
+    @stack('style')
     <title>Educrat</title>
 </head>

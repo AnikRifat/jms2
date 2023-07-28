@@ -16,7 +16,6 @@ class Course extends Model
     protected $fillable = [
         'title',
         'price',
-        'lesson',
         'description',
         'class_id',
         'subject_id',

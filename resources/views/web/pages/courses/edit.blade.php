@@ -34,12 +34,7 @@
                                       value="{{ $course->title }}">
                                 </div>
 
-                                <div class="col-12">
-                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course Lessons*</label>
-                                    <input type="text" name="lesson"
-                                      placeholder="Learn Figma - UI/UX Design Essential Training"
-                                      value="{{ $course->lesson }}">
-                                </div>
+                               
                                 <div class="col-12">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Course proce*</label>
                                     <input type="text" name="price" value="{{ $course->price }}"

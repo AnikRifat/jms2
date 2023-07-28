@@ -80,7 +80,6 @@ class CourseController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'title' => 'required',
-            'lesson' => 'required',
             'price' => 'numeric|required',
             'description' => 'required',
             'class_id' => 'required',

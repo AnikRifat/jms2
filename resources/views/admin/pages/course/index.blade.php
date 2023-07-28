@@ -53,7 +53,6 @@
                                         <th>price</th>
                                         {{-- <th>class</th> --}}
                                         <th>description</th>
-                                        <th>lesson</th>
                                         {{-- <th>subject</th> --}}
                                         <th>duration</th>
                                         <th>Image</th>
@@ -77,7 +76,6 @@
                                         <td>{{ $course->price }}</td>
                                         {{-- <td>{{ $course->class_id }}</td> --}}
                                         <td>{{ $course->description }}</td>
-                                        <td>{{ $course->lesson }}</td>
                                         {{-- <td>{{ $course->subject }}</td> --}}
                                         <td>{{ $course->durationName->timeline }}</td>
                                         <td>
