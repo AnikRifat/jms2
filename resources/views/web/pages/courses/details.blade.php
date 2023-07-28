@@ -39,17 +39,6 @@
 
                         <div id="overview" class="pt-60 lg:pt-40 to-over">
                             <h4 class="text-18 fw-500">Description</h4>
-
-                            <div class="show-more mt-30 js-show-more">
-                                <div class="show-more__content">
-                                    <p class="">
-                                        {!!$course->description !!}
-                                    </p>
-                                </div>
-
-                                <button class="d-none show-more__button text-purple-1 fw-500 underline mt-30">Show
-                                    more</button>
-                            </div>
                             <div class="mt-25">
 
 
@@ -62,39 +51,20 @@
                                     <div>{{ $course->durationName->timeline }}</div>
                                 </div>
 
-                                <div class="d-flex justify-between py-8 border-top-light">
-                                    <div class="d-flex items-center text-dark-1">
-                                        <div class="icon-bar-chart-2"></div>
-                                        <div class="ml-10">Skill level</div>
-                                    </div>
-                                    <div>Beginner</div>
-                                </div>
 
-                                <div class="d-flex justify-between py-8 border-top-light">
-                                    <div class="d-flex items-center text-dark-1">
-                                        <div class="icon-translate"></div>
-                                        <div class="ml-10">Language</div>
-                                    </div>
-                                    <div>English</div>
-                                </div>
-
-                                <div class="d-flex justify-between py-8 border-top-light">
-                                    <div class="d-flex items-center text-dark-1">
-                                        <div class="icon-badge"></div>
-                                        <div class="ml-10">Certificate</div>
-                                    </div>
-                                    <div>Yes</div>
-                                </div>
-
-                                <div class="d-flex justify-between py-8 border-top-light">
-                                    <div class="d-flex items-center text-dark-1">
-                                        <div class="icon-infinity"></div>
-                                        <div class="ml-10">Full lifetime access</div>
-                                    </div>
-                                    <div>Yes</div>
-                                </div>
 
                             </div>
+                            <div class="show-more mt-30 js-show-more">
+                                <div class="show-more__content">
+                                    <p class="">
+                                        {!!$course->description !!}
+                                    </p>
+                                </div>
+
+                                <button class="d-none show-more__button text-purple-1 fw-500 underline mt-30">Show
+                                    more</button>
+                            </div>
+
                         </div>
 
 
@@ -122,25 +92,7 @@
                                       class="button -md -outline-dark-1 text-dark-1 w-1/1 mt-10">Buy Now</a>
 
 
-                                    <div class="d-flex justify-center pt-15">
 
-                                        <a href="#" class="d-flex justify-center items-center size-40 rounded-full">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-
-                                        <a href="#" class="d-flex justify-center items-center size-40 rounded-full">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-
-                                        <a href="#" class="d-flex justify-center items-center size-40 rounded-full">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-
-                                        <a href="#" class="d-flex justify-center items-center size-40 rounded-full">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
