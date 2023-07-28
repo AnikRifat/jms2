@@ -43,7 +43,7 @@
                             <div class="show-more mt-30 js-show-more">
                                 <div class="show-more__content">
                                     <p class="">
-                                        {{ $course->description }}
+                                        {!!$course->description !!}
                                     </p>
                                 </div>
 
@@ -52,7 +52,7 @@
                             </div>
                             <div class="mt-25">
 
-                               
+
 
                                 <div class="d-flex justify-between py-8 border-top-light">
                                     <div class="d-flex items-center text-dark-1">
@@ -105,13 +105,13 @@
                                 <div class="relative">
                                     <img class="w-1/1" src="{{ asset('/') }}uploads/courses/{{ $course->image }}"
                                       alt="image">
-                                    <div class="absolute-full-center d-flex justify-center items-center">
+                                    {{-- <div class="absolute-full-center d-flex justify-center items-center">
                                         <a href="https://www.youtube.com/watch?v=ANYfx4-jyqY"
                                           class="d-flex justify-center items-center size-60 rounded-full bg-white js-gallery"
                                           data-gallery="gallery1">
                                             <div class="icon-play text-18"></div>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="courses-single-info__content scroll-bar-1 pt-30 pb-20 px-20">
