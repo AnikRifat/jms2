@@ -70,6 +70,8 @@ class OrderController extends Controller
 
 
         $order = Order::create($data);
+
+        $invoice = 'LP-' . str_pad($order->id, 10, '0', STR_PAD_LEFT);
         // dd($order);
         if ($order) {
             if ($data['type'] == 1) {
@@ -80,7 +82,7 @@ class OrderController extends Controller
                     'email' => Auth::user()->email,
                     'totalAmount' => $data['price'],
                     'productName' => $data['name'],
-                    'orderNumber' => $data['transaction_id'],
+                    'orderNumber' => $invoice,
                 );
                 $email = Auth::user()->email;
 
@@ -95,7 +97,7 @@ class OrderController extends Controller
                 $item = Course::find($data['item_id']);
 
                 $transaction['order_id'] = $order->id;
-                $transaction['transaction_id'] = $data['transaction_id'];
+                $transaction['invoice'] = $invoice;
                 $transaction['teacher_id'] = $item->creator_id;
                 $transaction['student_id'] = Auth::user()->id;
 
@@ -114,7 +116,7 @@ class OrderController extends Controller
                     'email' => Auth::user()->email,
                     'totalAmount' => $data['price'],
                     'productName' => $data['name'],
-                    'orderNumber' => $data['transaction_id'],
+                    'orderNumber' => $invoice,
                 );
                 $email = Auth::user()->email;
 
@@ -131,7 +133,7 @@ class OrderController extends Controller
                 $item = Course::find($data['item_id']);
 
                 $transaction['order_id'] = $order->id;
-                $transaction['transaction_id'] = $data['transaction_id'];
+                $transaction['invoice'] = $invoice;
                 $transaction['student_id'] = Auth::user()->id;
                 $transaction['teacher_id'] = '0';
                 $transaction['amount'] = $item->price;

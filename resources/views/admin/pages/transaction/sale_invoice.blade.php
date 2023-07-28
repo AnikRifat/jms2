@@ -104,7 +104,7 @@
             </div>
             <div class="invoice-details">
                 <div>
-                    <p><strong>Transaction ID:</strong> {{ $sale['transaction_id'] }}</p>
+                    <p><strong>Invoice ID:</strong> {{ $sale['invoice'] }}</p>
                     <p><strong>Date:</strong> {{ $sale['created_at'] }}</p>
                 </div>
                 <div>

@@ -44,7 +44,7 @@
                                         <th>Order No.</th>
                                         <th>Type</th>
                                         <th>Item Title</th>
-                                        <th>Transaction ID</th>
+                                        <th>Invoice ID</th>
                                         <th>Seller</th>
                                         <th>Amount</th>
                                         <th>Created At</th>
@@ -71,7 +71,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $item['item_title'] }}</td>
-                                        <td>{{ $item['transaction_id'] }}</td>
+                                        <td>{{ $item['invoice'] }}</td>
                                         <td>{{ $item['seller'] }}</td>
                                         <td>{{ $item['amount'] }}</td>
                                         <td>{{ $item['created_at'] }}</td>

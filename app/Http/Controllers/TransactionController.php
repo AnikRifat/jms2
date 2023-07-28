@@ -15,14 +15,12 @@ class TransactionController extends Controller
     {
         // Fetch the sale data based on the $transactionId (you may use the existing logic or adjust it as needed)
         $transaction = Transaction::findOrFail($transactionId);
-        $invoice = 'LP-' . str_pad($transaction->order_id, 10, '0', STR_PAD_LEFT);
 
         $sale = [
-            'invoice' => $invoice,
             'order_no' => $transaction->order_id,
             'type' => $transaction->order->type == 1 ? 'Course' : 'Product',
             'item_title' => $transaction->order->type == 1 ? $transaction->order->course->title : $transaction->order->product->name,
-            'transaction_id' => $transaction->transaction_id,
+            'invoice' => $transaction->invoice,
             'seller' => $transaction->order->type == 1 ? $transaction->creator->name : 'In House',
             'amount' => $transaction->amount,
             'created_at' => $transaction->created_at->format('d-mm-y'),
@@ -48,14 +46,12 @@ class TransactionController extends Controller
     {
         // Fetch the sale data based on the $transactionId (you may use the existing logic or adjust it as needed)
         $transaction = Transaction::findOrFail($transactionId);
-        $invoice = 'LP-' . str_pad($transaction->order_id, 10, '0', STR_PAD_LEFT);
 
         $sale = [
-            'invoice' => $invoice,
             'order_no' => $transaction->order_id,
             'type' => $transaction->order->type == 1 ? 'Course' : 'Product',
             'item_title' => $transaction->order->type == 1 ? $transaction->order->course->title : $transaction->order->product->name,
-            'transaction_id' => $transaction->transaction_id,
+            'invoice' => $transaction->invoice,
             'seller' => $transaction->order->type == 1 ? $transaction->creator->name : 'In House',
             'amount' => $transaction->amount,
             'created_at' => $transaction->created_at->format('d-mm-y'),
@@ -84,17 +80,15 @@ class TransactionController extends Controller
         $salesData = [];
 
         foreach ($transactions as $item) {
-            $invoice = 'LP-' . str_pad($item->order_id, 10, '0', STR_PAD_LEFT); // Generate invoice number using order_id
 
             // Determine the item type based on 'type' field
 
 
             $sale = [
-                'invoice' => $invoice,
                 'order_no' => $item->order_id,
                 'type' => $item->order->type == 1 ? 'Course' : 'Product',
                 'item_title' => $item->order->type == 1 ? $item->order->course->title : $item->order->product->name,
-                'transaction_id' => $item->transaction_id,
+                'invoice' => $item->invoice,
                 'seller' => $item->order->type == 1 ? $item->creator->name : 'In House',
                 'amount' => $item->amount,
                 'created_at' => $item->created_at->format('d-mm-y h:i:a'),
@@ -127,7 +121,7 @@ class TransactionController extends Controller
         foreach ($transactions as $item) {
             $response[] = [
                 'coursetitle' => $item->order->course->title,
-                'transaction_id' => $item->transaction_id,
+                'invoice' => $item->invoice,
                 'creator_name' => $item->creator->name,
                 'amount' => $item->amount,
                 'ratio' => $item->ratio,
@@ -159,7 +153,7 @@ class TransactionController extends Controller
         foreach ($transactions as $item) {
             $response[] = [
                 'coursetitle' => $item->order->product->name,
-                'transaction_id' => $item->transaction_id,
+                'invoice' => $item->invoice,
                 'student_name' => $item->student->name,
                 'amount' => $item->amount,
                 'ratio' => $item->ratio,

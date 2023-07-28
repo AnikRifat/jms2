@@ -59,7 +59,7 @@
                                 <thead>
                                     <tr>
                                         <th>Course Name</th>
-                                        <th>Transaction ID</th>
+                                        <th>Invoice ID</th>
                                         <th>Teacher Name</th>
                                         <th>Amount</th>
                                         <th>Ratio</th>
@@ -73,7 +73,7 @@
                                     @foreach ($transactions as $transaction)
                                     <tr>
                                         <td>{{ $transaction->order->course->title }}</td>
-                                        <td>{{ $transaction->transaction_id }}</td>
+                                        <td>{{ $transaction->invoice }}</td>
                                         <td>{{ $transaction->creator->name }}</td>
                                         <td>
                                             {{ $transaction->amount }}
@@ -157,7 +157,7 @@
         data.forEach(function(item) {
             var row = '<tr>';
             row += '<td>' + item.coursetitle + '</td>';
-            row += '<td>' + item.transaction_id + '</td>';
+            row += '<td>' + item.invoice + '</td>';
             row += '<td>' + item.creator_name + '</td>';
             row += '<td>' + item.amount + '</td>';
             row += '<td>' + item.ratio + ' %</td>';

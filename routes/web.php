@@ -193,6 +193,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/Course', [TransactionController::class, 'course'])->name('profit.course.index');
         Route::get('/shop', [TransactionController::class, 'shop'])->name('profit.shop.index');
         Route::get('/sale', [TransactionController::class, 'sale'])->name('profit.sale.index');
+        Route::get('/chart', [PublicController::class, 'chart'])->name('profit.chart.index');
     });
 
 

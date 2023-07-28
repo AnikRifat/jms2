@@ -9,19 +9,20 @@ class StudentSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('student_information')->insert([
-
-            [
-
-                'user_id' => 2,
+        $currentClass = rand(0, 1) === 0 ? 'Hsc' : 'SSC';
+        for ($i = 12; $i <= 50; $i++) {
+            DB::table('student_information')->insert([
+                'user_id' => $i,
                 'image' => 'student.png',
                 'file' => '1684483679_file.jpg',
                 'birthday' => '2000-05-19',
-                'address' => 'newyork califoirnia',
+                'address' => 'newyork california',
                 'current_department' => 'arts',
-                'current_class' => 'Hsc',
-                'current_school' => 'Universtiy of Havard',
-            ],
-        ]);
+                'current_class' => $currentClass,
+                'current_school' => 'University of Harvard',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

@@ -55,6 +55,26 @@ class ProductSeeder extends Seeder
                 'created_at' => "2023-05-18 17:48:20",
                 'updated_at' => "2023-05-18 17:48:20",
             ],
+            // Add additional products here
+            [
+                'name' => "Product Name 1",
+                'description' => "Description for Product 1",
+                'price' => 99.99,
+                'image' => "product_image_1.jpg",
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => "Product Name 2",
+                'description' => "Description for Product 2",
+                'price' => 79.99,
+                'image' => "product_image_2.jpg",
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            // Add more products if needed
         ];
 
         foreach ($products as $product) {

@@ -33,16 +33,25 @@ class PublicController extends Controller
     public function dashboard()
     {
         if (Auth::user()->role == 0) {
-            $students = User::where('role', 1)->where('allow', 1)->get();
 
-            $hsc = Student::where('current_class', 'Hsc')->get();
-            $ssc = Student::where('current_class', 'SSC')->get();
-            return view('admin.pages.index', compact('students', 'hsc', 'ssc'));
+            return view('admin.pages.index');
         } else {
             return redirect()->route('user.dashboard');
         }
     }
 
+    public function chart()
+    {
+        if (Auth::user()->role == 0) {
+            $students = User::where('role', 1)->where('allow', 1)->get();
+
+            $hsc = Student::where('current_class', 'Hsc')->get();
+            $ssc = Student::where('current_class', 'SSC')->get();
+            return view('admin.pages.transaction.chart', compact('students', 'hsc', 'ssc'));
+        } else {
+            return redirect()->route('user.dashboard');
+        }
+    }
     public function blogs()
     {
         $blogs = Blog::where('status', '1')

@@ -42,6 +42,8 @@
             <ul class="sub-menu" aria-expanded="false">
                 <li><a href="{{ route('profit.course.index') }}" key="t-list">Courses</a></li>
                 <li><a href="{{ route('profit.shop.index') }}" key="t-list">Shop</a></li>
+                <li><a href="{{ route('profit.sale.index') }}" key="t-list">sale</a></li>
+                <li><a href="{{ route('profit.chart.index') }}" key="t-list">charts</a></li>
 
 
             </ul>

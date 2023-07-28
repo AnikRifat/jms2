@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -10,46 +11,47 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
+        // Create Super Admin
         DB::table('users')->insert([
-            [
-                'id' => 1,
-                'name' => 'Super Admin',
-                'email' => 'superadmin@admin.com',
-                'phone' => '0123456789',
-                'email_verified_at' => null,
-                'password' => Hash::make('password'),
-                'role' => 0,
-                'allow' => 1,
-                'complete' => 1,
-                'remember_token' => null,
+            'name' => 'Super Admin',
+            'email' => 'superadmin@admin.com',
+            'phone' => '0123456789',
+            'password' => Hash::make('password123'),
+            'role' => 0,
+            'allow' => 1,
+            'complete' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
 
-            ],
-            [
-                'id' => 2,
-                'name' => 'Md Arman',
-                'email' => 'student@email.com',
-                'phone' => '01567875',
-                'email_verified_at' => null,
-                'password' => Hash::make('password'),
-                'role' => 1,
-                'allow' => 1,
-                'complete' => 1,
-                'remember_token' => null,
-
-            ],
-            [
-                'id' => 3,
-                'name' => 'Md tawsif',
-                'email' => 'teacher@email.com',
-                'phone' => '01567841',
-                'email_verified_at' => null,
-                'password' => Hash::make('password'),
+        // Create Teachers
+        for ($i = 1; $i <= 10; $i++) {
+            DB::table('users')->insert([
+                'name' => 'Teacher ' . $i,
+                'email' => 'teacher' . $i . '@email.com',
+                'phone' => '01567841' . $i,
+                'password' => Hash::make('password123'),
                 'role' => 2,
                 'allow' => 1,
                 'complete' => 1,
-                'remember_token' => null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
 
-            ]
-        ]);
+        // Create Students (40 students)
+        for ($i = 1; $i <= 40; $i++) {
+            DB::table('users')->insert([
+                'name' => 'Student ' . $i,
+                'email' => 'student' . $i . '@email.com',
+                'phone' => '01567875' . $i,
+                'password' => Hash::make('password123'),
+                'role' => 1,
+                'allow' => 1,
+                'complete' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
     }
 }
