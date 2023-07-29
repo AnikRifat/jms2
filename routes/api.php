@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // routes/web.php
+Route::get('/fetchCourseData',  [TransactionController::class, 'fetchCourseData'])->name('fetchCourseData');
 Route::get('/coursefilter',  [TransactionController::class, 'coursefilter'])->name('coursefilter');
 Route::get('/shopfilter',  [TransactionController::class, 'shopfilter'])->name('shopfilter');

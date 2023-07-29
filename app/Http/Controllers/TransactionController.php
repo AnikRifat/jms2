@@ -99,6 +99,8 @@ class TransactionController extends Controller
         // Pass the salesData to the view
         return view('admin.pages.transaction.sales', compact('salesData'));
     }
+
+
     public function coursefilter(Request $request)
     {
         $teacherId = $request->input('teacherId');
@@ -171,7 +173,7 @@ class TransactionController extends Controller
      */
     public function course()
     {
-        $transactions = Transaction::where('teacher_id', '!=', 0)->get();
+        $transactions = Transaction::where('teacher_id', '!=', 0)->paginate(10);
         // dd($transactions);
         $orders = Order::where('status', 1)->where('type', 1)->get();
         $studentIds = $orders->pluck('user_id')->unique();
@@ -192,64 +194,24 @@ class TransactionController extends Controller
         return view('admin.pages.transaction.shop', compact('transactions', 'students'));
     }
 
-    public function create()
+    public function fetchCourseData()
     {
-        //
-    }
+        $transactions = Transaction::where('teacher_id', '!=', 0);
+        $response = [];
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        foreach ($transactions as $item) {
+            $response[] = [
+                'coursetitle' => $item->order->course->title,
+                'invoice' => $item->invoice,
+                'creator_name' => $item->creator->name,
+                'amount' => $item->amount,
+                'ratio' => $item->ratio,
+                'teacher' => $item->teacher,
+                'owner' => $item->owner,
+                'created_at' => $item->created_at->format('d-mm-y h:i:a'),
+            ];
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Transaction $transaction)
-    {
-        //
+        return response()->json($response);
     }
 }

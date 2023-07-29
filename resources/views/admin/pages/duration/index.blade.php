@@ -88,11 +88,11 @@
                                         @if ($duration->status == 1)
                                         <a class="btn btn-danger waves-effect btn-circle waves-light"
                                           href="{{ route('durations.inactive', $duration->id) }}">
-                                            <i class="fa fa-eye-slash"></i> </a>
+                                            <i class="fas fa-minus-circle"></i> </a>
                                         @else
                                         <a class="btn btn-success waves-effect btn-circle waves-light"
                                           href="{{ route('durations.active', $duration->id) }}">
-                                            <i class="fa fa-eye"></i> </a>
+                                            <i class="fa fa-check"></i> </a>
                                         @endif
 
                                         <a class="btn btn-primary waves-effect btn-circle waves-light"

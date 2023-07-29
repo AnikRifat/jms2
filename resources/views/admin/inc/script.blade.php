@@ -39,7 +39,7 @@
 <!-- Responsive examples -->
 <script src="{{ asset('') }}assets/admin/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{ asset('') }}assets/admin/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
+@stack('scripts')
 <script src="{{ asset('') }}assets/admin/js/pages/datatables.init.js"></script>
 
 <!-- Sweet Alerts js -->

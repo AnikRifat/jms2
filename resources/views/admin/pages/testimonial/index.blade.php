@@ -13,128 +13,126 @@
 @section('main-content')
 <div class="main-content">
 
-    <div class="page-content">
-        <div class="container-fluid">
+  <div class="page-content">
+    <div class="container-fluid">
 
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Testimonial</h4>
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Testimonial</h4>
 
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item">Dashboards</li>
-                                <li class="breadcrumb-item active">Testimonial</li>
-                            </ol>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">Dashboards</li>
+                <li class="breadcrumb-item active">Testimonial</li>
+              </ol>
             </div>
-            <!-- end page title -->
 
-
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-body">
-
-                            <a class="btn btn-soft-primary waves-effect waves-light mb-2"
-                              href="{{ route('testimonials.create') }}">
-                                + Create New Testimonial </a>
-
-                            <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>status</th>
-                                        <th>Title</th>
-                                        <th>Sub Title</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($testimonials as $testimonial)
-                                    <tr>
-                                        <td>
-                                            @if ($testimonial->status == 1)
-                                            <span
-                                              class="badge rounded-pill badge-soft-success font-size-11">Active</span>
-                                            @else
-                                            <span
-                                              class="badge rounded-pill badge-soft-danger font-size-11">Inactive</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $testimonial->title }}</td>
-                                        <td>{{ $testimonial->subtitle }}</td>
-                                        <td>{!! $testimonial->description !!}</td>
-                                        <td>
-                                            @if ($testimonial->image)
-                                            <img src="{{ asset('uploads/testimonials/' . $testimonial->image) }}"
-                                              alt="{{ $testimonial->title }}" width="80">
-                                            @else
-                                            No Image
-                                            @endif
-                                        </td>
-
-
-                                        <td>
-                                            @if ($testimonial->status == 1)
-                                            <a class="btn btn-danger waves-effect btn-circle waves-light"
-                                              href="{{ route('testimonials.inactive', $testimonial->id) }}">
-                                                <i class="fa fa-eye-slash"></i> </a>
-                                            @else
-                                            <a class="btn btn-success waves-effect btn-circle waves-light"
-                                              href="{{ route('testimonials.active', $testimonial->id) }}">
-                                                <i class="fa fa-eye"></i> </a>
-                                            @endif
-
-                                            <a class="btn btn-primary waves-effect btn-circle waves-light"
-                                              href="{{ route('testimonials.edit', $testimonial->id) }}">
-                                                <i class="fa fa-edit"></i> </a>
-                                            <form hidden action="{{ route('testimonials.destroy', $testimonial->id) }}"
-                                              id="form{{ $testimonial->id }}" method="get">
-                                                @csrf
-                                            </form>
-                                            <button class="btn btn-danger waves-effect btn-circle waves-light"
-                                              onclick="deleteItem({{ $testimonial->id }});" type="button">
-                                                <i class="fa fa-trash"></i> </button>
-                                        </td>
-                                        {{-- <td>
-                                            <a href="{{ route('testimonials.edit', $testimonial->id) }}" class="btn btn-sm
-                                        btn-warning">Edit</a>
-                                        <form action="{{ route('testimonials.destroy', $testimonial->id) }}" method="POST"
-                                          style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"
-                                              onclick="return confirm('Are you sure you want to delete this testimonial?')">Delete</button>
-                                        </form>
-                                        </td> --}}
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <!-- end row -->
+          </div>
         </div>
-        <!-- container-fluid -->
+      </div>
+      <!-- end page title -->
+
+
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-body">
+
+              <a class="btn btn-soft-primary waves-effect waves-light mb-2" href="{{ route('testimonials.create') }}">
+                + Create New Testimonial </a>
+
+              <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                <thead>
+                  <tr>
+                    <th>status</th>
+                    <th>Title</th>
+                    <th>Sub Title</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($testimonials as $testimonial)
+                  <tr>
+                    <td>
+                      @if ($testimonial->status == 1)
+                      <span class="badge rounded-pill badge-soft-success font-size-11">Active</span>
+                      @else
+                      <span class="badge rounded-pill badge-soft-danger font-size-11">Inactive</span>
+                      @endif
+                    </td>
+                    <td>{{ $testimonial->title }}</td>
+                    <td>{{ $testimonial->subtitle }}</td>
+                    <td>{!! $testimonial->description !!}</td>
+                    <td>
+                      @if ($testimonial->image)
+                      <img src="{{ asset('uploads/testimonials/' . $testimonial->image) }}"
+                        alt="{{ $testimonial->title }}" width="80">
+                      @else
+                      No Image
+                      @endif
+                    </td>
+
+
+                    <td>
+                      @if ($testimonial->status == 1)
+                      <a class="btn btn-danger waves-effect btn-circle waves-light"
+                        href="{{ route('testimonials.inactive', $testimonial->id) }}">
+                        <i class="fas fa-minus-circle"></i> </a>
+                      @else
+                      <a class="btn btn-success waves-effect btn-circle waves-light"
+                        href="{{ route('testimonials.active', $testimonial->id) }}">
+                        <i class="fa fa-check"></i> </a>
+                      @endif
+
+                      <a class="btn btn-primary waves-effect btn-circle waves-light"
+                        href="{{ route('testimonials.edit', $testimonial->id) }}">
+                        <i class="fa fa-edit"></i> </a>
+                      <form hidden action="{{ route('testimonials.destroy', $testimonial->id) }}"
+                        id="form{{ $testimonial->id }}" method="get">
+                        @csrf
+                      </form>
+                      <button class="btn btn-danger waves-effect btn-circle waves-light"
+                        onclick="deleteItem({{ $testimonial->id }});" type="button">
+                        <i class="fa fa-trash"></i> </button>
+                    </td>
+                    {{-- <td>
+                                            <a href="{{ route('testimonials.edit', $testimonial->id) }}" class="btn
+                    btn-sm
+                    btn-warning">Edit</a>
+                    <form action="{{ route('testimonials.destroy', $testimonial->id) }}" method="POST"
+                      style="display: inline-block;">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this testimonial?')">Delete</button>
+                    </form>
+                    </td> --}}
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- end row -->
     </div>
-    <!-- End Page-content -->
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
 
 
 </div>
 @endsection
 @section('scripts')
 <script>
-    function deleteItem(id) {
+  function deleteItem(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

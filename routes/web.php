@@ -88,6 +88,8 @@ Route::prefix('chat/inbox')->middleware(['auth', 'checkProfile'])->group(functio
 });
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
+    Route::get('admin/profile', [UserController::class, 'adminIndex'])->name('dashboard.profile.index');
+    Route::put('admin/profile/update/{id}', [UserController::class, 'adminUpdate'])->name('dashboard.profile.update');
 
     Route::get('/sale/invoice/{transactionId}', [TransactionController::class, 'invoice'])->name('generate.invoice');
     Route::get('/sale/view/{transactionId}', [TransactionController::class, 'view'])->name('generate.view');

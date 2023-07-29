@@ -47,16 +47,18 @@
                             <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
+                                        <th>Action</th>
+
                                         <th>Status</th>
                                         <th>Title</th>
                                         <th>instructor</th>
                                         <th>price</th>
                                         {{-- <th>class</th> --}}
-                                        <th>description</th>
                                         {{-- <th>subject</th> --}}
                                         <th>duration</th>
                                         <th>Image</th>
-                                        <th>Action</th>
+                                        <th>description</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,37 +66,13 @@
                                     <tr>
                                         <td>
                                             @if ($course->status == 1)
-                                            <span
-                                              class="badge rounded-pill badge-soft-success font-size-11">Active</span>
-                                            @else
-                                            <span
-                                              class="badge rounded-pill badge-soft-danger font-size-11">Inactive</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $course->title }}</td>
-                                        <td>{{ $course->creator->name }}</td>
-                                        <td>{{ $course->price }}</td>
-                                        {{-- <td>{{ $course->class_id }}</td> --}}
-                                        <td>{{ $course->description }}</td>
-                                        {{-- <td>{{ $course->subject }}</td> --}}
-                                        <td>{{ $course->durationName->timeline }}</td>
-                                        <td>
-                                            @if ($course->image)
-                                            <img src="{{ asset('uploads/courses/' . $course->image) }}"
-                                              alt="{{ $course->name }}" width="80">
-                                            @else
-                                            No Image
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($course->status == 1)
                                             <a class="btn btn-danger waves-effect btn-circle waves-light"
                                               href="{{ route('courses.inactive', $course->id) }}">
-                                                <i class="fa fa-eye-slash"></i> </a>
+                                                <i class="fas fa-minus-circle"></i> </a>
                                             @else
                                             <a class="btn btn-success waves-effect btn-circle waves-light"
                                               href="{{ route('courses.active', $course->id) }}">
-                                                <i class="fa fa-eye"></i> </a>
+                                                <i class="fa fa-check"></i> </a>
                                             @endif
 
                                             <a class="btn btn-primary waves-effect btn-circle waves-light"
@@ -109,6 +87,32 @@
                                               onclick="deleteItem({{ $course->id }});" type="button">
                                                 <i class="fa fa-trash"></i> </button>
                                         </td>
+                                        <td>
+                                            @if ($course->status == 1)
+                                            <span
+                                              class="badge rounded-pill badge-soft-success font-size-11">Active</span>
+                                            @else
+                                            <span
+                                              class="badge rounded-pill badge-soft-danger font-size-11">Inactive</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $course->title }}</td>
+                                        <td>{{ $course->creator->name }}</td>
+                                        <td>{{ $course->price }}</td>
+                                        {{-- <td>{{ $course->class_id }}</td> --}}
+
+                                        {{-- <td>{{ $course->subject }}</td> --}}
+                                        <td>{{ $course->durationName->timeline }}</td>
+                                        <td>
+                                            @if ($course->image)
+                                            <img src="{{ asset('uploads/courses/' . $course->image) }}"
+                                              alt="{{ $course->name }}" width="80">
+                                            @else
+                                            No Image
+                                            @endif
+                                        </td>
+                                        <td>{!!$course->description !!}</td>
+
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -88,7 +88,7 @@
                                             @if ($order->status == 1)
                                             <a class="btn btn-danger waves-effect btn-circle waves-light"
                                               href="{{ route('orders.inactive', $order->id) }}">
-                                                <i class="fa fa-eye-slash"></i> </a>
+                                                <i class="fas fa-minus-circle"></i> </a>
                                             @elseif($order->status == 2)
                                             <a class="btn btn-success waves-effect btn-circle waves-light"
                                               href="{{ route('orders.pending', $order->id) }}">
@@ -96,7 +96,7 @@
                                             @else
                                             <a class="btn btn-success waves-effect btn-circle waves-light"
                                               href="{{ route('orders.active', $order->id) }}">
-                                                <i class="fa fa-eye"></i> </a>
+                                                <i class="fa fa-check"></i> </a>
                                             @endif
 
                                             {{-- <a class="btn btn-primary waves-effect btn-circle waves-light"

@@ -17,10 +17,10 @@ class OrderSeeder extends Seeder
         $courseIds = Course::pluck('id')->toArray();
 
         // Get all user IDs for students from the database
-        $studentUserIds = User::where('role', '2')->pluck('id')->toArray();
+        $studentUserIds = User::where('role', '1')->pluck('id')->toArray();
 
         // Create a total of 500 orders
-        for ($i = 1; $i <= 500; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             $productId = $productIds[array_rand($productIds)]; // Random product ID
             $courseId = $courseIds[array_rand($courseIds)]; // Random course ID
             $studentUserId = $studentUserIds[array_rand($studentUserIds)]; // Random student user ID

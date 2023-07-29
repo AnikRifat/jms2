@@ -38,8 +38,8 @@
                         <label for="filterTeacher" class="form-label">Filter by students</label>
                         <select id="filterTeacher" class="form-select">
                             <option value="0">All students</option>
-                            @foreach ($students as $t)
-                            <option value="{{ $t->id }}">{{ $t->name }}</option>
+                            @foreach ($students as $s)
+                            <option value="{{ $s->id }}">{{ $s->name }}</option>
                             @endforeach
                             <!-- Add options for teachers here -->
                         </select>

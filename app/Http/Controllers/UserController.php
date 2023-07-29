@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -34,9 +35,14 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = User::where('role', 2, 3)->get();
+        $users = User::where('role', 1, 2)->get();
         // dd($users);
         return view('admin.pages.users.index', compact('users'));
+    }
+
+    public function adminindex()
+    {
+        return view('admin.pages.dashboard.index');
     }
     public function studentconfirmationlist()
     {
@@ -60,6 +66,27 @@ class UserController extends Controller
         $users = User::where('role', 2)->get();
         return view('admin.pages.users.index', compact('users'));
     }
+
+
+
+    public function adminUpdate(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        if ($request->input('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+        $user->save();
+
+        return redirect()->route('dashboard.index')->with('success', 'User updated successfully!');
+    }
+
 
     public function update(Request $request, User $user)
     {
