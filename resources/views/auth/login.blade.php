@@ -35,6 +35,8 @@
                                     </button>
                                 </div>
                             </form>
+                            <p class="mt-10">Forget Passwword? <a href="{{ route('password.request') }}"
+                                  class="text-purple-1">Reset password</a></p>
                         </div>
                     </div>
                 </div>

@@ -15,34 +15,30 @@ class TeacherController extends Controller
 
     public function inbox()
     {
-        // dd('ok');
-        // $chat = Chat::Where('teacher_id', Auth::user()->id)->where('student_id', $student)->get();
 
-        $studentIds = Chat::where('teacher_id',  Auth::user()->id)
-            ->pluck('student_id')
+        $studentIds = Chat::Where('sender_id', Auth::user()->id)->where('sender_role', Auth::user()->role)
+            ->pluck('sender_id')
             ->unique()
             ->toArray();
         $users = User::whereIn('id', $studentIds)->get();
         $teacherCourses = Course::where('creator_id', Auth::user()->id)->where('status', 1)->get();
-
+        // dd($teacherCourses);
         $student = false;
-        return view('web.pages.chat.teacher', compact('student', 'users', 'teacherCourses'));
+        $chats = false;
+        return view('web.pages.chat.teacher', compact('student', 'users', 'teacherCourses', 'chats'));
     }
-    public function chat($student, $courseId)
+    public function chat($courseId)
     {
-        // dd($student);
-        $chats = Chat::Where('teacher_id', Auth::user()->id)->where('student_id', $student)->where('course_id', $courseId)->get();
-        $studentIds = Chat::where('teacher_id',  Auth::user()->id)
-            ->pluck('student_id')
-            ->unique()
-            ->toArray();
-        $users = User::whereIn('id', $studentIds)->get();
+        // dd($courseId);
+        $chats = Chat::Where('course_id', $courseId)->get();
+
+        $course = Course::find($courseId);
+        // dd($course);
 
         $teacherCourses = Course::where('creator_id', Auth::user()->id)->where('status', 1)->get();
 
-        $student = User::find($student);
-        $teacher = User::find(Auth::user()->id);
-        return view('web.pages.chat.teacher', compact('chats', 'student', 'teacher', 'users', 'teacherCourses'));
+        // dd($chats);
+        return view('web.pages.chat.teacher', compact('chats', 'teacherCourses', 'course'));
     }
     /**
      * Display a listing of the resource.

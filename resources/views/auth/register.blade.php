@@ -2,6 +2,7 @@
 
 @section('main-body')
 <div class="main-body">
+
     <section class="form-page">
 
 
@@ -11,7 +12,8 @@
                     <div class="col-xl-8 col-lg-9">
                         <div class="px-50 py-50 md:px-25 md:py-25 bg-white shadow-1 rounded-16">
                             <h3 class="text-30 lh-13">Sign Up</h3>
-                            <p class="mt-10">Already have an account? <a href="login.html" class="text-purple-1">Log
+                            <p class="mt-10">Already have an account? <a href="{{ route('login') }}"
+                                  class="text-purple-1">Log
                                     in</a></p>
 
                             <form class="contact-form respondForm__form row y-gap-20 pt-30"
@@ -82,9 +84,11 @@
                                 </div>
                             </form>
 
-
+                   
                         </div>
                     </div>
                 </div>
             </div>
     </section>
+
+    @endsection

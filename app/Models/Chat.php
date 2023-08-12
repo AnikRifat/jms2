@@ -12,10 +12,9 @@ class Chat extends Model
     protected $table = 'chats';
 
     protected $fillable = [
-        'sender',
+        'sender_id',
+        'sender_role',
         'course_id',
-        'student_id',
-        'teacher_id',
         'text',
     ];
 
@@ -28,7 +27,7 @@ class Chat extends Model
      */
     public function student()
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
     /**
@@ -36,6 +35,6 @@ class Chat extends Model
      */
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DurationController;
@@ -53,6 +54,8 @@ Route::post('/search', [SearchController::class, 'search'])->name('search'); // 
 Route::get('/search/view', [SearchController::class, 'result'])->name('result'); // show search
 
 Route::middleware('auth')->group(function () {
+    Route::post('/comment', [CommentsController::class, 'store'])->name('comment.store');
+
     Route::post('store/student-info', [StudentController::class, 'store'])->name('student.store');
     Route::post('store/teacher-info', [TeacherController::class, 'store'])->name('teacher.store');
 });
@@ -80,8 +83,8 @@ Route::prefix('chat/inbox')->middleware(['auth', 'checkProfile'])->group(functio
 
     Route::get('/teacher', [TeacherController::class, 'inbox'])->name('chat.inbox.teacher');
     Route::get('/student', [StudentController::class, 'inbox'])->name('chat.inbox.student');
-    Route::get('/teacher/{teacher}', [StudentController::class, 'chat'])->name('chat.show.student');
-    Route::get('/student/{student}', [TeacherController::class, 'chat'])->name('chat.show.teacher');
+    Route::get('teacher/course/{course}', [StudentController::class, 'chat'])->name('chat.show.student');
+    Route::get('student/course/{course}', [TeacherController::class, 'chat'])->name('chat.show.teacher');
 
 
     Route::post('/', [ChatController::class, 'store'])->name('chat.save');

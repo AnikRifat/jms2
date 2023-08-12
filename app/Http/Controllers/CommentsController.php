@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chat;
+use App\Models\Comments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ChatController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,37 +36,37 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'sender_id' => 'required',
-            'course_id' => 'required',
-            'sender_role' => 'required',
+        $data = $request->validate([
+            'blog_id' => 'required',
             'text' => 'required',
         ]);
-
-        $chat = Chat::create($validatedData);
-
-        if ($chat) {
-            return redirect()->back()->with('success', 'Text Message sent SuccessFully');
+        $data['user_id'] = Auth::user()->id;
+        $data['user_name'] = Auth::user()->name;
+        $comment =  Comments::create($data);
+        if ($comment) {
+            return redirect()->back()->with('success', 'Comment Added Successfull');
         } else {
-            return redirect()->back()->with('error', ' try again');
+            return redirect()->back()->with('error', 'Comment  Unuccessfull');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Chat  $chat
+     * @param  \App\Models\Comments  $comments
      * @return \Illuminate\Http\Response
      */
-
+    public function show(Comments $comments)
+    {
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Chat  $chat
+     * @param  \App\Models\Comments  $comments
      * @return \Illuminate\Http\Response
      */
-    public function edit(Chat $chat)
+    public function edit(Comments $comments)
     {
         //
     }
@@ -74,10 +75,10 @@ class ChatController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Chat  $chat
+     * @param  \App\Models\Comments  $comments
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Chat $chat)
+    public function update(Request $request, Comments $comments)
     {
         //
     }
@@ -85,10 +86,10 @@ class ChatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Chat  $chat
+     * @param  \App\Models\Comments  $comments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Chat $chat)
+    public function destroy(Comments $comments)
     {
         //
     }

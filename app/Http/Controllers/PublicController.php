@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comments;
 use App\Models\Course;
 use App\Models\Product;
 use App\Models\Student;
@@ -63,8 +64,9 @@ class PublicController extends Controller
     public function blogDetails($blogId)
     {
         $blog  = Blog::find($blogId);
+        $comments = Comments::query()->orderBy('created_at', 'ASC')->get();
         // dd($blog);
-        return view('web.pages.blog.details', compact('blog'));
+        return view('web.pages.blog.details', compact('blog', 'comments'));
     }
     public function completeprofile()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Models\Course;
 use App\Models\Order;
 use App\Models\Student;
 use App\Models\User;
@@ -14,23 +15,18 @@ class StudentController extends Controller
 {
     public function inbox()
     {
-        // dd('ok');
-        // $chat = Chat::Where('student_id', Auth::user()->id)->where('teacher_id', $teacher)->get();
 
         $orders = Order::where('type', 1)->where('user_id', Auth::user()->id)->distinct()->get();
-        // dd($orders);
-        $teacher = false;
-        return view('web.pages.chat.student', compact('orders', 'teacher'));
+        $course = false;
+        return view('web.pages.chat.student', compact('orders', 'course'));
     }
-    public function chat($teacher)
+    public function chat($course)
     {
-        $chats = Chat::Where('student_id', Auth::user()->id)->where('teacher_id', $teacher)->get();
-        // dd($chats);
+        $chats = Chat::Where('course_id', $course)->get();
         $orders = Order::where('type', 1)->where('user_id', Auth::user()->id)->get();
-        $teacher = User::find($teacher);
-
-        $student = User::find(Auth::user()->id);
-        return view('web.pages.chat.student', compact('orders', 'chats', 'teacher', 'student'));
+        $course = Course::find($course);
+        // dd($course);
+        return view('web.pages.chat.student', compact('orders', 'chats', 'course'));
     }
     /**
      * Display a listing of the resource.
