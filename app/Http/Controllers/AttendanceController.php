@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
@@ -14,7 +16,9 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $attendances = Attendance::orderBy('id', 'DESC')->get();
+        // dd($attendances);
+        return view('admin.pages.attandance.index', compact('attendances'));
     }
 
     /**
@@ -35,7 +39,34 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'course_id' => 'required',
+            'duration' => 'required',
+        ]);
+        $user = Auth::user();
+        $data['user_id'] = $user->id;
+        $data['user_type'] = $user->role;
+        $data['date'] = Carbon::now()->today()->toDateString();
         //
+        // dd($data);
+
+        $existingAttendance = Attendance::where('course_id', $data['course_id'])
+            ->where('date',  $data['date'])
+            ->where('user_type', '!=', $user->role)
+            ->first();
+
+        if ($existingAttendance) {
+            $data['staus'] = 2;
+        } else {
+            $data['staus'] = 1;
+        }
+
+        $result = Attendance::create($data);
+        if ($result) {
+            return redirect()->back()->with('success', 'Attendace acceped successfully');
+        } else {
+            return redirect()->back()->with('error', 'Attendace Unsuccessfull');
+        }
     }
 
     /**

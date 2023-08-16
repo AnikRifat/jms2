@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 // namespace Intervention\Image\Facades;
 

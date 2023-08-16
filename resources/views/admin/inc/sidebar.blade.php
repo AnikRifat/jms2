@@ -21,7 +21,19 @@
 
             </ul>
         </li>
+        {{-- start - attendance --}}
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="bx bx-home-circle"></i>
+                <span key="t-attendance">Attendance</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('attendances.index') }}" key="t-list">All Attendance</a></li>
+                <li><a href="{{ route('attendances.create') }}" key="t-create">Create Attendance</a></li>
 
+            </ul>
+        </li>
+        {{-- End - attendance --}}
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="bx bx-home-circle"></i>

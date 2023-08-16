@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Comments;
 use App\Models\Course;
+use App\Models\Duration;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Student;
 use App\Models\Subject;
@@ -173,7 +175,15 @@ class PublicController extends Controller
 
 
 
+    public function attendance()
+    {
+        $courses_id = Order::where('user_id', Auth::user()->id)->where('type', 1)->where('status', 1)->pluck('item_id')->unique();
+        $courses = Course::query()->whereIn('id', $courses_id)->get();
+        $duration_id = Course::query()->whereIn('id', $courses_id)->pluck('duration')->unique();
+        $durations = Duration::query()->whereIn('id', $duration_id)->get();
 
+        return view('web.pages.attendance', compact('courses', 'durations'));
+    }
 
 
 

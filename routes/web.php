@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatController;
@@ -62,6 +63,8 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/user/dashboard')->middleware(['auth', 'checkProfile'])->group(function () {
     Route::get('/Profile', [PublicController::class, 'userdashboard'])->name('user.dashboard');
+    Route::get('/attendance', [PublicController::class, 'attendance'])->name('attendance.index');
+    Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
 
     Route::post('update/teacher/{user}', [UserController::class, 'teacher'])->name('teacher.update');
     Route::post('update/student/{user}', [UserController::class, 'student'])->name('student.update');
@@ -170,6 +173,21 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/active/{blog}', [BlogController::class, 'active'])->name('blogs.active');
         Route::get('/inactive/{blog}', [BlogController::class, 'inactive'])->name('blogs.inactive');
     });
+
+    Route::prefix('attendances')->group(function () {
+        // attendance-Routes
+        Route::get('/', [AttendanceController::class, 'index'])->name('attendances.index');
+        Route::get('/create', [AttendanceController::class, 'create'])->name('attendances.create');
+        Route::post('/', [AttendanceController::class, 'store'])->name('attendances.store');
+        Route::get('/{attendance}', [AttendanceController::class, 'show'])->name('attendances.show');
+        Route::get('/{attendance}/edit', [AttendanceController::class, 'edit'])->name('attendances.edit');
+        Route::put('/{attendance}', [AttendanceController::class, 'update'])->name('attendances.update');
+        Route::get('/{attendance}', [AttendanceController::class, 'destroy'])->name('attendances.destroy');
+        Route::get('/active/{attendance}', [AttendanceController::class, 'active'])->name('attendances.active');
+        Route::get('/inactive/{attendance}', [AttendanceController::class, 'inactive'])->name('attendances.inactive');
+    });
+
+
     Route::prefix('products')->group(function () {
         // product-Routes
         Route::get('/', [ProductController::class, 'index'])->name('products.index');

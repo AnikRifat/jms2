@@ -9,7 +9,12 @@
                 Dashboard
             </a>
         </div>
-
+        <div class="sidebar__item ">
+            <a href="{{ route('attendance.index') }}" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
+                <i class="text-20 icon-edit mr-15"></i>
+                Attendance
+            </a>
+        </div>
         @if(Auth::user()->role == 2)
 
         <div class="sidebar__item ">

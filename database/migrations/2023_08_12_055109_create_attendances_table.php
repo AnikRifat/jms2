@@ -15,6 +15,12 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
+            $table->string('user_type');
+            $table->string('duration');
+            $table->string('course_id');
+            $table->dateTime('date');
+            $table->string('status')->nullable()->comment('1->attended', '2->pending', '0->Canceled');
             $table->timestamps();
         });
     }
