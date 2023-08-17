@@ -50,6 +50,7 @@ class PublicController extends Controller
 
             $hsc = Student::where('current_class', 'Hsc')->get();
             $ssc = Student::where('current_class', 'SSC')->get();
+
             return view('admin.pages.transaction.chart', compact('students', 'hsc', 'ssc'));
         } else {
             return redirect()->route('user.dashboard');
@@ -177,7 +178,12 @@ class PublicController extends Controller
 
     public function attendance()
     {
-        $courses_id = Order::where('user_id', Auth::user()->id)->where('type', 1)->where('status', 1)->pluck('item_id')->unique();
+        if (Auth::user()->role == 1) {
+            $courses_id = Order::where('user_id', Auth::user()->id)->where('type', 1)->where('status', 1)->pluck('item_id')->unique();
+        } else {
+            $courses_id = Course::where('creator_id', Auth::user()->id)->where('status', 1)->pluck('id')->unique();
+        }
+
         $courses = Course::query()->whereIn('id', $courses_id)->get();
         $duration_id = Course::query()->whereIn('id', $courses_id)->pluck('duration')->unique();
         $durations = Duration::query()->whereIn('id', $duration_id)->get();

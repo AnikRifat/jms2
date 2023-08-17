@@ -9,7 +9,8 @@ class StudentSeeder extends Seeder
 {
     public function run()
     {
-        $currentClass = rand(0, 1) === 0 ? 'Hsc' : 'SSC';
+        $faker = \Faker\Factory::create();
+
         for ($i = 12; $i <= 50; $i++) {
             DB::table('student_information')->insert([
                 'user_id' => $i,
@@ -18,7 +19,7 @@ class StudentSeeder extends Seeder
                 'birthday' => '2000-05-19',
                 'address' => 'newyork california',
                 'current_department' => 'arts',
-                'current_class' => $currentClass,
+                'current_class' => $faker->randomElement(['Hsc', 'SSC']),
                 'current_school' => 'University of Harvard',
                 'created_at' => now(),
                 'updated_at' => now(),

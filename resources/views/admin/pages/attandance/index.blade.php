@@ -83,40 +83,26 @@
                                         <td>{{ $attandance->date }}</td>
 
 
-                                        {{-- <td>
+                                        <td>
                                             @if ($attandance->status == 1)
                                             <a class="btn btn-danger waves-effect btn-circle waves-light"
-                                              href="{{ route('attandances.inactive', $attandance->id) }}">
-                                        <i class="fas fa-minus-circle"></i> </a>
-                                        @else
-                                        <a class="btn btn-success waves-effect btn-circle waves-light"
-                                          href="{{ route('attandances.active', $attandance->id) }}">
-                                            <i class="fa fa-check"></i> </a>
-                                        @endif
+                                              href="{{ route('attendances.inactive', $attandance->id) }}">
+                                                <i class="fas fa-minus-circle"></i> </a>
+                                            @else
+                                            <a class="btn btn-success waves-effect btn-circle waves-light"
+                                              href="{{ route('attendances.active', $attandance->id) }}">
+                                                <i class="fa fa-check"></i> </a>
+                                            @endif
 
-                                        <a class="btn btn-primary waves-effect btn-circle waves-light"
-                                          href="{{ route('attandances.edit', $attandance->id) }}">
-                                            <i class="fa fa-edit"></i> </a>
-                                        <form hidden action="{{ route('attandances.destroy', $attandance->id) }}"
-                                          id="form{{ $attandance->id }}" method="get">
-                                            @csrf
-                                        </form>
-                                        <button class="btn btn-danger waves-effect btn-circle waves-light"
-                                          onclick="deleteItem({{ $attandance->id }});" type="button">
-                                            <i class="fa fa-trash"></i> </button>
-                                        </td> --}}
-                                        {{-- <td>
-                                            <a href="{{ route('attandances.edit', $attandance->id) }}" class="btn
-                                        btn-sm
-                                        btn-warning">Edit</a>
-                                        <form action="{{ route('attandances.destroy', $attandance->id) }}" method="POST"
-                                          style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"
-                                              onclick="return confirm('Are you sure you want to delete this attandance?')">Delete</button>
-                                        </form>
-                                        </td> --}}
+                                            <form hidden action="{{ route('attendances.destroy', $attandance->id) }}"
+                                              id="form{{ $attandance->id }}" method="get">
+                                                @csrf
+                                            </form>
+                                            <button class="btn btn-danger waves-effect btn-circle waves-light"
+                                              onclick="deleteItem({{ $attandance->id }});" type="button">
+                                                <i class="fa fa-trash"></i> </button>
+                                        </td>
+
                                     </tr>
                                     @endforeach
                                 </tbody>

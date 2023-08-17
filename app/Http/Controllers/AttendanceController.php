@@ -52,15 +52,16 @@ class AttendanceController extends Controller
 
         $existingAttendance = Attendance::where('course_id', $data['course_id'])
             ->where('date',  $data['date'])
-            ->where('user_type', '!=', $user->role)
+            ->where('user_type', $user->role)
             ->first();
 
         if ($existingAttendance) {
-            $data['staus'] = 2;
+            $data['status'] = 2;
         } else {
-            $data['staus'] = 1;
+            $data['status'] = 1;
         }
 
+        // dd($data);
         $result = Attendance::create($data);
         if ($result) {
             return redirect()->back()->with('success', 'Attendace acceped successfully');
@@ -108,9 +109,53 @@ class AttendanceController extends Controller
      *
      * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
-     */
-    public function destroy(Attendance $attendance)
+     */    public function destroy(Attendance $attendance)
     {
-        //
+        // delete the attendance's image file, if it exists
+
+        // delete the attendance from the database
+        $attendance->delete();
+
+        return redirect()
+            ->route('attendances.index')
+            ->with('success', 'Attendance deleted successfully.');
+    }
+
+    /**
+     * Active the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Attendance  $attendance
+     * @return \Illuminate\Http\Response
+     */
+    public function Active(Attendance $attendance)
+    {
+        $attendance->status = '1';
+        if ($attendance->save()) {
+            return redirect()
+                ->route('attendances.index')
+                ->with('success', 'attendance Activated successfully.');
+        } else {
+            return back()->with('error', 'attendance Activation Unsuccessfull');
+        }
+    }
+    /**
+     * Inactive  the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Attendance  $attendance
+     * @return \Illuminate\Http\Response
+     */
+    public function Inactive(Attendance $attendance)
+    {
+        // dd($attendance->status);
+        $attendance->status = '0';
+        if ($attendance->save()) {
+            return redirect()
+                ->route('attendances.index')
+                ->with('success', 'attendance Deactivated successfully.');
+        } else {
+            return back()->with('error', 'attendance Dactivation Unsuccessfull.');
+        }
     }
 }
